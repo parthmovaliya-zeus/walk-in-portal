@@ -1,0 +1,11 @@
+@mixin displayFlex($justifyContent, $alignItems) {
+  display: flex;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin splitter($color, $height) {
+  border: 1px solid $color;
+  height: $height + px;
+  width: 0px;
+}

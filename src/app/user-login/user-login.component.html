@@ -1,0 +1,55 @@
+<div class="login-mainContainer">
+  <div class="login-container">
+    <div class="">
+      <h1>Log in</h1>
+
+      <div class="login-filed-container">
+        <div class="">
+          <input
+            class="login-inp"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email ID*"
+          />
+        </div>
+        <a href="#" class="inp-forgot">FORGOT EMAIL ID?</a>
+      </div>
+
+      <div class="login-filed-container">
+        <div class="inp-field">
+          <input
+            class="login-inp"
+            type="{{ passwordType }}"
+            name="password"
+            id="password"
+            placeholder="Password*"
+          />
+          <img
+            src="../../assets/icons/preview.svg"
+            alt="preview password icon"
+            (click)="togglePassword()"
+          />
+        </div>
+        <a href="#" class="inp-forgot">FORGOT PASSWORD?</a>
+      </div>
+    </div>
+    <div class="remember-me">
+      <input type="checkbox" name="rememberMe" id="rememberMe" />Remember Me
+    </div>
+
+    <div class="login-button-container">
+      <button>LOG IN</button>
+    </div>
+
+    <div class="register-user">
+      <p>Not registered yet?</p>
+      <a class="inp-forgot" href="#">CREATE AN ACCOUNT</a>
+    </div>
+  </div>
+  <div class="more-options">
+    <a href="#">About</a>
+    <div class="splitter"></div>
+    <a href="#">Contact Us</a>
+  </div>
+</div>

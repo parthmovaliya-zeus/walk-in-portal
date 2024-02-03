@@ -1,0 +1,37 @@
+@import "../../scss/functions";
+@import "../../scss/variables";
+
+.register-header {
+  @include displayFlex(space-between, center);
+  height: 48px;
+  background-color: $fourth-color;
+  color: $white-color;
+  padding: 0px 24px;
+
+  border-top: 2px solid $border-color;
+
+  a {
+    color: $button-background-color;
+    cursor: pointer;
+    // height: 24px;
+    // width: 16px;
+    // object-fit: contain;
+  }
+
+  .btn-container {
+    @include displayFlex(normal, normal);
+    gap: 16px;
+  }
+
+  .btn {
+    background-color: $button-background-color;
+    width: 90px;
+    height: 28px;
+    border: none;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: quicksand;
+    font-weight: 600;
+  }
+}

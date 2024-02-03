@@ -1,0 +1,18 @@
+@import "../../scss/variables";
+@import "../../scss/functions";
+
+.header {
+  height: 56px;
+  width: 100vw;
+  background: $header-background-color;
+  background-image: url(../../assets/header\ pattern\ svg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+
+  @include displayFlex(normal, center);
+
+  > img {
+    margin-left: 24px;
+  }
+}
