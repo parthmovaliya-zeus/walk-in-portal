@@ -9,8 +9,32 @@
   .personal_information_form {
     @include displayFlex(center, normal);
     flex-direction: column;
-
+    position: relative;
     gap: 40px;
+
+    .user_picture_component {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      text-align: center;
+      img {
+        width: 112px;
+        height: 134px;
+        object-fit: cover;
+        mix-blend-mode: luminosity;
+      }
+
+      .user_picture_title {
+        font-size: $xsmall-font + px;
+        color: $secondary-color;
+        margin: 16px 0px 8px;
+      }
+
+      .user_picture_info {
+        color: $fifth-color;
+        font-size: $xxsmall-font + px;
+      }
+    }
 
     .input_single_container {
       @include displayFlex(center, normal);
@@ -48,6 +72,7 @@
 
     .upload_resume_container {
       @include displayFlex(normal, center);
+      gap: 8px;
     }
 
     .phone_number_container {
