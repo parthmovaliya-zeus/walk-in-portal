@@ -1,8 +1,99 @@
-<div class="register-header">
+<div class="register_header">
   <a href="#"><mat-icon>arrow_back</mat-icon></a>
   <div class="">Create an account</div>
-  <div class="btn-container">
+  <div class="btn_container">
     <button class="btn">CANCEL</button>
-    <button class="btn">CREATE</button>
+    <button class="btn" [disabled]="isDisable">CREATE</button>
   </div>
+</div>
+
+<div class="register_container">
+  <div class="register_steps">
+    <div class="step">
+      <span
+        [ngClass]="{
+          step_count: true,
+          already_next_step: isAlreadyNextStep(1)
+        }"
+      >
+        @if(stepCount > 1){
+        <mat-icon>edit</mat-icon>
+        } @else { 1 }
+      </span>
+      <span>Personal Information</span>
+    </div>
+    <hr />
+    <div class="step">
+      <span
+        [ngClass]="{
+          step_count: true,
+          already_next_step: isAlreadyNextStep(2)
+        }"
+      >
+        @if(stepCount > 2){
+        <mat-icon>edit</mat-icon>
+        } @else { 2 }
+      </span>
+      <span>Qualifications</span>
+    </div>
+    <hr />
+    <div class="step">
+      <span
+        [ngClass]="{
+          step_count: true,
+          already_next_step: isAlreadyNextStep(3)
+        }"
+      >
+        @if(stepCount > 3){
+        <mat-icon>edit</mat-icon>
+        } @else { 3 }
+      </span>
+      <span>Review and Proceed</span>
+    </div>
+  </div>
+
+  @if(stepCount === 1){
+  <div class="step_inputs">s1</div>
+  <div class="step_moving_btn">
+    <button class="next_previous_btn" (click)="moveNextStep()">NEXT</button>
+  </div>
+  } @else if(stepCount === 2){
+  <div class="">
+    <div class="dropDown">
+      <span>Educational Qualifications</span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="step_inputs"></div>
+  </div>
+
+  <div class="">
+    <div class="dropDown">
+      <span>Professional Qualifications</span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+    <div class="step_inputs"></div>
+  </div>
+
+  <div class="step_moving_btn">
+    <button class="next_previous_btn" (click)="movePreviousStep()">
+      PREVIOUS
+    </button>
+    <button
+      class="next_previous_btn"
+      (click)="moveNextStep(); enableRegistration(false)"
+    >
+      NEXT
+    </button>
+  </div>
+  } @else if(stepCount === 3){
+  <div class="step_inputs">s3</div>
+  <div class="step_moving_btn">
+    <button
+      class="next_previous_btn"
+      (click)="movePreviousStep(); enableRegistration(true)"
+    >
+      PREVIOUS
+    </button>
+  </div>
+  }
 </div>

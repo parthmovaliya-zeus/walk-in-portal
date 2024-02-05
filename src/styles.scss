@@ -4,7 +4,7 @@
   font-family: quicksand;
   src: url(assets/Quicksand\ font\ 1/Quicksand-VariableFont_wght.ttf);
   font-weight: 400;
-  font-size: 16px;
+  font-size: $base-font + px;
 }
 
 body {

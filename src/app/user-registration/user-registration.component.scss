@@ -1,7 +1,7 @@
 @import "../../scss/functions";
 @import "../../scss/variables";
 
-.register-header {
+.register_header {
   @include displayFlex(space-between, center);
   height: 48px;
   background-color: $fourth-color;
@@ -18,7 +18,7 @@
     // object-fit: contain;
   }
 
-  .btn-container {
+  .btn_container {
     @include displayFlex(normal, normal);
     gap: 16px;
   }
@@ -28,10 +28,102 @@
     width: 90px;
     height: 28px;
     border: none;
+    color: $third-color;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
     border-radius: 2px;
-    font-size: 14px;
+    font-size: $small-font + px;
     font-family: quicksand;
     font-weight: 600;
+  }
+
+  .btn:disabled {
+    color: $third-color;
+    background-color: $disable-button-background-color;
+  }
+}
+.register_container {
+  background-color: $main-background-color;
+  min-height: 85vh;
+  padding: 24px;
+
+  @include displayFlex(normal, normal);
+  flex-direction: column;
+  gap: 24px;
+
+  .register_steps {
+    @include displayFlex(space-between, center);
+    padding: 12px 16px;
+    border-radius: 2px;
+    background-color: $white-color;
+
+    hr {
+      margin: 0px 10px;
+      border: 1px solid $border-12-color;
+      flex: 1;
+    }
+
+    .step {
+      @include displayFlex(normal, center);
+      gap: 8px;
+
+      .step_count {
+        background-color: $fifth-color;
+        color: $white-color;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        @include displayFlex(center, center);
+
+        mat-icon {
+          transform: scale(0.75);
+        }
+      }
+      .already_next_step {
+        background-color: $button-background-color;
+        color: $icon-dark-color;
+      }
+    }
+  }
+
+  .step_inputs {
+    background-color: $white-color;
+    padding: 24px;
+  }
+
+  .dropDown {
+    background-color: $section-header-color;
+    height: 56px;
+    @include displayFlex(space-between, center);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+
+    span {
+      margin-left: 16px;
+    }
+
+    mat-icon {
+      height: 56px;
+      width: 32px;
+      @include displayFlex(center, center);
+      border-left: 1px solid $border-25-color;
+    }
+  }
+
+  .step_moving_btn {
+    @include displayFlex(center, center);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .next_previous_btn {
+    width: 90px;
+    height: 28px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
+    border-radius: 2px;
+    border: none;
+    background-color: $button-background-color;
+    color: $third-color;
+    font-family: quicksand;
+    font-weight: 600;
+    font-size: $small-font + px;
   }
 }

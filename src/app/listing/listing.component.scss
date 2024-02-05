@@ -1,0 +1,140 @@
+@import "../../scss/functions";
+@import "../../scss/variables";
+
+.list_container {
+  background-color: $main-background-color;
+  padding: 35px 24px;
+  @include displayFlex(normal, normal);
+  flex-direction: column;
+  gap: 24px;
+  // @include displayFlex(normal, normal);
+
+  .job_container {
+    // @include displayFlex(normal, normal);
+    // flex-direction: column;
+    // gap: 16px;
+    background-color: $white-color;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.24);
+
+    h1 {
+      font-size: $large-font + px;
+      margin: 0px;
+      color: $secondary-color;
+    }
+
+    .expires_in_job {
+      position: absolute;
+      top: -7px;
+      right: 16px;
+      height: 14px;
+      padding: 2px 8px;
+      background-color: $main-background-color;
+      color: $seven-color;
+      font-size: $xsmall-font + px;
+      border-radius: 2px;
+    }
+
+    .date_time_container {
+      margin-top: 16px;
+      @include displayFlex(normal, normal);
+      flex-direction: column;
+      gap: 8px;
+      color: $sixth-color;
+      font-size: $xsmall-font + px;
+
+      .date_time_value {
+        @include displayFlex(normal, center);
+        gap: 16px;
+        color: $primary-color;
+        font-size: $small-font + px;
+
+        .splitter {
+          @include splitter($border-12-color, 12);
+        }
+
+        .location {
+          @include displayFlex(normal, center);
+          gap: 4px;
+          font-size: $xsmall-font + px;
+
+          mat-icon {
+            color: $sixth-color;
+          }
+        }
+      }
+    }
+
+    hr {
+      margin-top: 16px;
+      border: 1px solid $border-12-color;
+      flex: 1;
+    }
+
+    .job_role_title {
+      font-size: $xsmall-font + px;
+      color: $sixth-color;
+      margin-top: 16px;
+    }
+
+    .job_role_container {
+      @include displayFlex(normal, center);
+      gap: 8px;
+
+      margin-top: 8px;
+
+      .job_splitter {
+        @include splitter($border-12-color, 12);
+      }
+
+      .single_job {
+        @include displayFlex(normal, center);
+        gap: 8px;
+
+        img {
+          border: 1px solid $primary-color;
+          border-radius: 50%;
+          background-color: $white-color;
+          padding: 4px;
+        }
+      }
+    }
+
+    .extra_roles_container {
+      margin-top: 16px;
+      .extra_roles {
+        background-color: $yellow-background-color;
+        border-radius: 9px;
+        letter-spacing: 0.25px;
+        padding: 3px 8px;
+        font-size: $xsmall-font + px;
+      }
+    }
+
+    .more_details_btn {
+      @include displayFlex(center, center);
+      background-color: $button-background-color;
+      color: $header-background-color;
+      width: 168px;
+      height: 28px;
+      margin: 24px auto 0px auto;
+      border: 0px;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
+      border-radius: 2px;
+      font-family: quicksand;
+      font-weight: 600;
+    }
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .list_container {
+    .job_container {
+      .job_role_container {
+        @include displayFlex(center, normal);
+        flex-direction: column;
+      }
+    }
+  }
+}

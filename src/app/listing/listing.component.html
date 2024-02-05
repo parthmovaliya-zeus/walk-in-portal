@@ -1,0 +1,116 @@
+<div class="list_container">
+  @for(job of jobs; track job.id){
+  <div class="job_container">
+    <h1>{{ job.title | titlecase }}</h1>
+
+    @if(job.isExpiring){
+    <div class="expires_in_job">{{ job.isExpiringTitle | titlecase }}</div>
+    }
+
+    <div class="date_time_container">
+      <span>Date & Time :</span>
+
+      <div class="date_time_value">
+        <div class="">{{ job.sDate }} to {{ job.eDate }}</div>
+        <div class="splitter"></div>
+        <div class="location">
+          <!-- <img src="../../assets/icons/location_on_black_24dp.svg" alt="location icon" /> -->
+          <mat-icon> location_on</mat-icon>
+          <span>{{ job.location }}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="job_role_title">Job Roles :</div>
+    @for(jr of job.job_roles; track $index){
+    <div class="job_role_container">
+      <div class="single_job">
+        <img
+          src="../../assets/icons/Instructional Designer.svg"
+          alt="Instructional Designer icon"
+        />
+        <span class="">{{ jr }}</span>
+      </div>
+      @if($index !== jr.length){
+      <div class="job_splitter" [hidden]="screenWidth < 376"></div>
+      }
+    </div>
+    }
+    <!-- <div class="job_role_container">
+      <div class="single_job">
+        <img
+          src="../../assets/icons/Instructional Designer.svg"
+          alt="Instructional Designer icon"
+        />
+        <span class="">{{job.job_roles}}</span>
+      </div>
+      <div class="job_splitter" [hidden]="screenWidth < 376"></div>
+      <div class="single_job">
+        <img
+          src="../../assets/icons/Software Quality Engineer.svg"
+          alt="Software Quality Engineer icon"
+        />
+        <span class="">Software Quality Engineer</span>
+      </div>
+    </div> -->
+
+    @if(job.isExtraRoles){
+    <div class="extra_roles_container">
+      <span class="extra_roles">{{ job.isExtraRolesTitle }}</span>
+    </div>
+    }
+
+    <button [routerLink]="['/job', job.id]" class="more_details_btn">
+      VIEW MORE DETAILS
+    </button>
+  </div>
+  }
+
+  <!-- <div class="job_container">
+    <h1>Walk In for Designer Job Role</h1>
+
+    <div class="expires_in_job">Expires in 5 days</div>
+
+    <div class="date_time_container">
+      <span>Date & Time :</span>
+
+      <div class="date_time_value">
+        <div class="">10-Jul-2021 to 11-Jul-2021</div>
+        <div class="splitter"></div>
+        <div class="location">
+          <mat-icon> location_on</mat-icon>
+          <span>Mumbai</span>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="job_role_title">Job Roles :</div>
+    <div class="job_role_container">
+      <div class="single_job">
+        <img
+          src="../../assets/icons/Instructional Designer.svg"
+          alt="Instructional Designer icon"
+        />
+        <span class="">Instructional Designer</span>
+      </div>
+      <div class="job_splitter" [hidden]="screenWidth < 376"></div>
+      <div class="single_job">
+        <img
+          src="../../assets/icons/Software Quality Engineer.svg"
+          alt="Software Quality Engineer icon"
+        />
+        <span class="">Software Quality Engineer</span>
+      </div>
+    </div>
+
+    <div class="extra_roles_container">
+      <span class="extra_roles">Internship Opportunity for MCA Students</span>
+    </div>
+
+    <button class="more_details_btn">VIEW MORE DETAILS</button>
+  </div> -->
+</div>

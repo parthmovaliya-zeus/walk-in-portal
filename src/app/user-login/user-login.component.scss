@@ -11,7 +11,7 @@
   h1 {
     text-align: center;
     margin: 0px;
-    font-size: 24px;
+    font-size: $xxlarge-font + px;
   }
 
   .login-container {
@@ -46,9 +46,9 @@
     .login-inp {
       background-color: $white-color;
       border: 0px;
-      border-bottom: 1px solid $border-dark-color;
+      border-bottom: 1px solid $border-12-color;
       width: 100%;
-      font-size: 16px;
+      font-size: $base-font + px;
     }
 
     .login-inp:focus,
@@ -60,19 +60,19 @@
       align-self: flex-end;
       text-decoration: none;
       color: $secondary-color;
-      font-size: 14px;
+      font-size: $small-font + px;
       margin-top: 5px;
     }
 
     .remember-me {
       @include displayFlex(normal, normal);
-      font-size: 16px;
+      font-size: $base-font + px;
       margin-top: 26px;
     }
     .login-button-container {
       > button {
         background-color: $button-background-color;
-        font-size: 14px;
+        font-size: $small-font + px;
         box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
         width: 216px;
         height: 40px;
@@ -89,7 +89,7 @@
     }
     .register-user > p {
       margin: 0px;
-      font-size: 12px;
+      font-size: $xsmall-font + px;
       margin-bottom: 4px;
     }
   }
@@ -101,13 +101,13 @@
     bottom: 40px;
     > a {
       color: $secondary-color;
-      font-size: 14px;
+      font-size: $small-font + px;
       text-decoration: none;
     }
   }
 
   .splitter {
-    @include splitter($border-dark-color, 18);
+    @include splitter($border-12-color, 18);
   }
 }
 

@@ -39,12 +39,14 @@
     </div>
 
     <div class="login-button-container">
-      <button>LOG IN</button>
+      <button [routerLink]="['/jobs']">LOG IN</button>
     </div>
 
     <div class="register-user">
       <p>Not registered yet?</p>
-      <a class="inp-forgot" href="#">CREATE AN ACCOUNT</a>
+      <a class="inp-forgot" [routerLink]="['/registration']"
+        >CREATE AN ACCOUNT</a
+      >
     </div>
   </div>
   <div class="more-options">
