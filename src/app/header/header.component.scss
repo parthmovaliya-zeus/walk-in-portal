@@ -12,7 +12,10 @@
 
   @include displayFlex(normal, center);
 
+  border-bottom: 2px solid $border-color;
+
   > img {
     margin-left: 24px;
+    cursor: pointer;
   }
 }

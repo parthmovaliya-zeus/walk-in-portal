@@ -24,4 +24,9 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: ListingComponent,
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: UserLoginComponent,
+  },
 ];

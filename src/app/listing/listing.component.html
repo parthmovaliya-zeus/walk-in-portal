@@ -24,8 +24,8 @@
     <hr />
 
     <div class="job_role_title">Job Roles :</div>
-    @for(jr of job.job_roles; track $index){
     <div class="job_role_container">
+      @for(jr of job.job_roles; track $index){
       <div class="single_job">
         <img
           src="../../assets/icons/Instructional Designer.svg"
@@ -35,9 +35,8 @@
       </div>
       @if($index !== jr.length){
       <div class="job_splitter" [hidden]="screenWidth < 376"></div>
-      }
+      } }
     </div>
-    }
     <!-- <div class="job_role_container">
       <div class="single_job">
         <img
