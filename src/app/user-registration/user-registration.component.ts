@@ -1,11 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { PersonalInformationComponent } from '../personal-information/personal-information.component';
+import { QualificationsComponent } from '../qualifications/qualifications.component';
+import { ReviewProceedComponent } from '../review-proceed/review-proceed.component';
+import { IPersonalInformation } from '../interface';
 
 @Component({
   selector: 'app-user-registration',
   standalone: true,
-  imports: [MatIconModule, CommonModule],
+  imports: [
+    MatIconModule,
+    CommonModule,
+    PersonalInformationComponent,
+    QualificationsComponent,
+    ReviewProceedComponent,
+  ],
   templateUrl: './user-registration.component.html',
   styleUrl: './user-registration.component.scss',
 })
@@ -16,6 +26,8 @@ export class UserRegistrationComponent implements OnInit {
   ngOnInit(): void {}
 
   movePreviousStep() {
+    if (this.stepCount === 2) {
+    }
     this.stepCount -= 1;
   }
   moveNextStep() {
@@ -32,5 +44,24 @@ export class UserRegistrationComponent implements OnInit {
 
   enableRegistration(value: boolean) {
     this.isDisable = value;
+  }
+
+  userpersonalInformation: IPersonalInformation = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    countryCode: null,
+    phoneNumber: null,
+    portfolio: '',
+    instructionalDesigner: null,
+    softwareEngineer: null,
+    softwareQualityEngineer: null,
+    referralName: '',
+    jobRelatedUpdates: null,
+  };
+
+  setPersonalInformation(val: any) {
+    this.userpersonalInformation = val;
+    this.moveNextStep();
   }
 }

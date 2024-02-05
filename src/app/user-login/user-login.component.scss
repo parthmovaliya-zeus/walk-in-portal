@@ -65,9 +65,16 @@
     }
 
     .remember-me {
-      @include displayFlex(normal, normal);
+      @include displayFlex(normal, center);
       font-size: $base-font + px;
       margin-top: 26px;
+      gap: 5px;
+
+      input[type="checkbox"] {
+        height: 24px;
+        width: 24px;
+        accent-color: $secondary-color;
+      }
     }
     .login-button-container {
       > button {

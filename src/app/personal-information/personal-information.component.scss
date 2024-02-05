@@ -1,0 +1,73 @@
+@import "../../scss/functions";
+@import "../../scss/variables";
+
+// @include displayFlex(normal, center);
+.personal_information_container {
+  padding: 24px;
+  background-color: $white-color;
+
+  .personal_information_form {
+    @include displayFlex(center, normal);
+    flex-direction: column;
+
+    gap: 40px;
+
+    .input_single_container {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    input {
+      border: 0px;
+      border-bottom: 1px solid $border-38-color;
+    }
+    input:focus {
+      outline: none;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+    }
+
+    input[type="checkbox"] {
+      height: 24px;
+      width: 24px;
+      accent-color: $secondary-color;
+    }
+
+    .inp_string {
+      width: 480px;
+      padding-bottom: 4px;
+      font-size: $base-font + px;
+    }
+
+    .upload_resume_container {
+      @include displayFlex(normal, center);
+    }
+
+    .phone_number_container {
+      @include displayFlex(normal, center);
+      gap: 4px;
+      .country_code {
+        width: 22px;
+        font-size: $base-font + px;
+        padding-bottom: 4px;
+      }
+      .phone_number {
+        width: 95px;
+        font-size: $base-font + px;
+        padding-bottom: 4px;
+      }
+    }
+
+    .checkbox_single_container {
+      @include displayFlex(normal, center);
+      gap: 9px;
+    }
+  }
+}

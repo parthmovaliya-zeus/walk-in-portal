@@ -1,0 +1,260 @@
+<div class="personal_information_container">
+  <!-- <form class="personal_information_form"> -->
+  <div class="personal_information_form">
+    <div class="input_single_container">
+      <label for="firstName">First Name*</label>
+      <input
+        class="inp_string"
+        type="text"
+        [(ngModel)]="userInfo.firstName"
+        id="firstName"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="lastName">Last Name*</label>
+      <input
+        class="inp_string"
+        type="text"
+        [(ngModel)]="userInfo.lastName"
+        id="lastName"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="email">Email*</label>
+      <input
+        class="inp_string"
+        type="email"
+        [(ngModel)]="userInfo.email"
+        id="email"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="phoneNumber">Phone Number*</label>
+      <div class="phone_number_container">
+        <mat-icon>add</mat-icon>
+        <input
+          class="country_code"
+          type="number"
+          [(ngModel)]="userInfo.countryCode"
+          id="countryCode"
+        />
+        <input
+          class="phone_number"
+          type="number"
+          [(ngModel)]="userInfo.phoneNumber"
+          id="phoneNumber"
+        />
+      </div>
+    </div>
+
+    <!-- <input type="file" name="resume" id="resume" />
+     -->
+    <div class="upload_resume_container">
+      <img
+        src="../../assets/icons/Upload_black_24dp.svg"
+        alt="Upload Resume icon"
+      />
+      <span>Upload Resume</span>
+    </div>
+
+    <div class="input_single_container">
+      <label for="portfolio">Enter Portfolio URL (if any)</label>
+      <input
+        class="inp_string"
+        type="url"
+        [(ngModel)]="userInfo.portfolio"
+        id="portfolio"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="portfolio">Preferred Job Roles*</label>
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="instructionalDesigner"
+          [(ngModel)]="userInfo.instructionalDesigner"
+          value="instructionalDesigner"
+        />
+        <label for="instructionalDesigner">Instructional Designer</label>
+      </div>
+
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="softwareEngineer"
+          [(ngModel)]="userInfo.softwareEngineer"
+          value="softwareEngineer"
+        />
+        <label for="softwareEngineer">Software Engineer</label>
+      </div>
+
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="softwareQualityEngineer"
+          [(ngModel)]="userInfo.softwareQualityEngineer"
+          value="softwareQualityEngineer"
+        />
+        <label for="softwareQualityEngineer">Software Quality Engineer</label>
+      </div>
+    </div>
+
+    <div class="input_single_container">
+      <label for="referralName"
+        >If You Are Registering Via A Referral, Please Mention Full Name Of The
+        Employee Who Referred You</label
+      >
+      <input
+        class="inp_string"
+        type="text"
+        [(ngModel)]="userInfo.referralName"
+        id="referralName"
+      />
+    </div>
+
+    <div class="checkbox_single_container">
+      <input
+        type="checkbox"
+        id="jobRelatedUpdates"
+        [(ngModel)]="userInfo.jobRelatedUpdates"
+      />
+      <label for="jobRelatedUpdates"
+        >Send me job related updates via mail</label
+      >
+    </div>
+  </div>
+  <!-- </form> -->
+  <!-- <form [formGroup]="personalInformation" class="personal_information_form">
+    <div class="input_single_container">
+      <label for="firstName">First Name*</label>
+      <input
+        class="inp_string"
+        type="text"
+        formControlName="firstName"
+        [(ngModel)]="previousUserInfo.firstName"
+        id="firstName"
+        [value]="previousUserInfo.firstName"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="lastName">Last Name*</label>
+      <input
+        class="inp_string"
+        type="text"
+        formControlName="lastName"
+        id="lastName"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="email">Email*</label>
+      <input
+        class="inp_string"
+        type="email"
+        formControlName="email"
+        id="email"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="phoneNumber">Phone Number*</label>
+      <div class="phone_number_container">
+        <mat-icon>add</mat-icon>
+        <input
+          class="country_code"
+          type="number"
+          formControlName="countryCode"
+          id="countryCode"
+        />
+        <input
+          class="phone_number"
+          type="number"
+          formControlName="phoneNumber"
+          id="phoneNumber"
+        />
+      </div>
+    </div>
+
+    <div class="upload_resume_container">
+      <img
+        src="../../assets/icons/Upload_black_24dp.svg"
+        alt="Upload Resume icon"
+      />
+      <span>Upload Resume</span>
+    </div>
+
+    <div class="input_single_container">
+      <label for="portfolio">Enter Portfolio URL (if any)</label>
+      <input
+        class="inp_string"
+        type="url"
+        formControlName="portfolio"
+        id="portfolio"
+      />
+    </div>
+
+    <div class="input_single_container">
+      <label for="portfolio">Preferred Job Roles*</label>
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="instructionalDesigner"
+          formControlName="instructionalDesigner"
+          value="instructionalDesigner"
+        />
+        <label for="instructionalDesigner">Instructional Designer</label>
+      </div>
+
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="softwareEngineer"
+          formControlName="softwareEngineer"
+          value="softwareEngineer"
+        />
+        <label for="softwareEngineer">Software Engineer</label>
+      </div>
+
+      <div class="checkbox_single_container">
+        <input
+          type="checkbox"
+          id="softwareQualityEngineer"
+          formControlName="softwareQualityEngineer"
+          value="softwareQualityEngineer"
+        />
+        <label for="softwareQualityEngineer">Software Quality Engineer</label>
+      </div>
+    </div>
+
+    <div class="input_single_container">
+      <label for="referralName"
+        >If You Are Registering Via A Referral, Please Mention Full Name Of The
+        Employee Who Referred You</label
+      >
+      <input
+        class="inp_string"
+        type="text"
+        formControlName="referralName"
+        id="referralName"
+      />
+    </div>
+
+    <div class="checkbox_single_container">
+      <input
+        type="checkbox"
+        id="jobRelatedUpdates"
+        formControlName="jobRelatedUpdates"
+      />
+      <label for="jobRelatedUpdates"
+        >Send me job related updates via mail</label
+      >
+    </div>
+  </form> -->
+</div>
+<button (click)="onSubmit()" type="submit">Submit</button>
+<!-- </div> -->

@@ -1,0 +1,25 @@
+@import "../../scss/functions";
+@import "../../scss/variables";
+
+.dropDown {
+  background-color: $section-header-color;
+  height: 56px;
+  @include displayFlex(space-between, center);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+
+  span {
+    margin-left: 16px;
+  }
+
+  mat-icon {
+    height: 56px;
+    width: 32px;
+    @include displayFlex(center, center);
+    border-left: 1px solid $border-25-color;
+  }
+}
+
+.step_inputs {
+  background-color: $white-color;
+  padding: 24px;
+}

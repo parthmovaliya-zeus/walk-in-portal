@@ -53,27 +53,19 @@
   </div>
 
   @if(stepCount === 1){
-  <div class="step_inputs">s1</div>
+  <!-- <div class="step_inputs"> -->
+  <app-personal-information
+    (personalInformationSubmited)="setPersonalInformation($event)"
+    [prevUserInfo]="userpersonalInformation"
+  ></app-personal-information>
+  <!-- </div> -->
   <div class="step_moving_btn">
     <button class="next_previous_btn" (click)="moveNextStep()">NEXT</button>
   </div>
   } @else if(stepCount === 2){
-  <div class="">
-    <div class="dropDown">
-      <span>Educational Qualifications</span>
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </div>
-    <div class="step_inputs"></div>
-  </div>
-
-  <div class="">
-    <div class="dropDown">
-      <span>Professional Qualifications</span>
-      <mat-icon>keyboard_arrow_down</mat-icon>
-    </div>
-    <div class="step_inputs"></div>
-  </div>
-
+  <!-- <div class="step_inputs"> -->
+  <app-qualifications></app-qualifications>
+  <!-- </div> -->
   <div class="step_moving_btn">
     <button class="next_previous_btn" (click)="movePreviousStep()">
       PREVIOUS
@@ -86,7 +78,9 @@
     </button>
   </div>
   } @else if(stepCount === 3){
-  <div class="step_inputs">s3</div>
+  <!-- <div class="step_inputs"> -->
+  <app-review-proceed></app-review-proceed>
+  <!-- </div> -->
   <div class="step_moving_btn">
     <button
       class="next_previous_btn"
