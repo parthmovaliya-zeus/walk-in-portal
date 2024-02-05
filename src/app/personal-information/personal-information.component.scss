@@ -36,15 +36,17 @@
       }
     }
 
-    .input_single_container {
-      @include displayFlex(center, normal);
-      flex-direction: column;
-      gap: 12px;
+    label {
+      color: $sixth-color;
+      font-size: $xsmall-font + px;
+      width: 480px;
     }
 
     input {
       border: 0px;
       border-bottom: 1px solid $border-38-color;
+      font-family: quicksand;
+      font-weight: 600;
     }
     input:focus {
       outline: none;
@@ -64,15 +66,37 @@
       accent-color: $secondary-color;
     }
 
+    .preferred_job_roles {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .input_single_container {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 12px;
+
+      .referralLable {
+        letter-spacing: 0.3px;
+        width: 480px;
+      }
+    }
+
     .inp_string {
-      width: 480px;
       padding-bottom: 4px;
       font-size: $base-font + px;
+      width: 480px;
     }
 
     .upload_resume_container {
       @include displayFlex(normal, center);
       gap: 8px;
+
+      span {
+        color: $secondary-color;
+        font-size: $small-font;
+      }
     }
 
     .phone_number_container {
@@ -93,6 +117,11 @@
     .checkbox_single_container {
       @include displayFlex(normal, center);
       gap: 9px;
+
+      .normal_label {
+        color: $primary-color;
+        font-size: $base-font + px;
+      }
     }
   }
 }

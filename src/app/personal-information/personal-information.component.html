@@ -77,7 +77,7 @@
       />
     </div>
 
-    <div class="input_single_container">
+    <div class="preferred_job_roles">
       <label for="portfolio">Preferred Job Roles*</label>
       <div class="checkbox_single_container">
         <input
@@ -86,7 +86,9 @@
           [(ngModel)]="userInfo.instructionalDesigner"
           value="instructionalDesigner"
         />
-        <label for="instructionalDesigner">Instructional Designer</label>
+        <label class="normal_label" for="instructionalDesigner"
+          >Instructional Designer</label
+        >
       </div>
 
       <div class="checkbox_single_container">
@@ -96,7 +98,9 @@
           [(ngModel)]="userInfo.softwareEngineer"
           value="softwareEngineer"
         />
-        <label for="softwareEngineer">Software Engineer</label>
+        <label class="normal_label" for="softwareEngineer"
+          >Software Engineer</label
+        >
       </div>
 
       <div class="checkbox_single_container">
@@ -106,12 +110,14 @@
           [(ngModel)]="userInfo.softwareQualityEngineer"
           value="softwareQualityEngineer"
         />
-        <label for="softwareQualityEngineer">Software Quality Engineer</label>
+        <label class="normal_label" for="softwareQualityEngineer"
+          >Software Quality Engineer</label
+        >
       </div>
     </div>
 
     <div class="input_single_container">
-      <label for="referralName"
+      <label for="referralName" class="referralLable"
         >If You Are Registering Via A Referral, Please Mention Full Name Of The
         Employee Who Referred You</label
       >
@@ -129,7 +135,7 @@
         id="jobRelatedUpdates"
         [(ngModel)]="userInfo.jobRelatedUpdates"
       />
-      <label for="jobRelatedUpdates"
+      <label for="jobRelatedUpdates" class="normal_label"
         >Send me job related updates via mail</label
       >
     </div>

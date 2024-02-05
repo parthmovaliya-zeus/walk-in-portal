@@ -1,6 +1,10 @@
 @import "../../scss/functions";
 @import "../../scss/variables";
 
+.educational_qualifications {
+  margin-bottom: 24px;
+}
+
 .dropDown {
   background-color: $section-header-color;
   height: 56px;
@@ -11,15 +15,113 @@
     margin-left: 16px;
   }
 
-  mat-icon {
+  .dd_img_container {
     height: 56px;
     width: 32px;
-    @include displayFlex(center, center);
     border-left: 1px solid $border-25-color;
+    @include displayFlex(center, center);
+    cursor: pointer;
   }
+
+  .rotate180 {
+    transform: rotate(180deg);
+  }
+
+  //   mat-icon {
+  //     height: 56px;
+  //     width: 32px;
+  //     @include displayFlex(center, center);
+  //     border-left: 1px solid $border-25-color;
+  //     cursor: pointer;
+  //   }
 }
 
-.step_inputs {
-  background-color: $white-color;
-  padding: 24px;
+.step_input_container {
+  .mb-8 {
+    margin-bottom: 8px;
+  }
+  .step_inputs {
+    background-color: $white-color;
+    padding: 24px;
+    @include displayFlex(center, normal);
+    flex-direction: column;
+    gap: 40px;
+
+    .double_input_container {
+      @include displayFlex(normal, center);
+      gap: 24px;
+
+      .single_input_container {
+        flex: 1;
+      }
+    }
+
+    .single_input_container {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 12px;
+
+      label {
+        color: $sixth-color;
+        font-size: $xsmall-font + px;
+      }
+
+      input {
+        border: 0px;
+        border-bottom: 1px solid $border-38-color;
+        padding-bottom: 4px;
+        font-size: $base-font + px;
+        font-family: quicksand;
+        font-weight: 600;
+      }
+
+      select {
+        border: 0px;
+        border-bottom: 1px solid $border-38-color;
+        padding-bottom: 4px;
+        font-size: $base-font + px;
+        font-family: quicksand;
+        font-weight: 600;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+
+      .w_small {
+        width: 180px;
+      }
+
+      .applicant_type_container {
+        @include displayFlex(normal, center);
+        gap: 24px;
+
+        .applicant_type {
+          @include displayFlex(normal, center);
+          gap: 8px;
+          height: 20px;
+
+          input[type="radio"] {
+            height: 20px;
+            width: 20px;
+            accent-color: $secondary-color;
+          }
+
+          label {
+            font-size: $base-font + px;
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
 }

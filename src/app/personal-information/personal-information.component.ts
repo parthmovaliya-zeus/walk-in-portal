@@ -11,7 +11,7 @@ import { IPersonalInformation } from '../interface';
 @Component({
   selector: 'app-personal-information',
   standalone: true,
-  imports: [MatIcon, ReactiveFormsModule, FormsModule],
+  imports: [MatIcon, FormsModule],
   templateUrl: './personal-information.component.html',
   styleUrl: './personal-information.component.scss',
 })

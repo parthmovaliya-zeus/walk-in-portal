@@ -21,7 +21,7 @@ import { IPersonalInformation } from '../interface';
 })
 export class UserRegistrationComponent implements OnInit {
   isDisable: boolean = true;
-  stepCount: number = 1;
+  stepCount: number = 2;
 
   ngOnInit(): void {}
 
