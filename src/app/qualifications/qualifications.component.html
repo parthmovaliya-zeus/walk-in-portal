@@ -199,46 +199,29 @@
       <span class="technologies_container_label"
         >Select All The Technologies You Expertise In*</span
       >
+
+      @for(expertiseTechnology of expertiseTechnologies; track
+      expertiseTechnology.id){
       <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="'e_' + expertiseTechnology.technologyName"
+          [(ngModel)]="expertiseTechnology.value"
+        />
+        <label [for]="'e_' + expertiseTechnology.technologyName">{{
+          expertiseTechnology.technologyName
+        }}</label>
+      </div>
+      }
+
+      <!-- <div class="single_checkbox_container">
         <input
           type="checkbox"
           id="e_javascript"
           [(ngModel)]="userExperienced.e_javascript"
         />
         <label for="e_javascript">Javascript</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="e_angularJS"
-          [(ngModel)]="userExperienced.e_angularJS"
-        />
-        <label for="e_angularJS">Angular JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="e_react"
-          [(ngModel)]="userExperienced.e_react"
-        />
-        <label for="e_react">React</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="e_nodeJS"
-          [(ngModel)]="userExperienced.e_nodeJS"
-        />
-        <label for="e_nodeJS">Node JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="e_others"
-          [(ngModel)]="userExperienced.e_others"
-        />
-        <label for="e_others">Others</label>
-      </div>
+      </div> -->
 
       <div class="single_input_container specific_width">
         <label for="e_otherTechnologies">If others, please mention</label>
@@ -255,46 +238,29 @@
       <span class="technologies_container_label"
         >Select All The Technologies You Are Familiar In</span
       >
+
+      @for(familiarTechnologie of familiarTechnologies; track
+      familiarTechnologie.id){
       <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="'f_' + familiarTechnologie.technologyName"
+          [(ngModel)]="familiarTechnologie.value"
+        />
+        <label [for]="'f_' + familiarTechnologie.technologyName">{{
+          familiarTechnologie.technologyName
+        }}</label>
+      </div>
+      }
+
+      <!-- <div class="single_checkbox_container">
         <input
           type="checkbox"
           id="f_javascript"
           [(ngModel)]="userExperienced.f_javascript"
         />
         <label for="f_javascript">Javascript</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="f_angularJS"
-          [(ngModel)]="userExperienced.f_angularJS"
-        />
-        <label for="f_angularJS">Angular JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="f_react"
-          [(ngModel)]="userExperienced.f_react"
-        />
-        <label for="f_react">React</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="f_nodeJS"
-          [(ngModel)]="userExperienced.f_nodeJS"
-        />
-        <label for="f_nodeJS">Node JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="f_others"
-          [(ngModel)]="userExperienced.f_others"
-        />
-        <label for="f_others">Others</label>
-      </div>
+      </div> -->
 
       <div class="single_input_container specific_width">
         <label for="f_otherTechnologies">If others, please mention</label>
@@ -417,34 +383,29 @@
       <span class="technologies_container_label"
         >Select All The Technologies You Are Familiar In</span
       >
+
+      @for(familiarTechnologie of familiarTechnologies; track
+      familiarTechnologie.id){
       <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="familiarTechnologie.technologyName"
+          [(ngModel)]="familiarTechnologie.value"
+        />
+        <label [for]="familiarTechnologie.technologyName">{{
+          familiarTechnologie.technologyName
+        }}</label>
+      </div>
+      }
+
+      <!-- <div class="single_checkbox_container">
         <input
           type="checkbox"
           id="javascript"
           [(ngModel)]="userFresher.javascript"
         />
         <label for="javascript">Javascript</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="angularJS"
-          [(ngModel)]="userFresher.angularJS"
-        />
-        <label for="angularJS">Angular JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input type="checkbox" id="react" [(ngModel)]="userFresher.react" />
-        <label for="react">React</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input type="checkbox" id="nodeJS" [(ngModel)]="userFresher.nodeJS" />
-        <label for="nodeJS">Node JS</label>
-      </div>
-      <div class="single_checkbox_container">
-        <input type="checkbox" id="others" [(ngModel)]="userFresher.others" />
-        <label for="others">Others</label>
-      </div>
+      </div> -->
 
       <div class="single_input_container specific_width">
         <label for="otherTechnologies">If others, please mention</label>

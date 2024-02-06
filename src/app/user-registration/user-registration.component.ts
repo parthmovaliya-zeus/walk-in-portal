@@ -5,7 +5,9 @@ import { PersonalInformationComponent } from '../personal-information/personal-i
 import { QualificationsComponent } from '../qualifications/qualifications.component';
 import { ReviewProceedComponent } from '../review-proceed/review-proceed.component';
 import {
+  IJobRoles,
   IPersonalInformation,
+  ITechnologies,
   IUserEducationalQualifications,
   IUserExperiences,
   IUserFresher,
@@ -31,11 +33,15 @@ export class UserRegistrationComponent implements OnInit {
   ngOnInit(): void {}
 
   movePreviousStep() {
-    if (this.stepCount === 2) {
+    if (this.stepCount === 3) {
+      this.enableRegistration(true);
     }
     this.stepCount -= 1;
   }
   moveNextStep() {
+    if (this.stepCount === 2) {
+      this.enableRegistration(false);
+    }
     this.stepCount += 1;
   }
 
@@ -58,12 +64,86 @@ export class UserRegistrationComponent implements OnInit {
     countryCode: null,
     phoneNumber: null,
     portfolio: '',
-    instructionalDesigner: null,
-    softwareEngineer: null,
-    softwareQualityEngineer: null,
+    // instructionalDesigner: null,
+    // softwareEngineer: null,
+    // softwareQualityEngineer: null,
     referralName: '',
     jobRelatedUpdates: null,
   };
+
+  preferredJobRoles: IJobRoles[] = [
+    {
+      id: 1,
+      JobRoleName: 'instructional Designer',
+      value: false,
+    },
+    {
+      id: 2,
+      JobRoleName: 'software Engineer',
+      value: false,
+    },
+    {
+      id: 3,
+      JobRoleName: 'software Quality Engineer',
+      value: false,
+    },
+  ];
+
+  familiarTechnologies: ITechnologies[] = [
+    {
+      id: 1,
+      technologyName: 'Javascript',
+      value: false,
+    },
+    {
+      id: 2,
+      technologyName: 'Angular JS',
+      value: false,
+    },
+    {
+      id: 3,
+      technologyName: 'React',
+      value: false,
+    },
+    {
+      id: 4,
+      technologyName: 'Node JS',
+      value: false,
+    },
+    {
+      id: 5,
+      technologyName: 'Others',
+      value: false,
+    },
+  ];
+
+  expertiseTechnologies: ITechnologies[] = [
+    {
+      id: 1,
+      technologyName: 'Javascript',
+      value: false,
+    },
+    {
+      id: 2,
+      technologyName: 'Angular JS',
+      value: false,
+    },
+    {
+      id: 3,
+      technologyName: 'React',
+      value: false,
+    },
+    {
+      id: 4,
+      technologyName: 'Node JS',
+      value: false,
+    },
+    {
+      id: 5,
+      technologyName: 'Others',
+      value: false,
+    },
+  ];
 
   //   qualificationsInformation: any = {
   //     aggregatePercentage: '',
@@ -84,47 +164,46 @@ export class UserRegistrationComponent implements OnInit {
   //     appearedRoleName: null,
   //   };
 
-  qualificationsInformation_userEducationalQualifications: IUserEducationalQualifications =
-    {
-      aggregatePercentage: '',
-      passingYear: null,
-      qualification: null,
-      stream: null,
-      collegeName: null,
-      otherCollageName: null,
-      collageLocation: '',
-    };
-
-  qualificationsInformation_userProfessionalQualificationsVisible: any = {
-    isExperienced: true,
+  userEducationalQualifications: IUserEducationalQualifications = {
+    aggregatePercentage: '',
+    passingYear: null,
+    qualification: null,
+    stream: null,
+    collegeName: null,
+    otherCollageName: null,
+    collageLocation: '',
   };
 
-  qualificationsInformation_userFresher: IUserFresher = {
-    javascript: false,
-    angularJS: false,
-    react: false,
-    nodeJS: false,
-    others: false,
+  userProfessionalQualificationsVisible: any = {
+    isExperienced: false,
+  };
+
+  userFresher: IUserFresher = {
+    // javascript: false,
+    // angularJS: false,
+    // react: false,
+    // nodeJS: false,
+    // others: false,
     otherTechnologies: null,
     isAppearedInTestByZeus: null,
     appearedRoleName: null,
   };
 
-  qualificationsInformation_userExperienced: IUserExperiences = {
+  userExperienced: IUserExperiences = {
     yearsOfExperience: null,
     currentCTC: null,
     expectedCTC: null,
-    e_javascript: false,
-    e_angularJS: false,
-    e_react: false,
-    e_nodeJS: false,
-    e_others: false,
+    // e_javascript: false,
+    // e_angularJS: false,
+    // e_react: false,
+    // e_nodeJS: false,
+    // e_others: false,
     e_otherTechnologies: null,
-    f_javascript: false,
-    f_angularJS: false,
-    f_react: false,
-    f_nodeJS: false,
-    f_others: false,
+    // f_javascript: false,
+    // f_angularJS: false,
+    // f_react: false,
+    // f_nodeJS: false,
+    // f_others: false,
     f_otherTechnologies: null,
     isInNoticePeriod: null,
     noticePeriodEnd: null,
@@ -134,17 +213,17 @@ export class UserRegistrationComponent implements OnInit {
   };
 
   setPersonalInformation(val: any) {
-    this.userPersonalInformation = val;
+    this.preferredJobRoles = val.preferredJobRoles;
+    this.userPersonalInformation = val.userInfo;
     this.moveNextStep();
   }
 
   setQualificationsInformation(val: any) {
-    this.qualificationsInformation_userEducationalQualifications =
-      val.userEducationalQualifications;
-    this.qualificationsInformation_userProfessionalQualificationsVisible =
+    this.userEducationalQualifications = val.userEducationalQualifications;
+    this.userProfessionalQualificationsVisible =
       val.userProfessionalQualificationsVisible;
-    this.qualificationsInformation_userFresher = val.userFresher;
-    this.qualificationsInformation_userExperienced = val.userExperienced;
+    this.userFresher = val.userFresher;
+    this.userExperienced = val.userExperienced;
     if (val.direction === 'PREVIOUS') {
       this.movePreviousStep();
     } else if (val.direction === 'NEXT') {

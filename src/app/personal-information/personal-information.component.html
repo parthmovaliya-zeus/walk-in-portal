@@ -79,11 +79,30 @@
 
     <div class="preferred_job_roles">
       <label for="portfolio">Preferred Job Roles*</label>
+
+      @for(preferredJobRole of preferredJobRoles; track preferredJobRole.id){
       <div class="checkbox_single_container">
+        <input
+          [id]="preferredJobRole.JobRoleName"
+          type="checkbox"
+          [(ngModel)]="preferredJobRole.value"
+        />
+        <label
+          [for]="preferredJobRole.JobRoleName"
+          class="normal_label"
+          for="instructionalDesigner"
+          >{{ preferredJobRole.JobRoleName }}</label
+        >
+      </div>
+      }
+
+      <!-- @if(preferredJobRoles.hasOwnProperty(key)){ console.log(key) } -->
+
+      <!-- <div class="checkbox_single_container">
         <input
           type="checkbox"
           id="instructionalDesigner"
-          [(ngModel)]="userInfo.instructionalDesigner"
+          [(ngModel)]="preferredJobRoles.instructionalDesigner"
           value="instructionalDesigner"
         />
         <label class="normal_label" for="instructionalDesigner"
@@ -95,7 +114,7 @@
         <input
           type="checkbox"
           id="softwareEngineer"
-          [(ngModel)]="userInfo.softwareEngineer"
+          [(ngModel)]="preferredJobRoles.softwareEngineer"
           value="softwareEngineer"
         />
         <label class="normal_label" for="softwareEngineer"
@@ -107,13 +126,13 @@
         <input
           type="checkbox"
           id="softwareQualityEngineer"
-          [(ngModel)]="userInfo.softwareQualityEngineer"
+          [(ngModel)]="preferredJobRoles.softwareQualityEngineer"
           value="softwareQualityEngineer"
         />
         <label class="normal_label" for="softwareQualityEngineer"
           >Software Quality Engineer</label
         >
-      </div>
+      </div> -->
     </div>
 
     <div class="input_single_container">

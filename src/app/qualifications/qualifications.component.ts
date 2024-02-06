@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import {
+  ITechnologies,
   IUserEducationalQualifications,
   IUserExperiences,
   IUserFresher,
@@ -38,53 +39,60 @@ export class QualificationsComponent {
   //     appearedRoleName: null,
   //   };
 
-  userEducationalQualifications: IUserEducationalQualifications = {
-    aggregatePercentage: '',
-    passingYear: null,
-    qualification: null,
-    stream: null,
-    collegeName: null,
-    otherCollageName: null,
-    collageLocation: '',
-  };
+  //     userEducationalQualifications: IUserEducationalQualifications = {
+  //     aggregatePercentage: '',
+  //     passingYear: null,
+  //     qualification: null,
+  //     stream: null,
+  //     collegeName: null,
+  //     otherCollageName: null,
+  //     collageLocation: '',
+  //   };
 
-  userProfessionalQualificationsVisible: any = {
-    isExperienced: false,
-  };
+  //   userProfessionalQualificationsVisible: any = {
+  //     isExperienced: false,
+  //   };
 
-  userFresher: IUserFresher = {
-    javascript: false,
-    angularJS: false,
-    react: false,
-    nodeJS: false,
-    others: false,
-    otherTechnologies: null,
-    isAppearedInTestByZeus: null,
-    appearedRoleName: null,
-  };
+  //     userFresher: IUserFresher = {
+  //     // javascript: false,
+  //     // angularJS: false,
+  //     // react: false,
+  //     // nodeJS: false,
+  //     // others: false,
+  //     otherTechnologies: null,
+  //     isAppearedInTestByZeus: null,
+  //     appearedRoleName: null,
+  //   };
 
-  userExperienced: IUserExperiences = {
-    yearsOfExperience: null,
-    currentCTC: null,
-    expectedCTC: null,
-    e_javascript: false,
-    e_angularJS: false,
-    e_react: false,
-    e_nodeJS: false,
-    e_others: false,
-    e_otherTechnologies: null,
-    f_javascript: false,
-    f_angularJS: false,
-    f_react: false,
-    f_nodeJS: false,
-    f_others: false,
-    f_otherTechnologies: null,
-    isInNoticePeriod: null,
-    noticePeriodEnd: null,
-    noticePeriodLength: null,
-    isAppearedInTestByZeus: null,
-    appearedRoleName: null,
-  };
+  //     userExperienced: IUserExperiences = {
+  //     yearsOfExperience: null,
+  //     currentCTC: null,
+  //     expectedCTC: null,
+  //     // e_javascript: false,
+  //     // e_angularJS: false,
+  //     // e_react: false,
+  //     // e_nodeJS: false,
+  //     // e_others: false,
+  //     e_otherTechnologies: null,
+  //     // f_javascript: false,
+  //     // f_angularJS: false,
+  //     // f_react: false,
+  //     // f_nodeJS: false,
+  //     // f_others: false,
+  //     f_otherTechnologies: null,
+  //     isInNoticePeriod: null,
+  //     noticePeriodEnd: null,
+  //     noticePeriodLength: null,
+  //     isAppearedInTestByZeus: null,
+  //     appearedRoleName: null,
+  //   };
+
+  userEducationalQualifications: any = {};
+  userProfessionalQualificationsVisible: any = {};
+  userFresher: any = {};
+  userExperienced: any = {};
+  familiarTechnologies: ITechnologies[] = [];
+  expertiseTechnologies: ITechnologies[] = [];
 
   changeEducationalQualificationsVisible() {
     this.isEducationalQualificationsVisible =
@@ -96,29 +104,27 @@ export class QualificationsComponent {
   }
 
   @Input() set prevUserInfo(val: any) {
-    this.userEducationalQualifications =
-      val.qualificationsInformation_userEducationalQualifications;
+    this.userEducationalQualifications = val.userEducationalQualifications;
     this.userProfessionalQualificationsVisible =
-      val.qualificationsInformation_userProfessionalQualificationsVisible;
-    this.userFresher = val.qualificationsInformation_userFresher;
-    this.userExperienced = val.qualificationsInformation_userExperienced;
-    // this.userQualifications = val;
+      val.userProfessionalQualificationsVisible;
+    this.userFresher = val.userFresher;
+    this.userExperienced = val.userExperienced;
+    this.familiarTechnologies = val.familiarTechnologies;
+    this.expertiseTechnologies = val.expertiseTechnologies;
   }
 
   @Output() qualificationsSubmited = new EventEmitter();
 
   onSubmit(direction: string) {
-    // if (!this.userProfessionalQualificationsVisible.isExperienced) {
     this.qualificationsSubmited.emit({
       userEducationalQualifications: this.userEducationalQualifications,
       userProfessionalQualificationsVisible:
         this.userProfessionalQualificationsVisible,
       userFresher: this.userFresher,
       userExperienced: this.userExperienced,
+      familiarTechnologies: this.familiarTechnologies,
+      expertiseTechnologies: this.expertiseTechnologies,
       direction,
     });
-    // } else {
-    //   console.log(this.userExperienced);
-    // }
   }
 }

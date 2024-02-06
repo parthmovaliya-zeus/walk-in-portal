@@ -53,27 +53,32 @@
   </div>
 
   @if(stepCount === 1){
-  <!-- <div class="step_inputs"> -->
+
   <app-personal-information
     (personalInformationSubmited)="setPersonalInformation($event)"
-    [prevUserInfo]="userPersonalInformation"
+    [prevUserInfo]="{ userInfo: userPersonalInformation, preferredJobRoles }"
   ></app-personal-information>
-  <!-- </div> -->
+
   <!-- <div class="step_moving_btn">
     <button class="next_previous_btn" (click)="moveNextStep()">NEXT</button>
   </div> -->
 
   } @else if(stepCount === 2){
-  <!-- <div class="step_inputs"> -->
+
   <app-qualifications
     (qualificationsSubmited)="setQualificationsInformation($event)"
-    [prevUserInfo]="{qualificationsInformation_userEducationalQualifications,
-            qualificationsInformation_userProfessionalQualificationsVisible,
-            qualificationsInformation_userFresher,
-            qualificationsInformation_userExperienced}
-            "
+    [prevUserInfo]="{
+      userEducationalQualifications: userEducationalQualifications,
+      preferredJobRoles,
+      userProfessionalQualificationsVisible:
+        userProfessionalQualificationsVisible,
+      userFresher: userFresher,
+      userExperienced: userExperienced,
+      familiarTechnologies,
+      expertiseTechnologies
+    }"
   ></app-qualifications>
-  <!-- </div> -->
+
   <!-- <div class="step_moving_btn">
     <button class="next_previous_btn" (click)="movePreviousStep()">
       PREVIOUS
@@ -89,11 +94,17 @@
   } @else if(stepCount === 3){
   <!-- <div class="step_inputs"> -->
   <app-review-proceed
-    [prevUserInfo]="{userPersonalInformation,qualificationsInformation_userEducationalQualifications,
-    qualificationsInformation_userProfessionalQualificationsVisible,
-    qualificationsInformation_userFresher,
-    qualificationsInformation_userExperienced}
-    "
+    [prevUserInfo]="{
+      userInfo: userPersonalInformation,
+      preferredJobRoles,
+      userEducationalQualifications: userEducationalQualifications,
+      userProfessionalQualificationsVisible:
+        userProfessionalQualificationsVisible,
+      userFresher: userFresher,
+      userExperienced: userExperienced,
+      familiarTechnologies,
+      expertiseTechnologies
+    }"
   ></app-review-proceed>
   <!-- </div> -->
   <div class="step_moving_btn">
