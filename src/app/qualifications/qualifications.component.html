@@ -1,107 +1,176 @@
 <div class="educational_qualifications">
-  <div class="dropDown">
-    <span>Educational Qualifications</span>
-    <div [ngClass]="{'dd_img_container': true}" (click)="changeEducationalQualificationsVisible()">
-      <!-- <mat-icon (click)="changeEducationalQualificationsVisible()"
+    <div class="dropDown">
+        <span>Educational Qualifications</span>
+        <div [ngClass]="{'dd_img_container': true}" (click)="changeEducationalQualificationsVisible()">
+            <!-- <mat-icon (click)="changeEducationalQualificationsVisible()"
         >keyboard_arrow_down</mat-icon
       > -->
-      <img [ngClass]="{'rotate180': !isEducationalQualificationsVisible}"
-        src="../../assets/icons/expand_less_black_24dp.svg" alt="expand less/more icon" />
+            <img [ngClass]="{'rotate180': !isEducationalQualificationsVisible}"
+                src="../../assets/icons/expand_less_black_24dp.svg" alt="expand less/more icon" />
+        </div>
     </div>
-  </div>
 
-  <div class="step_input_container" [hidden]="isEducationalQualificationsVisible">
-    <div class="step_inputs">
-      <div class="single_input_container">
-        <label for="aggregatePercentage">Aggregate Percentage*</label>
-        <input class="w_small" type="number" id="aggregatePercentage"
-          [(ngModel)]="userEducationalQualifications.aggregatePercentage" />
-      </div>
+    <div class="step_input_container" [hidden]="isEducationalQualificationsVisible">
+        <div class="step_inputs">
+            <div class="single_input_container">
+                <label for="aggregatePercentage">Aggregate Percentage*</label>
+                <input class="w_small" type="number" id="aggregatePercentage"
+                    [(ngModel)]="userEducationalQualifications.aggregatePercentage" />
+            </div>
 
-      <div class="single_input_container">
-        <label for="passingYear">Year of Passing*</label>
-        <select class="w_small" name="passingYear" id="passingYear"
-          [(ngModel)]="userEducationalQualifications.passingYear">
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-          <option value="2023">2023</option>
-        </select>
-      </div>
+            <div class="single_input_container">
+                <label for="passingYear">Year of Passing*</label>
+                <select class="w_small" name="passingYear" id="passingYear"
+                    [(ngModel)]="userEducationalQualifications.passingYear">
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+            </div>
 
-      <div class="double_input_container">
-        <div class="single_input_container">
-          <label for="qualification">Qualification*</label>
-          <select name="qualification" id="qualification" [(ngModel)]="userEducationalQualifications.qualification">
-            <option value="Bachelor in Technology (B.Tech)">Bachelor in Technology (B.Tech)</option>
-          </select>
+            <div class="double_input_container">
+                <div class="single_input_container">
+                    <label for="qualification">Qualification*</label>
+                    <select name="qualification" id="qualification"
+                        [(ngModel)]="userEducationalQualifications.qualification">
+                        <option value="Bachelor in Technology (B.Tech)">Bachelor in Technology (B.Tech)</option>
+                    </select>
+                </div>
+
+                <div class="single_input_container">
+                    <label for="stream">Stream*</label>
+                    <select name="stream" id="stream" [(ngModel)]="userEducationalQualifications.stream">
+                        <option value="Information Technology">Information Technology</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="double_input_container">
+                <div class="single_input_container">
+                    <label for="collegeName">College*</label>
+                    <select name="collegeName" id="collegeName" [(ngModel)]="userEducationalQualifications.collegeName">
+                        <option value="Pune Institute of Technology (PIT)">Pune Institute of Technology (PIT)</option>
+                    </select>
+                </div>
+
+                <div class="single_input_container">
+                    <label for="otherCollageName">If others, please enter your college name</label>
+                    <input type="text" name="otherCollageName" id="otherCollageName"
+                        [(ngModel)]="userEducationalQualifications.otherCollageName">
+                </div>
+            </div>
+
+            <div class="single_input_container">
+                <label for="collageLocation">Where is your college located?*</label>
+                <input class="w_small" type="text" id="collageLocation"
+                    [(ngModel)]="userEducationalQualifications.collageLocation" />
+            </div>
+
         </div>
-
-        <div class="single_input_container">
-          <label for="stream">Stream*</label>
-          <select name="stream" id="stream" [(ngModel)]="userEducationalQualifications.stream">
-            <option value="Information Technology">Information Technology</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="double_input_container">
-        <div class="single_input_container">
-          <label for="collegeName">College*</label>
-          <select name="collegeName" id="collegeName" [(ngModel)]="userEducationalQualifications.collegeName">
-            <option value="Pune Institute of Technology (PIT)">Pune Institute of Technology (PIT)</option>
-          </select>
-        </div>
-
-        <div class="single_input_container">
-          <label for="otherCollageName">If others, please enter your college name</label>
-          <input type="text" name="otherCollageName" id="otherCollageName"
-            [(ngModel)]="userEducationalQualifications.otherCollageName">
-        </div>
-      </div>
-
-      <div class="single_input_container">
-        <label for="collageLocation">Where is your college located?*</label>
-        <input class="w_small" type="text" id="collageLocation"
-          [(ngModel)]="userEducationalQualifications.collageLocation" />
-      </div>
-
     </div>
-  </div>
 </div>
 
 <div class="dropDown">
-  <span>Professional Qualifications</span>
-  <div [ngClass]="{'dd_img_container': true}" (click)="changeProfessionalQualificationsVisible()">
-    <!-- <mat-icon (click)="changeProfessionalQualificationsVisible()">keyboard_arrow_down</mat-icon> -->
-    <img [ngClass]="{'rotate180': !isProfessionalQualificationsVisible}"
-      src="../../assets/icons/expand_less_black_24dp.svg" alt="expand less/more icon" />
-  </div>
+    <span>Professional Qualifications</span>
+    <div [ngClass]="{'dd_img_container': true}" (click)="changeProfessionalQualificationsVisible()">
+        <!-- <mat-icon (click)="changeProfessionalQualificationsVisible()">keyboard_arrow_down</mat-icon> -->
+        <img [ngClass]="{'rotate180': !isProfessionalQualificationsVisible}"
+            src="../../assets/icons/expand_less_black_24dp.svg" alt="expand less/more icon" />
+    </div>
 </div>
 
 <div class="step_input_container" [hidden]="isProfessionalQualificationsVisible">
-  <div class="step_inputs mb-8">
-    <div class="single_input_container">
-      <label for="applicantType">Applicant Type*</label>
-      <div class="applicant_type_container">
-        <div class="applicant_type">
-          <input type="radio" name="applicantType" id="applicantType1" value="true"
-            [(ngModel)]="userProfessionalQualificationsVisible.isFresher">
-          <label for="applicantType1">Fresher</label>
-        </div>
+    <div class="step_inputs mb-8">
+        <div class="single_input_container">
+            <label for="applicantType">Applicant Type*</label>
+            <!-- -----------------------label no use ----------------- -->
+            <div class="applicant_type_container">
+                <div class="applicant_type">
+                    <input type="radio" name="applicantType" id="applicantType1" [value]=false
+                        [(ngModel)]="userProfessionalQualificationsVisible.isExperienced">
+                    <label for="applicantType1">Fresher</label>
+                </div>
 
-        <div class="applicant_type">
-          <input type="radio" name="applicantType" id="applicantType2" value="false"
-            [(ngModel)]="userProfessionalQualificationsVisible.isFresher">
-          <label for="applicantType2">Experienced</label>
+                <div class="applicant_type">
+                    <input type="radio" name="applicantType" id="applicantType2" [value]=true
+                        [(ngModel)]="userProfessionalQualificationsVisible.isExperienced">
+                    <label for="applicantType2">Experienced</label>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  @if(userProfessionalQualificationsVisible.isFresher === 'false'){
-  <div class="step_inputs">Experienced</div>
-  } @else if(userProfessionalQualificationsVisible.isFresher === 'true'){
-  <div class="step_inputs">Fresher</div>
-  }
+    @if(userProfessionalQualificationsVisible.isExperienced === true){
+    <div class="step_inputs">
+        Experienced
+    </div>
+
+    } @else if(userProfessionalQualificationsVisible.isExperienced === false){
+    <div class="step_inputs">
+
+        <div class="technologies_container">
+            <span class="technologies_container_label">Select All The Technologies You Are Familiar In</span>
+            <div class="single_checkbox_container">
+                <input type="checkbox" id="javascript" [(ngModel)]="userFresher.javascript" />
+                <label for="javascript">Javascript</label>
+            </div>
+            <div class="single_checkbox_container">
+                <input type="checkbox" id="angularJS" [(ngModel)]="userFresher.angularJS" />
+                <label for="angularJS">Angular JS</label>
+            </div>
+            <div class="single_checkbox_container">
+                <input type="checkbox" id="react" [(ngModel)]="userFresher.react" />
+                <label for="react">React</label>
+            </div>
+            <div class="single_checkbox_container">
+                <input type="checkbox" id="nodeJS" [(ngModel)]="userFresher.nodeJS" />
+                <label for="nodeJS">Node JS</label>
+            </div>
+            <div class="single_checkbox_container">
+                <input type="checkbox" id="others" [(ngModel)]="userFresher.others" />
+                <label for="others">Others</label>
+            </div>
+        </div>
+
+        <div class="single_input_container specific_width">
+            <label for="otherTechnologies">If others, please mention</label>
+            <input type="text" name="otherTechnologies" id="otherTechnologies"
+                [(ngModel)]="userFresher.otherTechnologies">
+        </div>
+
+        <div class="radio_container">
+            <span class="radio_container_label">Have You Appeared For Any Test By Zeus in the past 12 months?*</span>
+            <div class="radio_container_options">
+                <div class="single_radio_container">
+                    <input type="radio" name="isAppearedInTestByZeus" id="isAppearedInTestByZeus_yes" [value]=true
+                        [(ngModel)]="userFresher.isAppearedInTestByZeus">
+                    <label for="isAppearedInTestByZeus_yes">Yes</label>
+                </div>
+
+                <div class="single_radio_container">
+                    <input type="radio" name="isAppearedInTestByZeus" id="isAppearedInTestByZeus_no" [value]=false
+                        [(ngModel)]="userFresher.isAppearedInTestByZeus">
+                    <label for="isAppearedInTestByZeus_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="single_input_container specific_width">
+            <label for="appearedRoleName">If Yes, which role did you apply for?</label>
+            <input type="text" name="appearedRoleName" id="appearedRoleName" [(ngModel)]="userFresher.appearedRoleName">
+        </div>
+
+    </div>
+
+    }
+</div>
+
+<div class="step_moving_btn">
+    <button class="next_previous_btn" (click)="onSubmit('PREVIOUS')" type="submit">
+        PREVIOUS
+    </button>
+    <button class="next_previous_btn" (click)="onSubmit('NEXT')" type="submit">
+        NEXT
+    </button>
 </div>

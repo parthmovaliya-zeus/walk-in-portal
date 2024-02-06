@@ -4,7 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { QualificationsComponent } from '../qualifications/qualifications.component';
 import { ReviewProceedComponent } from '../review-proceed/review-proceed.component';
-import { IPersonalInformation } from '../interface';
+import {
+  IPersonalInformation,
+  IUserEducationalQualifications,
+  IUserFresher,
+} from '../interface';
 
 @Component({
   selector: 'app-user-registration',
@@ -46,7 +50,7 @@ export class UserRegistrationComponent implements OnInit {
     this.isDisable = value;
   }
 
-  userpersonalInformation: IPersonalInformation = {
+  userPersonalInformation: IPersonalInformation = {
     firstName: '',
     lastName: '',
     email: '',
@@ -60,8 +64,66 @@ export class UserRegistrationComponent implements OnInit {
     jobRelatedUpdates: null,
   };
 
+  //   qualificationsInformation: any = {
+  //     aggregatePercentage: '',
+  //     passingYear: null,
+  //     qualification: null,
+  //     stream: null,
+  //     collegeName: null,
+  //     otherCollageName: null,
+  //     collageLocation: '',
+  //     isExperienced: false,
+  //     javascript: false,
+  //     angularJS: false,
+  //     react: false,
+  //     nodeJS: false,
+  //     others: false,
+  //     otherTechnologies: null,
+  //     isAppearedInTestByZeus: null,
+  //     appearedRoleName: null,
+  //   };
+
+  qualificationsInformation_userEducationalQualifications: IUserEducationalQualifications =
+    {
+      aggregatePercentage: '',
+      passingYear: null,
+      qualification: null,
+      stream: null,
+      collegeName: null,
+      otherCollageName: null,
+      collageLocation: '',
+    };
+
+  qualificationsInformation_userProfessionalQualificationsVisible: any = {
+    isExperienced: false,
+  };
+
+  qualificationsInformation_userFresher: IUserFresher = {
+    javascript: false,
+    angularJS: false,
+    react: false,
+    nodeJS: false,
+    others: false,
+    otherTechnologies: null,
+    isAppearedInTestByZeus: null,
+    appearedRoleName: null,
+  };
+
   setPersonalInformation(val: any) {
-    this.userpersonalInformation = val;
+    this.userPersonalInformation = val;
     this.moveNextStep();
+  }
+
+  setQualificationsInformation(val: any) {
+    this.qualificationsInformation_userEducationalQualifications =
+      val.userEducationalQualifications;
+    this.qualificationsInformation_userProfessionalQualificationsVisible =
+      val.userProfessionalQualificationsVisible;
+    this.qualificationsInformation_userFresher = val.userFresher;
+    if (val.direction === 'PREVIOUS') {
+      this.movePreviousStep();
+    } else if (val.direction === 'NEXT') {
+      this.moveNextStep();
+    }
   }
 }

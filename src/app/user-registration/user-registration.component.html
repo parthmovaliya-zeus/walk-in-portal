@@ -56,7 +56,7 @@
   <!-- <div class="step_inputs"> -->
   <app-personal-information
     (personalInformationSubmited)="setPersonalInformation($event)"
-    [prevUserInfo]="userpersonalInformation"
+    [prevUserInfo]="userPersonalInformation"
   ></app-personal-information>
   <!-- </div> -->
   <!-- <div class="step_moving_btn">
@@ -65,9 +65,15 @@
 
   } @else if(stepCount === 2){
   <!-- <div class="step_inputs"> -->
-  <app-qualifications></app-qualifications>
+  <app-qualifications
+    (qualificationsSubmited)="setQualificationsInformation($event)"
+    [prevUserInfo]="{qualificationsInformation_userEducationalQualifications,
+            qualificationsInformation_userProfessionalQualificationsVisible,
+            qualificationsInformation_userFresher}
+            "
+  ></app-qualifications>
   <!-- </div> -->
-  <div class="step_moving_btn">
+  <!-- <div class="step_moving_btn">
     <button class="next_previous_btn" (click)="movePreviousStep()">
       PREVIOUS
     </button>
@@ -77,7 +83,8 @@
     >
       NEXT
     </button>
-  </div>
+  </div> -->
+
   } @else if(stepCount === 3){
   <!-- <div class="step_inputs"> -->
   <app-review-proceed></app-review-proceed>
