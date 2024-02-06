@@ -7,6 +7,7 @@ import { ReviewProceedComponent } from '../review-proceed/review-proceed.compone
 import {
   IPersonalInformation,
   IUserEducationalQualifications,
+  IUserExperiences,
   IUserFresher,
 } from '../interface';
 
@@ -25,7 +26,7 @@ import {
 })
 export class UserRegistrationComponent implements OnInit {
   isDisable: boolean = true;
-  stepCount: number = 2;
+  stepCount: number = 3;
 
   ngOnInit(): void {}
 
@@ -95,7 +96,7 @@ export class UserRegistrationComponent implements OnInit {
     };
 
   qualificationsInformation_userProfessionalQualificationsVisible: any = {
-    isExperienced: false,
+    isExperienced: true,
   };
 
   qualificationsInformation_userFresher: IUserFresher = {
@@ -105,6 +106,29 @@ export class UserRegistrationComponent implements OnInit {
     nodeJS: false,
     others: false,
     otherTechnologies: null,
+    isAppearedInTestByZeus: null,
+    appearedRoleName: null,
+  };
+
+  qualificationsInformation_userExperienced: IUserExperiences = {
+    yearsOfExperience: null,
+    currentCTC: null,
+    expectedCTC: null,
+    e_javascript: false,
+    e_angularJS: false,
+    e_react: false,
+    e_nodeJS: false,
+    e_others: false,
+    e_otherTechnologies: null,
+    f_javascript: false,
+    f_angularJS: false,
+    f_react: false,
+    f_nodeJS: false,
+    f_others: false,
+    f_otherTechnologies: null,
+    isInNoticePeriod: null,
+    noticePeriodEnd: null,
+    noticePeriodLength: null,
     isAppearedInTestByZeus: null,
     appearedRoleName: null,
   };
@@ -120,6 +144,7 @@ export class UserRegistrationComponent implements OnInit {
     this.qualificationsInformation_userProfessionalQualificationsVisible =
       val.userProfessionalQualificationsVisible;
     this.qualificationsInformation_userFresher = val.userFresher;
+    this.qualificationsInformation_userExperienced = val.userExperienced;
     if (val.direction === 'PREVIOUS') {
       this.movePreviousStep();
     } else if (val.direction === 'NEXT') {

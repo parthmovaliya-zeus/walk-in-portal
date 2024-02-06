@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { IUserEducationalQualifications, IUserFresher } from '../interface';
+import {
+  IUserEducationalQualifications,
+  IUserExperiences,
+  IUserFresher,
+} from '../interface';
 
 @Component({
   selector: 'app-qualifications',
@@ -59,7 +63,28 @@ export class QualificationsComponent {
     appearedRoleName: null,
   };
 
-  userExperienced: any = {};
+  userExperienced: IUserExperiences = {
+    yearsOfExperience: null,
+    currentCTC: null,
+    expectedCTC: null,
+    e_javascript: false,
+    e_angularJS: false,
+    e_react: false,
+    e_nodeJS: false,
+    e_others: false,
+    e_otherTechnologies: null,
+    f_javascript: false,
+    f_angularJS: false,
+    f_react: false,
+    f_nodeJS: false,
+    f_others: false,
+    f_otherTechnologies: null,
+    isInNoticePeriod: null,
+    noticePeriodEnd: null,
+    noticePeriodLength: null,
+    isAppearedInTestByZeus: null,
+    appearedRoleName: null,
+  };
 
   changeEducationalQualificationsVisible() {
     this.isEducationalQualificationsVisible =
@@ -76,20 +101,24 @@ export class QualificationsComponent {
     this.userProfessionalQualificationsVisible =
       val.qualificationsInformation_userProfessionalQualificationsVisible;
     this.userFresher = val.qualificationsInformation_userFresher;
+    this.userExperienced = val.qualificationsInformation_userExperienced;
     // this.userQualifications = val;
   }
 
   @Output() qualificationsSubmited = new EventEmitter();
 
   onSubmit(direction: string) {
-    if (!this.userProfessionalQualificationsVisible.isExperienced) {
-      this.qualificationsSubmited.emit({
-        userEducationalQualifications: this.userEducationalQualifications,
-        userProfessionalQualificationsVisible:
-          this.userProfessionalQualificationsVisible,
-        userFresher: this.userFresher,
-        direction,
-      });
-    }
+    // if (!this.userProfessionalQualificationsVisible.isExperienced) {
+    this.qualificationsSubmited.emit({
+      userEducationalQualifications: this.userEducationalQualifications,
+      userProfessionalQualificationsVisible:
+        this.userProfessionalQualificationsVisible,
+      userFresher: this.userFresher,
+      userExperienced: this.userExperienced,
+      direction,
+    });
+    // } else {
+    //   console.log(this.userExperienced);
+    // }
   }
 }

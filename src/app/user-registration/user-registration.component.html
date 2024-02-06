@@ -69,7 +69,8 @@
     (qualificationsSubmited)="setQualificationsInformation($event)"
     [prevUserInfo]="{qualificationsInformation_userEducationalQualifications,
             qualificationsInformation_userProfessionalQualificationsVisible,
-            qualificationsInformation_userFresher}
+            qualificationsInformation_userFresher,
+            qualificationsInformation_userExperienced}
             "
   ></app-qualifications>
   <!-- </div> -->
@@ -87,7 +88,13 @@
 
   } @else if(stepCount === 3){
   <!-- <div class="step_inputs"> -->
-  <app-review-proceed></app-review-proceed>
+  <app-review-proceed
+    [prevUserInfo]="{userPersonalInformation,qualificationsInformation_userEducationalQualifications,
+    qualificationsInformation_userProfessionalQualificationsVisible,
+    qualificationsInformation_userFresher,
+    qualificationsInformation_userExperienced}
+    "
+  ></app-review-proceed>
   <!-- </div> -->
   <div class="step_moving_btn">
     <button

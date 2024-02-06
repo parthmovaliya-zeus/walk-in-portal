@@ -47,6 +47,10 @@
     flex-direction: column;
     gap: 40px;
 
+    .w_small {
+      width: 180px;
+    }
+
     .double_input_container {
       @include displayFlex(normal, center);
       gap: 24px;
@@ -58,6 +62,12 @@
 
     .specific_width {
       width: 452px;
+    }
+
+    .flex_16 {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 16px;
     }
 
     .single_input_container {
@@ -161,7 +171,7 @@
       }
 
       .radio_container_options {
-        margin-top: 12px;
+        margin-top: 13px;
         @include displayFlex(normal, center);
         gap: 24px;
 
