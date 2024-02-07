@@ -14,15 +14,25 @@
 
     .user_picture_component {
       position: absolute;
-      top: 24px;
-      right: 24px;
+      width: 150px;
+      top: 0px;
+      right: 0px;
       text-align: center;
-      img {
-        width: 112px;
-        height: 134px;
-        object-fit: cover;
-        mix-blend-mode: luminosity;
+
+      #input_user_image {
+        display: none;
       }
+
+      .display_image {
+        width: 112px;
+        height: 112px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      //   .image_contain {
+      //     object-fit: contain;
+      //   }
 
       .user_picture_title {
         font-size: $xsmall-font + px;
@@ -91,12 +101,25 @@
     }
 
     .upload_resume_container {
-      @include displayFlex(normal, center);
-      gap: 8px;
-
       span {
         color: $secondary-color;
-        font-size: $small-font;
+        font-size: $small-font + px;
+      }
+
+      .input_file_label {
+        @include displayFlex(normal, center);
+        gap: 8px;
+        font-size: $base-font + px;
+        color: $secondary-color;
+      }
+
+      #input_file {
+        display: none;
+      }
+
+      #input_file::-webkit-file-upload-button {
+        background-color: $white-color;
+        border: none;
       }
     }
 

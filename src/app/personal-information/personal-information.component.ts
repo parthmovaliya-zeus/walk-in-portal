@@ -53,4 +53,29 @@ export class PersonalInformationComponent {
       preferredJobRoles: this.preferredJobRoles,
     });
   }
+
+  avatarFileInfo: any = [null];
+  resumeFileInfo: any = [null];
+
+  showPreview(event: any) {
+    const file = (event?.target).files[0];
+    this.userInfo.avatarName = file?.name;
+    this.avatarFileInfo = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.userInfo.avatarBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(this.avatarFileInfo);
+  }
+
+  showResume(event: any) {
+    const file = (event?.target).files[0];
+    this.resumeFileInfo = file;
+    this.userInfo.resumeName = file?.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.userInfo.resumeBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(this.resumeFileInfo);
+  }
 }

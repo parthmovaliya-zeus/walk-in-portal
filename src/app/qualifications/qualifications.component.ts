@@ -1,12 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ITechnologies,
-  IUserEducationalQualifications,
-  IUserExperiences,
-  IUserFresher,
-} from '../interface';
+
+import { ITechnologies } from '../interface';
 
 @Component({
   selector: 'app-qualifications',
@@ -86,10 +82,10 @@ export class QualificationsComponent {
   //     appearedRoleName: null,
   //   };
 
-  userEducationalQualifications: any = {};
-  userProfessionalQualificationsVisible: any = {};
-  userFresher: any = {};
-  userExperienced: any = {};
+  userEducationalQualifications: any;
+  userProfessionalQualificationsVisible: any;
+  userFresher: any;
+  userExperienced: any;
   familiarTechnologies: ITechnologies[] = [];
   expertiseTechnologies: ITechnologies[] = [];
 
@@ -103,6 +99,8 @@ export class QualificationsComponent {
   }
 
   @Input() set prevUserInfo(val: any) {
+    // console.log('ip: -----------------------------', val);
+
     this.userEducationalQualifications = val.userEducationalQualifications;
     this.userProfessionalQualificationsVisible =
       val.userProfessionalQualificationsVisible;
@@ -115,6 +113,17 @@ export class QualificationsComponent {
   @Output() qualificationsSubmited = new EventEmitter();
 
   onSubmit(direction: string) {
+    // console.log('op: -----------------------', {
+    //   userEducationalQualifications: this.userEducationalQualifications,
+    //   userProfessionalQualificationsVisible:
+    //     this.userProfessionalQualificationsVisible,
+    //   userFresher: this.userFresher,
+    //   userExperienced: this.userExperienced,
+    //   familiarTechnologies: this.familiarTechnologies,
+    //   expertiseTechnologies: this.expertiseTechnologies,
+    //   direction,
+    // });
+
     this.qualificationsSubmited.emit({
       userEducationalQualifications: this.userEducationalQualifications,
       userProfessionalQualificationsVisible:

@@ -95,10 +95,10 @@ export class ReviewProceedComponent {
     this.expertiseTechnologies = val.expertiseTechnologies;
   }
 
-  @Output() qualificationsSubmited = new EventEmitter();
+  @Output() reviewPricessSubmited = new EventEmitter();
 
   onSubmit(direction: string) {
-    this.qualificationsSubmited.emit({
+    this.reviewPricessSubmited.emit({
       direction,
     });
   }

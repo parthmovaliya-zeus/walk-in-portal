@@ -61,10 +61,6 @@
     [prevUserInfo]="{ userInfo: userPersonalInformation, preferredJobRoles }"
   ></app-personal-information>
 
-  <!-- <div class="step_moving_btn">
-    <button class="next_previous_btn" (click)="moveNextStep()">NEXT</button>
-  </div> -->
-
   } @else if(stepCount === 2){
 
   <app-qualifications
@@ -81,22 +77,10 @@
     }"
   ></app-qualifications>
 
-  <!-- <div class="step_moving_btn">
-    <button class="next_previous_btn" (click)="movePreviousStep()">
-      PREVIOUS
-    </button>
-    <button
-      class="next_previous_btn"
-      (click)="moveNextStep(); enableRegistration(false)"
-    >
-      NEXT
-    </button>
-  </div> -->
-
   } @else if(stepCount === 3){
-  <!-- <div class="step_inputs"> -->
+
   <app-review-proceed
-    (qualificationsSubmited)="setQualificationsInformation($event)"
+    (reviewPricessSubmited)="reviewPricessSubmited($event)"
     [prevUserInfo]="{
       userInfo: userPersonalInformation,
       preferredJobRoles,
@@ -109,14 +93,6 @@
       expertiseTechnologies
     }"
   ></app-review-proceed>
-  <!-- </div> -->
-  <!-- <div class="step_moving_btn">
-    <button
-      class="next_previous_btn"
-      (click)="movePreviousStep(); enableRegistration(true)"
-    >
-      PREVIOUS
-    </button>
-  </div> -->
+
   }
 </div>

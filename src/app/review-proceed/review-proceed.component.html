@@ -18,7 +18,12 @@
 } } -->
 
   <div class="user_image_container">
+    @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0 &&
+    userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+    <img [src]="userInfo.avatarBase64" [alt]="userInfo.avatarName" />
+    } @else {
     <img src="../../assets/icons/account_circle.svg" alt="user image" />
+    }
   </div>
 
   <div class="single_input_container">
@@ -59,8 +64,11 @@
         src="../../assets/icons/Upload_black_24dp.svg"
         alt="Upload Resume icon"
       />
-      <span class="resume_container_title">Upload Resume</span>
-      <span>MyResume.pdf</span>
+      <span>
+        @if(userInfo.resumeBase64 !== null && userInfo.resumeBase64.length !== 0
+        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0)
+        {{{userInfo.resumeName}}} @else{Upload Resume}
+      </span>
     </span>
   </div>
 

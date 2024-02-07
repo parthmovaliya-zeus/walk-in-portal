@@ -2,9 +2,46 @@
   <!-- <form class="personal_information_form"> -->
   <div class="personal_information_form">
     <div class="user_picture_component">
-      <img src="../../assets/icons/account_circle.svg" alt="user image icon" />
-      <div class="user_picture_title">UPLOAD DISPLAY PICTURE</div>
-      <div class="user_picture_info">Max. image size: 5 MB</div>
+      <input
+        id="input_user_image"
+        type="file"
+        accept="image/*"
+        (change)="showPreview($event)"
+      />
+
+      <label for="input_user_image" class="user_picture_component">
+        @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0
+        && userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+
+        <img
+          class="display_image"
+          [src]="userInfo.avatarBase64"
+          [alt]="userInfo.avatarName"
+        />
+
+        } @else {
+
+        <img
+          class="display_image"
+          src="../../assets/icons/account_circle.svg"
+          alt="user image icon"
+        />
+
+        }
+        <!-- --------------------------  -->
+        @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0
+        && userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+
+        <div class="user_picture_title">CHANGE {{ userInfo.avatarName }}</div>
+        <div class="user_picture_info">Max. image size: 5 MB</div>
+
+        } @else {
+
+        <div class="user_picture_title">UPLOAD DISPLAY PICTURE</div>
+        <div class="user_picture_info">Max. image size: 5 MB</div>
+
+        }
+      </label>
     </div>
 
     <div class="input_single_container">
@@ -56,14 +93,23 @@
       </div>
     </div>
 
-    <!-- <input type="file" name="resume" id="resume" />
-     -->
     <div class="upload_resume_container">
-      <img
-        src="../../assets/icons/Upload_black_24dp.svg"
-        alt="Upload Resume icon"
+      <label class="input_file_label" for="input_file">
+        <img
+          src="../../assets/icons/Upload_black_24dp.svg"
+          alt="Upload Resume icon"
+        />
+        @if(userInfo.resumeBase64 !== null && userInfo.resumeBase64.length !== 0
+        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0)
+        {{{userInfo.resumeName}}} @else{Upload Resume}
+      </label>
+      <input
+        type="file"
+        accept=".pdf"
+        id="input_file"
+        (change)="showResume($event)"
       />
-      <span>Upload Resume</span>
+      <!-- [(ngModel)]="userInfo.resume" -->
     </div>
 
     <div class="input_single_container">

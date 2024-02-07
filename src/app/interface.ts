@@ -1,9 +1,13 @@
 export interface IPersonalInformation {
+  avatarBase64: string | null;
+  avatarName: string | null;
   firstName: string;
   lastName: string;
   email: string;
   countryCode: number | null;
   phoneNumber: number | null;
+  resumeBase64: string | null;
+  resumeName: string | null;
   portfolio: string;
   //   instructionalDesigner: boolean | null;
   //   softwareEngineer: boolean | null;
