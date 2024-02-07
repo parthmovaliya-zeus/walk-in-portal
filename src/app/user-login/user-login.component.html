@@ -39,7 +39,8 @@
     </div>
 
     <div class="login-button-container">
-      <button [routerLink]="['/jobs']">LOG IN</button>
+      <button (click)="loginUserClicked()">LOG IN</button>
+      <!-- [routerLink]="['/jobs']" -->
     </div>
 
     <div class="register-user">

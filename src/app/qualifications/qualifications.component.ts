@@ -99,8 +99,6 @@ export class QualificationsComponent {
   }
 
   @Input() set prevUserInfo(val: any) {
-    // console.log('ip: -----------------------------', val);
-
     this.userEducationalQualifications = val.userEducationalQualifications;
     this.userProfessionalQualificationsVisible =
       val.userProfessionalQualificationsVisible;
@@ -113,17 +111,6 @@ export class QualificationsComponent {
   @Output() qualificationsSubmited = new EventEmitter();
 
   onSubmit(direction: string) {
-    // console.log('op: -----------------------', {
-    //   userEducationalQualifications: this.userEducationalQualifications,
-    //   userProfessionalQualificationsVisible:
-    //     this.userProfessionalQualificationsVisible,
-    //   userFresher: this.userFresher,
-    //   userExperienced: this.userExperienced,
-    //   familiarTechnologies: this.familiarTechnologies,
-    //   expertiseTechnologies: this.expertiseTechnologies,
-    //   direction,
-    // });
-
     this.qualificationsSubmited.emit({
       userEducationalQualifications: this.userEducationalQualifications,
       userProfessionalQualificationsVisible:

@@ -3,7 +3,7 @@
 
 .login-mainContainer {
   background-color: $main-background-color;
-  min-height: 92vh;
+  min-height: 91vh;
   @include displayFlex(center, center);
   flex-direction: column;
   position: relative;
