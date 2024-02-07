@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { IJobRoles, IPersonalInformation } from '../interface';
 import { CommonModule } from '@angular/common';
+
+import { IJobRoles, IPersonalInformation } from '../interface';
 
 @Component({
   selector: 'app-personal-information',

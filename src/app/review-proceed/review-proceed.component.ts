@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { IJobRoles, ITechnologies } from '../interface';
-import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-review-proceed',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [CommonModule, MatIcon],
   templateUrl: './review-proceed.component.html',
   styleUrl: './review-proceed.component.scss',
 })
@@ -71,6 +72,8 @@ export class ReviewProceedComponent {
   //     isAppearedInTestByZeus: null,
   //     appearedRoleName: null,
   //   };
+
+  objectKeys = Object.keys;
 
   userInfo: any = {};
   preferredJobRoles: IJobRoles[] = [];

@@ -105,12 +105,12 @@
   //       border-left: 1px solid $border-25-color;
   //     }
   //   }
+}
 
-  .step_moving_btn {
-    @include displayFlex(center, center);
-    gap: 16px;
-    margin-top: 8px;
-  }
+.step_moving_btn {
+  @include displayFlex(center, center);
+  gap: 16px;
+  margin-top: 32px;
 
   .next_previous_btn {
     width: 90px;
@@ -123,5 +123,6 @@
     font-family: quicksand;
     font-weight: 600;
     font-size: $small-font + px;
+    cursor: pointer;
   }
 }

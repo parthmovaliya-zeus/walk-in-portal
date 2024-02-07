@@ -24,7 +24,7 @@ export interface ITechnologies {
 }
 
 export interface IUserEducationalQualifications {
-  aggregatePercentage: string;
+  aggregatePercentage: number | null;
   passingYear: number | null;
   qualification: string | null;
   stream: string | null;

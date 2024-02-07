@@ -1,1 +1,409 @@
-<div class="main_component"></div>
+<div class="single_main_header_component">
+  <div class="main_component_title">Personal Information</div>
+  <div class="main_edit_component">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </div>
+</div>
+
+<div class="single_main_component mb_24">
+  <!-- @for(key of objectKeys(userInfo); track $index) {
+  @if(userInfo.hasOwnProperty(key)) {
+      <div class="single_input_container">
+          <span class="single_container_title" for="yearsOfExperience">{{
+              key
+            }}</span>
+    <span class="single_container_value">Value: {{ userInfo[key] }}</span>
+</div>
+} } -->
+
+  <div class="user_image_container">
+    <img src="../../assets/icons/account_circle.svg" alt="user image" />
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >First Name</span
+    >
+    <span class="single_container_value">{{
+      userInfo.firstName | titlecase
+    }}</span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Last Name</span
+    >
+    <span class="single_container_value">{{
+      userInfo.lastName | titlecase
+    }}</span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience">Email</span>
+    <span class="single_container_value">{{ userInfo.email }}</span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Phone Number</span
+    >
+    <span class="single_container_value">
+      + {{ userInfo.countryCode }} {{ userInfo.phoneNumber }}
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="resume_info_container">
+      <img
+        src="../../assets/icons/Upload_black_24dp.svg"
+        alt="Upload Resume icon"
+      />
+      <span class="resume_container_title">Upload Resume</span>
+      <span>MyResume.pdf</span>
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Enter Portfolio URL (if any)</span
+    >
+    <span class="single_container_value">{{ userInfo.portfolio }}</span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Preferred Job Roles</span
+    >
+    <span class="checkbox_ticked_value_container">
+      @for(preferredJobRole of preferredJobRoles; track preferredJobRole.id){
+      @if(preferredJobRole.value){
+
+      <span>{{ preferredJobRole.JobRoleName | titlecase }}</span>
+
+      } }
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title referral_title" for="yearsOfExperience"
+      >If You Are Registering Via A Referral, Please Mention Full Name Of The
+      Employee Who Referred You</span
+    >
+    <span class="single_container_value">
+      @if(userInfo.referralName.length !== 0){
+      {{ userInfo.referralName | titlecase }}
+      } @else { - }
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <div class="single_checkbox_container">
+      <input
+        type="checkbox"
+        [checked]="userInfo.jobRelatedUpdates"
+        class="single_container_value"
+        disabled
+      />
+      <span class="single_container_title" for="yearsOfExperience"
+        >Send me job related updates via mail</span
+      >
+    </div>
+  </div>
+</div>
+
+<div class="single_main_header_component">
+  <div class="main_component_title">Qualifications</div>
+  <div class="main_edit_component">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </div>
+</div>
+
+<div class="dropDown">
+  <span>Educational Qualifications</span>
+</div>
+
+<div class="single_main_component mb_24">
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Aggregate Percentage</span
+    >
+    <span class="single_container_value">
+      {{ userEducationalQualifications.aggregatePercentage }}
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Year of Passing</span
+    >
+    <span class="single_container_value">
+      {{ userEducationalQualifications.passingYear }}
+    </span>
+  </div>
+
+  <div class="double_container">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Qualification</span
+      >
+      <span class="single_container_value">
+        {{ userEducationalQualifications.qualification }}
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience">Stream</span>
+      <span class="single_container_value">
+        {{ userEducationalQualifications.stream }}
+      </span>
+    </div>
+  </div>
+
+  <div class="double_container">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >College</span
+      >
+      <span class="single_container_value">
+        {{ userEducationalQualifications.collegeName }}
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If others, please enter your college name</span
+      >
+      <span class="single_container_value">
+        @if(userEducationalQualifications.otherCollageName !== null &&
+        userEducationalQualifications.otherCollageName.length !== 0){
+        {{ userEducationalQualifications.otherCollageName }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Where is your college located?</span
+    >
+    <span class="single_container_value">
+      {{ userEducationalQualifications.collageLocation | titlecase }}
+    </span>
+  </div>
+</div>
+
+<div class="dropDown">
+  <span>Professional Qualifications</span>
+</div>
+
+<div class="single_main_component mb_8">
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Applicant Type</span
+    >
+    <span class="single_container_value">
+      @if(userProfessionalQualificationsVisible.isExperienced){ Experienced }
+      @else { Fresher }
+    </span>
+  </div>
+</div>
+
+@if(userProfessionalQualificationsVisible.isExperienced){
+
+<div class="single_main_component mb_24">
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Years of Experience</span
+    >
+    <span class="single_container_value">
+      {{ userExperienced.yearsOfExperience }}
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Current CTC (In Rupees)</span
+    >
+    <span class="single_container_value">
+      {{ userExperienced.currentCTC }}
+    </span>
+  </div>
+
+  <div class="single_input_container">
+    <span class="single_container_title" for="yearsOfExperience"
+      >Expected CTC (In Rupees)</span
+    >
+    <span class="single_container_value">
+      {{ userExperienced.expectedCTC }}
+    </span>
+  </div>
+
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Select All The Technologies You Expertise In</span
+      >
+      <span class="checkbox_ticked_value_container">
+        @for(expertiseTechnology of expertiseTechnologies; track
+        expertiseTechnology.id){ @if(expertiseTechnology.value){
+
+        <span>{{ expertiseTechnology.technologyName | titlecase }}</span>
+
+        } }
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If others, please mention</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.e_otherTechnologies !== null &&
+        userExperienced.e_otherTechnologies.length !== 0){
+        {{ userExperienced.e_otherTechnologies | titlecase }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Select All The Technologies You are familiar In</span
+      >
+      <span class="checkbox_ticked_value_container">
+        @for(familiarTechnology of familiarTechnologies; track
+        familiarTechnology.id){ @if(familiarTechnology.value){
+
+        <span>{{ familiarTechnology.technologyName | titlecase }}</span>
+
+        } }
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If others, please mention</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.f_otherTechnologies !== null &&
+        userExperienced.f_otherTechnologies.length !== 0){
+        {{ userExperienced.f_otherTechnologies | titlecase }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Are you currently on notice period?</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.isInNoticePeriod){Yes} @else {No}
+      </span>
+    </div>
+
+    <div class="double_container">
+      <div class="single_input_container">
+        <span class="single_container_title" for="yearsOfExperience"
+          >If Yes, when will your notice period end?</span
+        >
+        <span class="single_container_value">
+          {{ userExperienced.noticePeriodEnd | date : "dd-MMM-yyyy" }}
+        </span>
+      </div>
+
+      <div class="single_input_container">
+        <span class="single_container_title" for="yearsOfExperience"
+          >How long is your notice period? (Mention in months)</span
+        >
+        <span class="single_container_value">
+          {{ userExperienced.noticePeriodLength }} Months
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Have You Appeared For Any Test By Zeus in the past 12 months?</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.isAppearedInTestByZeus){Yes} @else {No}
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If Yes, which role did you apply for?</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.appearedRoleName !== null &&
+        userExperienced.appearedRoleName.length !== 0){
+        {{ userExperienced.appearedRoleName | titlecase }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+</div>
+
+} @else {
+
+<div class="single_main_component mb_24">
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Select All The Technologies You are familiar In</span
+      >
+      <span class="checkbox_ticked_value_container">
+        @for(familiarTechnology of familiarTechnologies; track
+        familiarTechnology.id){ @if(familiarTechnology.value){
+
+        <span>{{ familiarTechnology.technologyName | titlecase }}</span>
+
+        } }
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If others, please mention</span
+      >
+      <span class="single_container_value">
+        @if(userFresher.otherTechnologies !== null &&
+        userFresher.otherTechnologies.length !== 0){
+        {{ userFresher.otherTechnologies | titlecase }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex_16">
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >Have You Appeared For Any Test By Zeus in the past 12 months?</span
+      >
+      <span class="single_container_value">
+        @if(userFresher.isAppearedInTestByZeus){Yes} @else {No}
+      </span>
+    </div>
+
+    <div class="single_input_container">
+      <span class="single_container_title" for="yearsOfExperience"
+        >If Yes, which role did you apply for?</span
+      >
+      <span class="single_container_value">
+        @if(userExperienced.appearedRoleName !== null &&
+        userExperienced.appearedRoleName.length !== 0){
+        {{ userExperienced.appearedRoleName }}
+        } @else {-}
+      </span>
+    </div>
+  </div>
+</div>
+
+}

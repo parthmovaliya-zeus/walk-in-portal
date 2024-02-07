@@ -1,7 +1,118 @@
 @import "../../scss/functions";
 @import "../../scss/variables";
 
-.main_component {
+.single_main_header_component {
+  @include displayFlex(space-between, center);
+  margin: 0px 0px 24px 0px;
+  .main_edit_component {
+    cursor: pointer;
+    @include displayFlex(normal, center);
+    gap: 9px;
+    color: $secondary-color;
+  }
+}
+
+.dropDown {
+  background-color: $section-header-color;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+  height: 56px;
+  @include displayFlex(normal, center);
+
+  > span {
+    margin-left: 16px;
+  }
+}
+
+.mb_24 {
+  margin-bottom: 24px;
+}
+
+.mb_8 {
+  margin-bottom: 8px;
+}
+
+.single_main_component {
   background-color: $white-color;
   padding: 24px;
+  @include displayFlex(center, normal);
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+
+  .user_image_container {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    img {
+      width: 112px;
+      height: 112px;
+    }
+  }
+
+  .double_container {
+    @include displayFlex(normal, normal);
+    gap: 24px;
+
+    .single_input_container {
+      flex: 1;
+    }
+  }
+
+  .flex_16 {
+    @include displayFlex(normal, normal);
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .single_input_container {
+    @include displayFlex(center, normal);
+    flex-direction: column;
+    gap: 12px;
+
+    .single_container_title {
+      font-size: $xsmall-font + px;
+      color: $sixth-color;
+    }
+
+    .resume_info_container {
+      @include displayFlex(normal, center);
+      gap: 8px;
+
+      .resume_container_title {
+        font-size: $small-font + px;
+      }
+
+      > img {
+        width: 14px;
+        height: 24px;
+        object-fit: cover;
+      }
+    }
+
+    .checkbox_ticked_value_container {
+      @include displayFlex(center, normal);
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .referral_title {
+      letter-spacing: 0.3px;
+      width: 480px;
+    }
+
+    .single_checkbox_container {
+      @include displayFlex(normal, center);
+      gap: 8px;
+
+      input[type="checkbox"],
+      input[type="checkbox"]:disabled:checked {
+        width: 18px;
+        height: 24px;
+        accent-color: $primary-color;
+      }
+    }
+
+    // -------------single_input_container end here---------------
+  }
 }
