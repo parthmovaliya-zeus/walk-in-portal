@@ -9,6 +9,12 @@
     @include displayFlex(normal, center);
     gap: 9px;
     color: $secondary-color;
+
+    img {
+      //   scale: 0.33333;
+      height: 18px;
+      width: 18px;
+    }
   }
 }
 

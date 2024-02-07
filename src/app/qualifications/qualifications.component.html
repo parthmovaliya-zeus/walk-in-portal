@@ -2,12 +2,9 @@
   <div class="dropDown">
     <span>Educational Qualifications</span>
     <div
-      [ngClass]="{ dd_img_container: true }"
+      [ngClass]="['dd_img_container']"
       (click)="changeEducationalQualificationsVisible()"
     >
-      <!-- <mat-icon (click)="changeEducationalQualificationsVisible()"
-        >keyboard_arrow_down</mat-icon
-      > -->
       <img
         [ngClass]="{ rotate180: !isEducationalQualificationsVisible }"
         src="../../assets/icons/expand_less_black_24dp.svg"
@@ -114,18 +111,19 @@
   </div>
 </div>
 
-<div class="dropDown">
-  <span>Professional Qualifications</span>
-  <div
-    [ngClass]="{ dd_img_container: true }"
-    (click)="changeProfessionalQualificationsVisible()"
-  >
-    <!-- <mat-icon (click)="changeProfessionalQualificationsVisible()">keyboard_arrow_down</mat-icon> -->
-    <img
-      [ngClass]="{ rotate180: !isProfessionalQualificationsVisible }"
-      src="../../assets/icons/expand_less_black_24dp.svg"
-      alt="expand less/more icon"
-    />
+<div class="">
+  <div class="dropDown">
+    <span>Professional Qualifications</span>
+    <div
+      [ngClass]="['dd_img_container']"
+      (click)="changeProfessionalQualificationsVisible()"
+    >
+      <img
+        [ngClass]="{ rotate180: !isProfessionalQualificationsVisible }"
+        src="../../assets/icons/expand_less_black_24dp.svg"
+        alt="expand less/more icon"
+      />
+    </div>
   </div>
 </div>
 

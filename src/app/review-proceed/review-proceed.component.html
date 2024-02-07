@@ -1,7 +1,7 @@
 <div class="single_main_header_component">
   <div class="main_component_title">Personal Information</div>
   <div class="main_edit_component">
-    <mat-icon>edit</mat-icon>
+    <img src="../../assets/icons/edit.png" alt="edit icon" />
     <span>Edit</span>
   </div>
 </div>
@@ -115,7 +115,7 @@
 <div class="single_main_header_component">
   <div class="main_component_title">Qualifications</div>
   <div class="main_edit_component">
-    <mat-icon>edit</mat-icon>
+    <img src="../../assets/icons/edit.png" alt="edit icon" />
     <span>Edit</span>
   </div>
 </div>
@@ -212,7 +212,7 @@
 
 @if(userProfessionalQualificationsVisible.isExperienced){
 
-<div class="single_main_component mb_24">
+<div class="single_main_component">
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Years of Experience</span
@@ -353,7 +353,7 @@
 
 } @else {
 
-<div class="single_main_component mb_24">
+<div class="single_main_component">
   <div class="flex_16">
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
@@ -407,3 +407,13 @@
 </div>
 
 }
+
+<div class="step_moving_btn">
+  <button
+    class="next_previous_btn"
+    (click)="onSubmit('PREVIOUS')"
+    type="submit"
+  >
+    PREVIOUS
+  </button>
+</div>

@@ -58,10 +58,6 @@
           @include displayFlex(normal, center);
           gap: 4px;
           font-size: $xsmall-font + px;
-
-          mat-icon {
-            color: $sixth-color;
-          }
         }
       }
     }

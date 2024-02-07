@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
 import {
   ITechnologies,
   IUserEducationalQualifications,
@@ -12,7 +11,7 @@ import {
 @Component({
   selector: 'app-qualifications',
   standalone: true,
-  imports: [MatIcon, FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './qualifications.component.html',
   styleUrl: './qualifications.component.scss',
 })

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { QualificationsComponent } from '../qualifications/qualifications.component';
@@ -18,7 +17,6 @@ import {
   selector: 'app-user-registration',
   standalone: true,
   imports: [
-    MatIconModule,
     CommonModule,
     PersonalInformationComponent,
     QualificationsComponent,

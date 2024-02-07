@@ -1,5 +1,7 @@
 <div class="register_header">
-  <a href="#"><mat-icon>arrow_back</mat-icon></a>
+  <a href="#">
+    <img src="../../assets/icons/back_light_clr.svg" alt="go back icon" />
+  </a>
   <div class="">Create an account</div>
   <div class="btn_container">
     <button class="btn">CANCEL</button>
@@ -17,7 +19,7 @@
         }"
       >
         @if(stepCount > 1){
-        <mat-icon>edit</mat-icon>
+        <img src="../../assets/icons/edit_black.png" alt="edit icon" />
         } @else { 1 }
       </span>
       <span>Personal Information</span>
@@ -31,7 +33,7 @@
         }"
       >
         @if(stepCount > 2){
-        <mat-icon>edit</mat-icon>
+        <img src="../../assets/icons/edit_black.png" alt="edit icon" />
         } @else { 2 }
       </span>
       <span>Qualifications</span>
@@ -45,7 +47,7 @@
         }"
       >
         @if(stepCount > 3){
-        <mat-icon>edit</mat-icon>
+        <img src="../../assets/icons/edit_black.png" alt="edit icon" />
         } @else { 3 }
       </span>
       <span>Review and Proceed</span>
@@ -94,6 +96,7 @@
   } @else if(stepCount === 3){
   <!-- <div class="step_inputs"> -->
   <app-review-proceed
+    (qualificationsSubmited)="setQualificationsInformation($event)"
     [prevUserInfo]="{
       userInfo: userPersonalInformation,
       preferredJobRoles,
@@ -107,13 +110,13 @@
     }"
   ></app-review-proceed>
   <!-- </div> -->
-  <div class="step_moving_btn">
+  <!-- <div class="step_moving_btn">
     <button
       class="next_previous_btn"
       (click)="movePreviousStep(); enableRegistration(true)"
     >
       PREVIOUS
     </button>
-  </div>
+  </div> -->
   }
 </div>

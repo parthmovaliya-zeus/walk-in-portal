@@ -1,13 +1,12 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
 import { PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listing',
   standalone: true,
-  imports: [MatIcon, CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
 })

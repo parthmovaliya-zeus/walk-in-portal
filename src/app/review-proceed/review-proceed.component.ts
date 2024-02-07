@@ -1,12 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IJobRoles, ITechnologies } from '../interface';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-review-proceed',
   standalone: true,
-  imports: [CommonModule, MatIcon],
+  imports: [CommonModule],
   templateUrl: './review-proceed.component.html',
   styleUrl: './review-proceed.component.scss',
 })
@@ -94,5 +93,13 @@ export class ReviewProceedComponent {
     this.userExperienced = val.userExperienced;
     this.familiarTechnologies = val.familiarTechnologies;
     this.expertiseTechnologies = val.expertiseTechnologies;
+  }
+
+  @Output() qualificationsSubmited = new EventEmitter();
+
+  onSubmit(direction: string) {
+    this.qualificationsSubmited.emit({
+      direction,
+    });
   }
 }
