@@ -33,10 +33,12 @@
     font-size: $small-font + px;
     font-family: quicksand;
     font-weight: 600;
+    cursor: pointer;
   }
 
   .btn:disabled {
     color: $third-color;
+    cursor: default;
     background-color: $disable-button-background-color;
   }
 }
@@ -85,29 +87,6 @@
       }
     }
   }
-
-  //   .step_inputs {
-  //     background-color: $white-color;
-  //     padding: 24px;
-  //   }
-
-  //   .dropDown {
-  //     background-color: $section-header-color;
-  //     height: 56px;
-  //     @include displayFlex(space-between, center);
-  //     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
-
-  //     span {
-  //       margin-left: 16px;
-  //     }
-
-  //     mat-icon {
-  //       height: 56px;
-  //       width: 32px;
-  //       @include displayFlex(center, center);
-  //       border-left: 1px solid $border-25-color;
-  //     }
-  //   }
 }
 
 .step_moving_btn {
@@ -127,5 +106,16 @@
     font-weight: 600;
     font-size: $small-font + px;
     cursor: pointer;
+  }
+}
+
+.dropDown {
+  background-color: $section-header-color;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+  height: 56px;
+  @include displayFlex(space-between, center);
+
+  > span {
+    margin-left: 16px;
   }
 }
