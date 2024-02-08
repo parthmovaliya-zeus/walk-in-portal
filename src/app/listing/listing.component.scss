@@ -7,6 +7,7 @@
   @include displayFlex(normal, normal);
   flex-direction: column;
   gap: 24px;
+  min-height: 81.9vh;
   // @include displayFlex(normal, normal);
 
   .job_container {
@@ -130,6 +131,10 @@
       .job_role_container {
         @include displayFlex(center, normal);
         flex-direction: column;
+
+        .screen_mobile {
+          display: none;
+        }
       }
     }
   }

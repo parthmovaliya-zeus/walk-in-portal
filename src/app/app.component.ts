@@ -17,6 +17,7 @@ import { ListingComponent } from './listing/listing.component';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  //   host: { ngSkipHydration: 'true' },
 })
 export class AppComponent {
   title = 'walk-in-portal';

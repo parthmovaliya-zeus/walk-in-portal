@@ -18,7 +18,7 @@
 .dd_img_container {
   height: 56px;
   width: 32px;
-  border-left: 1px solid $border-25-color;
+  border-left: 2px solid $border-25-color;
   @include displayFlex(center, center);
   cursor: pointer;
 }

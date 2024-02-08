@@ -36,7 +36,8 @@
         <span class="">{{ jr }}</span>
       </div>
       @if($index !== jr.length){
-      <div class="job_splitter" [hidden]="screenWidth < 376"></div>
+      <div class="job_splitter screen_mobile"></div>
+      <!-- [hidden]="screenWidth < 376" -->
       } }
     </div>
     <!-- <div class="job_role_container">
