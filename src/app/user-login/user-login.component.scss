@@ -1,7 +1,7 @@
 @import "../../scss/variables";
 @import "../../scss/functions";
 
-.login-mainContainer {
+.login_mainContainer {
   background-color: $main-background-color;
   min-height: 91vh;
   @include displayFlex(center, center);
@@ -14,7 +14,7 @@
     font-size: $xxlarge-font + px;
   }
 
-  .login-container {
+  .login_container {
     background: $white-color;
     padding: 24px 32px;
     width: 424px;
@@ -28,22 +28,22 @@
       gap: 32px;
     }
 
-    .login-filed-container {
+    .login_filed_container {
       @include displayFlex(normal, normal);
       flex-direction: column;
     }
 
-    .inp-field {
+    .inp_field {
       position: relative;
     }
 
-    .inp-field > img {
+    .inp_field > img {
       position: absolute;
       top: 0px;
       right: 0px;
     }
 
-    .login-inp {
+    .login_inp {
       background-color: $white-color;
       border: 0px;
       border-bottom: 1px solid $border-12-color;
@@ -51,12 +51,13 @@
       font-size: $base-font + px;
     }
 
-    .login-inp:focus,
-    .login-inp:active {
+    .login_inp:focus,
+    .login_inp:active {
       outline: none;
     }
 
-    .inp-forgot {
+    .inp_forgot {
+      cursor: pointer;
       align-self: flex-end;
       text-decoration: none;
       color: $secondary-color;
@@ -64,7 +65,7 @@
       margin-top: 5px;
     }
 
-    .remember-me {
+    .remember_me {
       @include displayFlex(normal, center);
       font-size: $base-font + px;
       margin-top: 26px;
@@ -75,9 +76,16 @@
         width: 24px;
         accent-color: $secondary-color;
       }
+      input[type="checkbox"] {
+        height: 24px;
+        width: 24px;
+        accent-color: $secondary-color;
+        // border-color: yellow;
+      }
     }
-    .login-button-container {
+    .login_button_container {
       > button {
+        cursor: pointer;
         background-color: $button-background-color;
         font-size: $small-font + px;
         box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.24);
@@ -91,17 +99,17 @@
       }
     }
 
-    .register-user {
+    .register_user {
       text-align: center;
     }
-    .register-user > p {
+    .register_user > p {
       margin: 0px;
       font-size: $xsmall-font + px;
       margin-bottom: 4px;
     }
   }
 
-  .more-options {
+  .more_options {
     @include displayFlex(center, center);
     gap: 9px;
     position: absolute;
@@ -120,8 +128,8 @@
 
 // @media screen and (max-width: 376px) {
 @media screen and (max-width: 500px) {
-  .login-mainContainer {
-    .login-container {
+  .login_mainContainer {
+    .login_container {
       background: $white-color;
       padding: 20px 16px;
       width: 311px;

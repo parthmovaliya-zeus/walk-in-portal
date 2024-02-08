@@ -15,7 +15,7 @@ export class UserLoginComponent implements OnInit {
   private _text = 'text';
   private _password = 'password';
 
-  isUserLogedIn!: boolean;
+  isUserLogedIn: any;
 
   //   @Input() set userLoged(val: any) {
   //     this.isUserLogedIn = val;
@@ -28,7 +28,6 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.isUserLogedIn = this.userLoginService.getUserLoginStatus();
-
     //   .subscribe((data:boolean)=>{this.isUserLogedIn = data})
   }
 
@@ -41,5 +40,10 @@ export class UserLoginComponent implements OnInit {
   loginUserClicked() {
     this.userLoginService.setUserLoginStatus(true);
     this.router.navigate(['/jobs']);
+  }
+
+  createAccountClicked() {
+    this.userLoginService.setUserLoginStatus(false);
+    this.router.navigate(['/registration']);
   }
 }

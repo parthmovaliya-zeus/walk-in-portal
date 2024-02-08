@@ -1,28 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { IUserLogin } from '../interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserLoginService {
-  private _isUserLogedIn: boolean = true;
-  //   private userLoginChange: Subject<boolean> = new Subject<boolean>();
+  private UserLogin: IUserLogin = {
+    isUserLogedIn: new BehaviorSubject(false),
+  };
+  //   isUserLogedIn: BehaviorSubject<boolean>;
 
   //   constructor() {
-  //     this.userLoginChange.subscribe((value) => {
-  //       this._isUserLogedIn = value;
-  //     });
+  //     this.UserLogin.isUserLogedIn = new BehaviorSubject(false);
   //   }
 
   setUserLoginStatus(val: boolean) {
-    this._isUserLogedIn = val;
+    this.UserLogin.isUserLogedIn.next(val);
   }
 
-  getUserLoginStatus() {
-    return this._isUserLogedIn;
+  getUserLoginStatus(): Observable<boolean> {
+    return this.UserLogin.isUserLogedIn.asObservable();
   }
-
-  //   observeUserLoginStatus(): Observable<boolean> {
-  //     return this.userLoginChange.asObservable();
-  //   }
 }

@@ -16,11 +16,9 @@ export class HeaderComponent implements OnInit {
   constructor(private userLoginService: UserLoginService) {}
 
   ngOnInit(): void {
-    // this.isUserLogedIn = this.userLoginService.getUserLoginStatus();
-    // this.userLoginService
-    //   .observeUserLoginStatus()
-    //   .subscribe((loggedInStatus) => {
-    //     this.isUserLogedIn = loggedInStatus;
-    //   });
+    this.userLoginService.getUserLoginStatus().subscribe((resp: boolean) => {
+      this.isUserLogedIn = resp;
+    });
+    // this.userLoginService.getUserLoginStatus().subscribe();
   }
 }
