@@ -1,0 +1,83 @@
+@import "../../scss/functions";
+@import "../../scss/variables";
+
+.main_component {
+  padding: 76px 24px 40px;
+  background-color: $main-background-color;
+  min-height: 81vh;
+
+  .hallTicket_component {
+    background-color: $white-color;
+    padding: 74px 16px 24px;
+    position: relative;
+    box-shadow: 0px 4px 6px $border-24-color;
+
+    > img {
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      top: -50px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    > h1 {
+      margin: 0px;
+      font-size: $large-font + px;
+      padding-bottom: 8px;
+    }
+
+    hr {
+      border: 1px solid $border-12-color;
+      margin: 16px 0px;
+    }
+
+    .sub_component {
+      @include displayFlex(normal, normal);
+      flex-direction: column;
+      gap: 8px;
+
+      .component_title {
+        color: $sixth-color;
+        font-size: $xsmall-font + px;
+      }
+      .component_value {
+        @include displayFlex(normal, normal);
+        flex-direction: column;
+        gap: 8px;
+        font-size: $small-font + px;
+      }
+
+      .address_value {
+        font-size: $small-font + px;
+        line-height: 20px;
+      }
+    }
+
+    button {
+      @include displayFlex(center, center);
+      background-color: $button-background-color;
+      box-shadow: 0px 3px 5px $border-24-color;
+      width: 202px;
+      height: 28px;
+      border: none;
+      margin: 0px auto;
+      padding: 8px 0px;
+    }
+
+    // ------------------
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .main_component {
+    .hallTicket_component {
+      > h1 {
+        text-align: center;
+      }
+    }
+  }
+}

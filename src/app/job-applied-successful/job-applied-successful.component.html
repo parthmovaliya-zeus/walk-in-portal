@@ -1,2 +1,51 @@
-<p>job-applied-successful works!</p>
-{{ job | json }}
+<div class="main_component">
+  <div class="hallTicket_component">
+    <img src="../../assets/icons/correct_green.png" alt="correct icon" />
+    <h1>
+      Congratulations ! You have successfully applied for the walk-in
+      opportunity
+    </h1>
+
+    <hr />
+
+    <div class="sub_component">
+      <div class="component_title">Date & Time of Walk-In :</div>
+      <div class="component_value">
+        <div class="">03rd July 2021</div>
+        <div class="">9:00 AM to 11:00 AM</div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="sub_component">
+      <div class="component_title">Venue of Walk-In :</div>
+      <div class="address_value">
+        <div class="">{{ job?.address?.name }}</div>
+        <div class="">{{ job?.address?.addressLine1 }}</div>
+        <div class="">{{ job?.address?.area }}</div>
+        <div class="">
+          {{ job?.address?.city }} - {{ job?.address?.pincode }}
+        </div>
+        <div class="">+{{ job?.address?.phone }}</div>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="sub_component">
+      <div class="component_title">THINGS TO REMEMBER :</div>
+      <div class="component_value">
+        <!-- {{ job?.thingsToRemember | json }} -->
+        @for(ttr of job?.thingsToRemember?.split("- "); track $index){
+        @if(ttr.length !== 0){
+        <div class="">- {{ ttr }}</div>
+        } }
+      </div>
+    </div>
+
+    <hr />
+
+    <button>DOWNLOAD HALL TICKET</button>
+  </div>
+</div>

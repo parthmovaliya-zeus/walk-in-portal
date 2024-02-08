@@ -22,7 +22,7 @@ export class JobComponent implements OnInit, AfterContentChecked {
   job!: IJobs | null;
   $event: any;
 
-  isAppliedInJob: boolean = false;
+  isAppliedInJob: boolean = true;
 
   constructor(
     private _route: ActivatedRoute,
