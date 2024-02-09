@@ -10,7 +10,13 @@
       <h1>{{ job.title | titlecase }}</h1>
 
       <div class="apply_in_job">
-        <button (click)="applyIntoJob()" class="apply_btn">APPLY</button>
+        <button
+          [disabled]="isApplyDisabled()"
+          (click)="applyIntoJob()"
+          class="apply_btn"
+        >
+          APPLY
+        </button>
       </div>
 
       <div class="date_time_container">
@@ -53,10 +59,7 @@
       }
     </div>
 
-    <div
-      class="dropDown"
-      (click)="clickClose('pre_requisites_application_process')"
-    >
+    <div class="dropDown" (click)="clickClosePreRequisitesApplication()">
       <span>Pre-requisites & Application Process</span>
       <div [ngClass]="['dd_img_container']">
         <!-- (click)="changeEducationalQualificationsVisible()" -->
@@ -65,15 +68,15 @@
           src="../../assets/icons/expand_less_black_24dp.svg"
           alt="expand less/more icon"
           [class]="{
-            rotate180: checkForRotate('pre_requisites_application_process')
+            rotate180: isPreRequisitesApplicationClose
           }"
         />
       </div>
     </div>
 
     <div
-      class="single_job_container hide"
-      id="pre_requisites_application_process"
+      class="single_job_container"
+      [hidden]="isPreRequisitesApplicationClose"
     >
       <div class="job_container_info">
         <div class="job_info">
@@ -149,8 +152,12 @@
         @for(timeSlot of job.timeSlots; track $index){
 
         <div class="single_radio_container">
-          <input type="radio" name="isInNoticePeriod" [value]="timeSlot" />
-          <!-- [(ngModel)]="userExperienced.isInNoticePeriod" -->
+          <input
+            type="radio"
+            name="isInNoticePeriod"
+            [value]="timeSlot"
+            [(ngModel)]="applyInJob.timeSlot"
+          />
           <label for="isInNoticePeriod">{{ timeSlot }}</label>
         </div>
         }
@@ -164,15 +171,18 @@
       @for(job_role of job.job_roles; track $index){
 
       <div class="single_checkbox_container">
-        <input type="checkbox" [id]="'checkbox_' + job_role" />
-        <!-- [(ngModel)]="expertiseTechnology.value" -->
+        <input
+          type="checkbox"
+          [id]="'checkbox_' + job_role"
+          [value]="job_role"
+          [(ngModel)]="applyInJob.preference[$index]"
+        />
         <label [for]="'checkbox_' + job_role">
           {{ job_role }}
         </label>
       </div>
       }
     </div>
-
     <hr />
 
     <div class="upload_resume_container">
@@ -193,7 +203,7 @@
 
   @for(job_role of job.job_roles; track $index){
 
-  <div class="single_job_container" (click)="clickClose(job_role)">
+  <div class="single_job_container" (click)="clickClose($index)">
     <div class="dropDown">
       <span>{{ job_role }}</span>
 
@@ -204,13 +214,13 @@
           src="../../assets/icons/expand_less_black_24dp.svg"
           alt="expand less/more icon"
           [class]="{
-            rotate180: checkForRotate(job_role)
+            rotate180: jobRolesDrop[$index]
           }"
         />
       </div>
     </div>
 
-    <div class="job_container_info hide" [id]="job_role">
+    <div class="job_container_info" [hidden]="jobRolesDrop[$index]">
       <div class="job_info">
         <div class="job_header">gross compensation package :</div>
 

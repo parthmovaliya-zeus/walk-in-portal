@@ -72,6 +72,11 @@
           font-family: quicksand;
           font-weight: 600;
         }
+
+        .apply_btn:disabled {
+          cursor: default;
+          opacity: 0.5;
+        }
       }
 
       .date_time_container {
