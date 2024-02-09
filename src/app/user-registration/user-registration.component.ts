@@ -72,79 +72,91 @@ export class UserRegistrationComponent implements OnInit {
     jobRelatedUpdates: false,
   };
 
-  preferredJobRoles: IJobRoles[] = [
-    {
-      id: 1,
-      JobRoleName: 'instructional Designer',
-      value: false,
-    },
-    {
-      id: 2,
-      JobRoleName: 'software Engineer',
-      value: false,
-    },
-    {
-      id: 3,
-      JobRoleName: 'software Quality Engineer',
-      value: false,
-    },
-  ];
+  preferredJobRoles: IJobRoles = {
+    JobRoleNames: [
+      'instructional Designer',
+      'software Engineer',
+      'software Quality Engineer',
+    ],
+    values: [false, false, false],
+  };
+  //     {
+  //       JobRoleName: 'instructional Designer',
+  //       value: false,
+  //     },
+  //     {
+  //       JobRoleName: 'software Engineer',
+  //       value: false,
+  //     },
+  //     {
+  //       JobRoleName: 'software Quality Engineer',
+  //       value: false,
+  //     },
+  //   ];
 
-  familiarTechnologies: ITechnologies[] = [
-    {
-      id: 1,
-      technologyName: 'Javascript',
-      value: false,
-    },
-    {
-      id: 2,
-      technologyName: 'Angular JS',
-      value: false,
-    },
-    {
-      id: 3,
-      technologyName: 'React',
-      value: false,
-    },
-    {
-      id: 4,
-      technologyName: 'Node JS',
-      value: false,
-    },
-    {
-      id: 5,
-      technologyName: 'Others',
-      value: false,
-    },
-  ];
+  familiarTechnologies: ITechnologies = {
+    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
+    values: [false, false, false, false, false],
+  };
+  //   [
+  //     {
 
-  expertiseTechnologies: ITechnologies[] = [
-    {
-      id: 1,
-      technologyName: 'Javascript',
-      value: false,
-    },
-    {
-      id: 2,
-      technologyName: 'Angular JS',
-      value: false,
-    },
-    {
-      id: 3,
-      technologyName: 'React',
-      value: false,
-    },
-    {
-      id: 4,
-      technologyName: 'Node JS',
-      value: false,
-    },
-    {
-      id: 5,
-      technologyName: 'Others',
-      value: false,
-    },
-  ];
+  //       technologyName: 'Javascript',
+  //       value: false,
+  //     },
+  //     {
+
+  //       technologyName: 'Angular JS',
+  //       value: false,
+  //     },
+  //     {
+
+  //       technologyName: 'React',
+  //       value: false,
+  //     },
+  //     {
+
+  //       technologyName: 'Node JS',
+  //       value: false,
+  //     },
+  //     {
+
+  //       technologyName: 'Others',
+  //       value: false,
+  //     },
+  //   ];
+
+  expertiseTechnologies: ITechnologies = {
+    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
+    values: [false, false, false, false, false],
+  };
+  //   [
+  //     {
+  //       id: 1,
+  //       technologyName: 'Javascript',
+  //       value: false,
+  //     },
+  //     {
+  //       id: 2,
+  //       technologyName: 'Angular JS',
+  //       value: false,
+  //     },
+  //     {
+  //       id: 3,
+  //       technologyName: 'React',
+  //       value: false,
+  //     },
+  //     {
+  //       id: 4,
+  //       technologyName: 'Node JS',
+  //       value: false,
+  //     },
+  //     {
+  //       id: 5,
+  //       technologyName: 'Others',
+  //       value: false,
+  //     },
+  //   ];
 
   userEducationalQualifications: IUserEducationalQualifications = {
     aggregatePercentage: null,

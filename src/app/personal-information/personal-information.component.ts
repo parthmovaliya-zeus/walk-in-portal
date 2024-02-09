@@ -1,8 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { IJobRoles, IPersonalInformation } from '../interface';
+import { IJobRoles } from '../interface';
 
 @Component({
   selector: 'app-personal-information',
@@ -12,50 +20,88 @@ import { IJobRoles, IPersonalInformation } from '../interface';
   styleUrl: './personal-information.component.scss',
 })
 export class PersonalInformationComponent {
-  //   userInfo: IPersonalInformation = {
-  // firstName: '',
-  // lastName: '',
-  // email: '',
-  // countryCode: null,
-  // phoneNumber: null,
-  // portfolio: '',
-  // referralName: '',
-  // jobRelatedUpdates: false,
-  //   };
-
   userInfo: any = {};
-  preferredJobRoles: IJobRoles[] = [];
+  preferredJobRoles!: IJobRoles;
+
+  avatarFileInfo: any = [null];
+  resumeFileInfo: any = [null];
+
+  constructor(private renderer: Renderer2) {}
+
+  @ViewChild('firstName') firstName!: ElementRef;
+  @ViewChild('lastName') lastName!: ElementRef;
+  @ViewChild('email') email!: ElementRef;
+  @ViewChild('countryCode') countryCode!: ElementRef;
+  @ViewChild('phoneNumber') phoneNumber!: ElementRef;
+  @ViewChild('preferredJobRolescheckbox')
+  preferredJobRolescheckbox!: ElementRef;
 
   @Input() set prevUserInfo(val: any) {
     this.preferredJobRoles = val.preferredJobRoles;
     this.userInfo = val.userInfo;
   }
 
-  //   personalInformation = new FormGroup({
-  //     firstName: new FormControl(''),
-  //     lastName: new FormControl(''),
-  //     email: new FormControl(''),
-  //     countryCode: new FormControl(),
-  //     phoneNumber: new FormControl(),
-  //     portfolio: new FormControl(''),
-  //     instructionalDesigner: new FormControl(),
-  //     softwareEngineer: new FormControl(),
-  //     softwareQualityEngineer: new FormControl(),
-  //     referralName: new FormControl(''),
-  //     jobRelatedUpdates: new FormControl(),
-  //   });
-
   @Output() personalInformationSubmited = new EventEmitter();
 
-  onSubmit() {
-    this.personalInformationSubmited.emit({
-      userInfo: this.userInfo,
-      preferredJobRoles: this.preferredJobRoles,
-    });
+  checkSingleField(ele: ElementRef): boolean {
+    if (!ele.nativeElement.value) {
+      alert("This field can't be empty!!");
+      ele.nativeElement.focus();
+      return false;
+    }
+    return true;
   }
 
-  avatarFileInfo: any = [null];
-  resumeFileInfo: any = [null];
+  checkPhoneNumberField(ele: ElementRef): boolean {
+    if (!ele.nativeElement.value) {
+      alert("This field can't be empty!!");
+      ele.nativeElement.focus();
+      return false;
+    }
+    if (ele.nativeElement.value.length !== 10) {
+      alert('Phone Number Length must be 10 character long');
+      ele.nativeElement.focus();
+      return false;
+    }
+    return true;
+  }
+
+  checkJobsContainer(ele: ElementRef): boolean {
+    if (this.preferredJobRoles.values.includes(true)) {
+      return true;
+    }
+    alert('Select atleast One Preferred Job Roles');
+    ele.nativeElement.focus();
+    return false;
+  }
+
+  checkField(): boolean {
+    if (this.checkSingleField(this.firstName)) {
+      if (this.checkSingleField(this.lastName)) {
+        if (this.checkSingleField(this.email)) {
+          if (this.checkSingleField(this.countryCode)) {
+            if (this.checkPhoneNumberField(this.phoneNumber)) {
+              if (this.checkJobsContainer(this.preferredJobRolescheckbox)) {
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  onSubmit() {
+    const finalCheck: boolean = this.checkField();
+
+    if (finalCheck) {
+      this.personalInformationSubmited.emit({
+        userInfo: this.userInfo,
+        preferredJobRoles: this.preferredJobRoles,
+      });
+    }
+  }
 
   showPreview(event: any) {
     const file = (event?.target).files[0];

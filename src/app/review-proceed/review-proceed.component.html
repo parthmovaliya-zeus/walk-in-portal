@@ -74,6 +74,7 @@
       >First Name</span
     >
     <input
+      #firstName
       type="text"
       class="single_container_value"
       [readonly]="isEditPersonalInformationReadOnly"
@@ -86,6 +87,7 @@
       >Last Name</span
     >
     <input
+      #lastName
       type="text"
       class="single_container_value"
       [readonly]="isEditPersonalInformationReadOnly"
@@ -96,6 +98,7 @@
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience">Email</span>
     <input
+      #email
       type="text"
       class="single_container_value"
       [readonly]="isEditPersonalInformationReadOnly"
@@ -110,6 +113,7 @@
     <div class="phone_number_container">
       <div class="add_text">+</div>
       <input
+        #countryCode
         class="country_code"
         type="number"
         [readonly]="isEditPersonalInformationReadOnly"
@@ -117,6 +121,7 @@
         id="countryCode"
       />
       <input
+        #phoneNumber
         class="phone_number"
         type="number"
         [readonly]="isEditPersonalInformationReadOnly"
@@ -174,24 +179,26 @@
     >
     @if(isEditPersonalInformationReadOnly){
     <span class="checkbox_ticked_value_container">
-      @for(preferredJobRole of preferredJobRoles; track preferredJobRole.id){
-      @if(preferredJobRole.value){
+      @for(jobRoleName of preferredJobRoles.JobRoleNames; track $index){
+      @if(preferredJobRoles.values[$index]){
 
-      <span>{{ preferredJobRole.JobRoleName | titlecase }}</span>
+      <span>{{ preferredJobRoles.JobRoleNames[$index] | titlecase }}</span>
 
       } }
     </span>
-    } @else { @for(preferredJobRole of preferredJobRoles; track
-    preferredJobRole.id){
+    } @else { @for(jobRoleName of preferredJobRoles.JobRoleNames; track $index){
     <div class="checkbox_single_container">
       <input
-        [id]="preferredJobRole.JobRoleName"
+        #preferredJobRolescheckbox
+        [id]="preferredJobRoles.JobRoleNames[$index]"
         type="checkbox"
-        [(ngModel)]="preferredJobRole.value"
+        [(ngModel)]="preferredJobRoles.values[$index]"
       />
-      <label [for]="preferredJobRole.JobRoleName" class="normal_label">{{
-        preferredJobRole.JobRoleName
-      }}</label>
+      <label
+        [for]="preferredJobRoles.JobRoleNames[$index]"
+        class="normal_label"
+        >{{ preferredJobRoles.JobRoleNames[$index] }}</label
+      >
     </div>
     } }
   </div>
@@ -259,7 +266,8 @@
       >Aggregate Percentage</span
     >
     <input
-      type="text"
+      #aggregatePercentage
+      type="number"
       class="w_small"
       [readonly]="isEditQualificationsReadOnly"
       [(ngModel)]="userEducationalQualifications.aggregatePercentage"
@@ -279,6 +287,7 @@
     />
     } @else {
     <select
+      #passingYear
       class="w_small"
       name="passingYear"
       id="passingYear"
@@ -303,6 +312,7 @@
       </span>
       } @else {
       <select
+        #qualification
         name="qualification"
         id="qualification"
         [(ngModel)]="userEducationalQualifications.qualification"
@@ -322,6 +332,7 @@
       </span>
       } @else {
       <select
+        #stream
         name="stream"
         id="stream"
         [(ngModel)]="userEducationalQualifications.stream"
@@ -343,6 +354,7 @@
       </span>
       } @else {
       <select
+        #collegeName
         name="collegeName"
         id="collegeName"
         [(ngModel)]="userEducationalQualifications.collegeName"
@@ -383,6 +395,7 @@
       >Where is your college located?</span
     >
     <input
+      #collageLocation
       class="w_small"
       type="text"
       name="collageLocation"
@@ -417,7 +430,8 @@
       >Years of Experience</span
     >
     <input
-      type="text"
+      #yearsOfExperience
+      type="number"
       class="w_small"
       [readonly]="isEditQualificationsReadOnly"
       [(ngModel)]="userExperienced.yearsOfExperience"
@@ -429,6 +443,7 @@
       >Current CTC (In Rupees)</span
     >
     <input
+      #currentCTC
       type="number"
       class="w_small"
       [readonly]="isEditQualificationsReadOnly"
@@ -441,6 +456,7 @@
       >Expected CTC (In Rupees)</span
     >
     <input
+      #expectedCTC
       type="number"
       class="w_small"
       [readonly]="isEditQualificationsReadOnly"
@@ -455,24 +471,23 @@
       >
       @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
-        @for(expertiseTechnology of expertiseTechnologies; track
-        expertiseTechnology.id){ @if(expertiseTechnology.value){
+        @for(technology of expertiseTechnologies.technologyNames; track $index){
+        @if(expertiseTechnologies.values[$index]){
 
-        <span>{{ expertiseTechnology.technologyName | titlecase }}</span>
+        <span>{{ technology | titlecase }}</span>
 
         } }
       </span>
-      } @else { @for(expertiseTechnology of expertiseTechnologies; track
-      expertiseTechnology.id){
+      } @else { @for(technology of expertiseTechnologies.technologyNames; track
+      $index){
       <div class="single_checkbox_container">
         <input
+          #expertiseTechnologiesHash
           type="checkbox"
-          [id]="'e_' + expertiseTechnology.technologyName"
-          [(ngModel)]="expertiseTechnology.value"
+          [id]="'e_' + technology"
+          [(ngModel)]="expertiseTechnologies.values[$index]"
         />
-        <label [for]="'e_' + expertiseTechnology.technologyName">{{
-          expertiseTechnology.technologyName
-        }}</label>
+        <label [for]="'e_' + technology">{{ technology }}</label>
       </div>
       } }
     </div>
@@ -506,24 +521,22 @@
       >
       @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
-        @for(familiarTechnology of familiarTechnologies; track
-        familiarTechnology.id){ @if(familiarTechnology.value){
+        @for(technology of familiarTechnologies.technologyNames; track $index){
+        @if(familiarTechnologies.values[$index]){
 
-        <span>{{ familiarTechnology.technologyName | titlecase }}</span>
+        <span>{{ technology | titlecase }}</span>
 
         } }
       </span>
-      } @else { @for(familiarTechnologie of familiarTechnologies; track
-      familiarTechnologie.id){
+      } @else { @for(technology of familiarTechnologies.technologyNames; track
+      $index){
       <div class="single_checkbox_container">
         <input
           type="checkbox"
-          [id]="'f_' + familiarTechnologie.technologyName"
-          [(ngModel)]="familiarTechnologie.value"
+          [id]="'f_' + technology"
+          [(ngModel)]="familiarTechnologies.values[$index]"
         />
-        <label [for]="'f_' + familiarTechnologie.technologyName">{{
-          familiarTechnologie.technologyName
-        }}</label>
+        <label [for]="'f_' + technology">{{ technology }}</label>
       </div>
       } }
     </div>
@@ -564,6 +577,7 @@
         <div class="radio_container_options">
           <div class="single_radio_container">
             <input
+              #isInNoticePeriod
               type="radio"
               name="isInNoticePeriod"
               [value]="true"
@@ -601,6 +615,7 @@
         } @else {
 
         <input
+          #noticePeriodEnd
           type="date"
           id="noticePeriodEnd"
           [readonly]="isEditQualificationsReadOnly"
@@ -620,6 +635,7 @@
         </span>
         } @else {
         <select
+          #noticePeriodLength
           name="noticePeriodLength"
           id="noticePeriodLength"
           [(ngModel)]="userExperienced.noticePeriodLength"
@@ -648,6 +664,7 @@
         <div class="radio_container_options">
           <div class="single_radio_container">
             <input
+              #exp_isAppearedInTestByZeus
               type="radio"
               name="isAppearedInTestByZeus"
               id="isAppearedInTestByZeus_yes"
@@ -685,7 +702,8 @@
       </span>
       } @else {
       <input
-        class="single_container_valuez"
+        exp_appearedRoleName
+        class="single_container_value"
         type="text"
         name="appearedRoleName"
         id="appearedRoleName"
@@ -707,24 +725,22 @@
       >
       @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
-        @for(familiarTechnology of familiarTechnologies; track
-        familiarTechnology.id){ @if(familiarTechnology.value){
+        @for(technology of familiarTechnologies.technologyNames; track $index){
+        @if(familiarTechnologies.values[$index]){
 
-        <span>{{ familiarTechnology.technologyName | titlecase }}</span>
+        <span>{{ technology | titlecase }}</span>
 
         } }
       </span>
-      } @else { @for(familiarTechnologie of familiarTechnologies; track
-      familiarTechnologie.id){
+      } @else { @for(technology of familiarTechnologies.technologyNames; track
+      $index){
       <div class="single_checkbox_container">
         <input
           type="checkbox"
-          [id]="familiarTechnologie.technologyName"
-          [(ngModel)]="familiarTechnologie.value"
+          [id]="technology"
+          [(ngModel)]="familiarTechnologies.values[$index]"
         />
-        <label [for]="familiarTechnologie.technologyName">{{
-          familiarTechnologie.technologyName
-        }}</label>
+        <label [for]="technology">{{ technology }}</label>
       </div>
       } }
     </div>
@@ -766,6 +782,7 @@
         <div class="radio_container_options">
           <div class="single_radio_container">
             <input
+              #fre_isAppearedInTestByZeus
               type="radio"
               name="isAppearedInTestByZeus"
               id="isAppearedInTestByZeus_yes"
@@ -804,6 +821,7 @@
       </span>
       } @else {
       <input
+        #fre_appearedRoleName
         type="text"
         class="single_container_value"
         [readonly]="isEditQualificationsReadOnly"

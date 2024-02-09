@@ -21,6 +21,7 @@
       <div class="single_input_container">
         <label for="aggregatePercentage">Aggregate Percentage*</label>
         <input
+          #aggregatePercentage
           class="w_small"
           type="number"
           id="aggregatePercentage"
@@ -31,6 +32,7 @@
       <div class="single_input_container">
         <label for="passingYear">Year of Passing*</label>
         <select
+          #passingYear
           class="w_small"
           name="passingYear"
           id="passingYear"
@@ -47,6 +49,7 @@
         <div class="single_input_container">
           <label for="qualification">Qualification*</label>
           <select
+            #qualification
             name="qualification"
             id="qualification"
             [(ngModel)]="userEducationalQualifications.qualification"
@@ -60,6 +63,7 @@
         <div class="single_input_container">
           <label for="stream">Stream*</label>
           <select
+            #stream
             name="stream"
             id="stream"
             [(ngModel)]="userEducationalQualifications.stream"
@@ -75,6 +79,7 @@
         <div class="single_input_container">
           <label for="collegeName">College*</label>
           <select
+            #collegeName
             name="collegeName"
             id="collegeName"
             [(ngModel)]="userEducationalQualifications.collegeName"
@@ -101,6 +106,7 @@
       <div class="single_input_container">
         <label for="collageLocation">Where is your college located?*</label>
         <input
+          #collageLocation
           class="w_small"
           type="text"
           id="collageLocation"
@@ -167,6 +173,7 @@
     <div class="single_input_container w_small">
       <label for="yearsOfExperience">Years of Experience*</label>
       <input
+        #yearsOfExperience
         type="number"
         name="yearsOfExperience"
         id="yearsOfExperience"
@@ -177,6 +184,7 @@
     <div class="single_input_container w_small">
       <label for="currentCTC">Current CTC* (In Rupees)</label>
       <input
+        #currentCTC
         type="text"
         name="currentCTC"
         id="currentCTC"
@@ -187,6 +195,7 @@
     <div class="single_input_container w_small">
       <label for="expectedCTC">Expected CTC* (In Rupees)</label>
       <input
+        #expectedCTC
         type="text"
         name="expectedCTC"
         id="expectedCTC"
@@ -199,17 +208,15 @@
         >Select All The Technologies You Expertise In*</span
       >
 
-      @for(expertiseTechnology of expertiseTechnologies; track
-      expertiseTechnology.id){
+      @for(technology of expertiseTechnologies.technologyNames; track $index){
       <div class="single_checkbox_container">
         <input
+          #expertiseTechnologiesHash
           type="checkbox"
-          [id]="'e_' + expertiseTechnology.technologyName"
-          [(ngModel)]="expertiseTechnology.value"
+          [id]="'e_' + technology"
+          [(ngModel)]="expertiseTechnologies.values[$index]"
         />
-        <label [for]="'e_' + expertiseTechnology.technologyName">{{
-          expertiseTechnology.technologyName
-        }}</label>
+        <label [for]="'e_' + technology">{{ technology }}</label>
       </div>
       }
 
@@ -229,7 +236,7 @@
         >Select All The Technologies You Are Familiar In</span
       >
 
-      @for(familiarTechnologie of familiarTechnologies; track
+      <!-- @for(familiarTechnologie of familiarTechnologies; track
       familiarTechnologie.id){
       <div class="single_checkbox_container">
         <input
@@ -240,6 +247,17 @@
         <label [for]="'f_' + familiarTechnologie.technologyName">{{
           familiarTechnologie.technologyName
         }}</label>
+      </div>
+      } -->
+
+      @for(technology of familiarTechnologies.technologyNames; track $index){
+      <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="'f_' + technology"
+          [(ngModel)]="familiarTechnologies.values[$index]"
+        />
+        <label [for]="'f_' + technology">{{ technology }}</label>
       </div>
       }
 
@@ -271,6 +289,7 @@
         <div class="radio_container_options">
           <div class="single_radio_container">
             <input
+              #isInNoticePeriod
               type="radio"
               name="isInNoticePeriod"
               [value]="true"
@@ -297,6 +316,7 @@
             >If Yes, when will your notice period end?*</label
           >
           <input
+            #noticePeriodEnd
             type="date"
             name="noticePeriodEnd"
             id="noticePeriodEnd"
@@ -309,6 +329,7 @@
             >How long is your notice period?* (Mention in months)</label
           >
           <select
+            #noticePeriodLength
             name="noticePeriodLength"
             id="noticePeriodLength"
             [(ngModel)]="userExperienced.noticePeriodLength"
@@ -334,7 +355,7 @@
               name="isAppearedInTestByZeus"
               id="isAppearedInTestByZeus_yes"
               [value]="true"
-              [(ngModel)]="userFresher.isAppearedInTestByZeus"
+              [(ngModel)]="userExperienced.isAppearedInTestByZeus"
             />
             <label for="isAppearedInTestByZeus_yes">Yes</label>
           </div>
@@ -357,6 +378,7 @@
           >If Yes, which role did you apply for?</label
         >
         <input
+          #exp_appearedRoleName
           type="text"
           name="appearedRoleName"
           id="appearedRoleName"
@@ -376,28 +398,16 @@
         >Select All The Technologies You Are Familiar In</span
       >
 
-      @for(familiarTechnologie of familiarTechnologies; track
-      familiarTechnologie.id){
+      @for(technology of familiarTechnologies.technologyNames; track $index){
       <div class="single_checkbox_container">
         <input
           type="checkbox"
-          [id]="familiarTechnologie.technologyName"
-          [(ngModel)]="familiarTechnologie.value"
+          [id]="'f_' + technology"
+          [(ngModel)]="familiarTechnologies.values[$index]"
         />
-        <label [for]="familiarTechnologie.technologyName">{{
-          familiarTechnologie.technologyName
-        }}</label>
+        <label [for]="'f_' + technology">{{ technology }}</label>
       </div>
       }
-
-      <!-- <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="javascript"
-          [(ngModel)]="userFresher.javascript"
-        />
-        <label for="javascript">Javascript</label>
-      </div> -->
 
       <div class="single_input_container specific_width">
         <label for="otherTechnologies">If others, please mention</label>
@@ -418,6 +428,7 @@
         <div class="radio_container_options">
           <div class="single_radio_container">
             <input
+              #isAppearedInTestByZeus
               type="radio"
               name="isAppearedInTestByZeus"
               id="isAppearedInTestByZeus_yes"
@@ -445,6 +456,7 @@
           >If Yes, which role did you apply for?</label
         >
         <input
+          #fre_appearedRoleName
           type="text"
           name="appearedRoleName"
           id="appearedRoleName"

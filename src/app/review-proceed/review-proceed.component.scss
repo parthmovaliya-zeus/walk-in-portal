@@ -59,6 +59,10 @@ input {
 input:focus {
   outline: none;
 }
+input[type="date"]:focus-visible,
+input[type="date"]:focus {
+  outline: auto;
+}
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -153,10 +157,6 @@ input[type="checkbox"] {
   font-size: $base-font + px;
 }
 
-.w_small:read-only:focus {
-  outline: none;
-}
-
 .single_main_component {
   background-color: $white-color;
   padding: 24px;
@@ -184,10 +184,9 @@ input[type="checkbox"] {
     .single_input_container {
       flex: 1;
     }
-    input:focus,
-    select:focus {
-      outline: none;
-    }
+    // input:focus {
+    //   outline: none;
+    // }
   }
 
   .flex_16 {

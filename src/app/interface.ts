@@ -15,15 +15,25 @@ export interface IPersonalInformation {
   jobRelatedUpdates: boolean | null;
 }
 
+// export interface IJobRoles {
+//   id: number;
+//   JobRoleName: string;
+//   value: boolean;
+// }
+
 export interface IJobRoles {
-  id: number;
-  JobRoleName: string;
-  value: boolean;
+  JobRoleNames: string[];
+  values: boolean[];
 }
+
+// export interface ITechnologies {
+//   id: number;
+//   technologyName: string;
+//   value: boolean;
+// }
 export interface ITechnologies {
-  id: number;
-  technologyName: string;
-  value: boolean;
+  technologyNames: string[];
+  values: boolean[];
 }
 
 export interface IUserEducationalQualifications {

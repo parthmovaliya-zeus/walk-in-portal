@@ -1,5 +1,4 @@
 <div class="personal_information_container">
-  <!-- <form class="personal_information_form"> -->
   <div class="personal_information_form">
     <div class="user_picture_component">
       <input
@@ -47,6 +46,7 @@
     <div class="input_single_container">
       <label for="firstName">First Name*</label>
       <input
+        #firstName
         class="inp_string"
         type="text"
         [(ngModel)]="userInfo.firstName"
@@ -57,6 +57,7 @@
     <div class="input_single_container">
       <label for="lastName">Last Name*</label>
       <input
+        #lastName
         class="inp_string"
         type="text"
         [(ngModel)]="userInfo.lastName"
@@ -67,6 +68,7 @@
     <div class="input_single_container">
       <label for="email">Email*</label>
       <input
+        #email
         class="inp_string"
         type="email"
         [(ngModel)]="userInfo.email"
@@ -79,12 +81,14 @@
       <div class="phone_number_container">
         <div class="add_text">+</div>
         <input
+          #countryCode
           class="country_code"
           type="number"
           [(ngModel)]="userInfo.countryCode"
           id="countryCode"
         />
         <input
+          #phoneNumber
           class="phone_number"
           type="number"
           [(ngModel)]="userInfo.phoneNumber"
@@ -100,8 +104,9 @@
           alt="Upload Resume icon"
         />
         @if(userInfo.resumeBase64 !== null && userInfo.resumeBase64.length !== 0
-        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0)
-        {{{userInfo.resumeName}}} @else{Upload Resume}
+        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0) {
+        {{ userInfo.resumeName }}
+        } @else{Upload Resume}
       </label>
       <input
         type="file"
@@ -124,56 +129,21 @@
     <div class="preferred_job_roles">
       <label for="portfolio">Preferred Job Roles*</label>
 
-      @for(preferredJobRole of preferredJobRoles; track preferredJobRole.id){
+      @for(jobRoleName of preferredJobRoles.JobRoleNames; track $index){
       <div class="checkbox_single_container">
         <input
-          [id]="preferredJobRole.JobRoleName"
+          #preferredJobRolescheckbox
+          [id]="preferredJobRoles.JobRoleNames[$index]"
           type="checkbox"
-          [(ngModel)]="preferredJobRole.value"
+          [(ngModel)]="preferredJobRoles.values[$index]"
         />
-        <label [for]="preferredJobRole.JobRoleName" class="normal_label">{{
-          preferredJobRole.JobRoleName
-        }}</label>
+        <label
+          [for]="preferredJobRoles.JobRoleNames[$index]"
+          class="normal_label"
+          >{{ preferredJobRoles.JobRoleNames[$index] }}</label
+        >
       </div>
       }
-
-      <!-- @if(preferredJobRoles.hasOwnProperty(key)){ console.log(key) } -->
-
-      <!-- <div class="checkbox_single_container">
-        <input
-          type="checkbox"
-          id="instructionalDesigner"
-          [(ngModel)]="preferredJobRoles.instructionalDesigner"
-          value="instructionalDesigner"
-        />
-        <label class="normal_label" for="instructionalDesigner"
-          >Instructional Designer</label
-        >
-      </div>
-
-      <div class="checkbox_single_container">
-        <input
-          type="checkbox"
-          id="softwareEngineer"
-          [(ngModel)]="preferredJobRoles.softwareEngineer"
-          value="softwareEngineer"
-        />
-        <label class="normal_label" for="softwareEngineer"
-          >Software Engineer</label
-        >
-      </div>
-
-      <div class="checkbox_single_container">
-        <input
-          type="checkbox"
-          id="softwareQualityEngineer"
-          [(ngModel)]="preferredJobRoles.softwareQualityEngineer"
-          value="softwareQualityEngineer"
-        />
-        <label class="normal_label" for="softwareQualityEngineer"
-          >Software Quality Engineer</label
-        >
-      </div> -->
     </div>
 
     <div class="input_single_container">
@@ -200,8 +170,15 @@
       >
     </div>
   </div>
-  <!-- </form> -->
-  <!-- <form [formGroup]="personalInformation" class="personal_information_form">
+</div>
+
+<div class="step_moving_btn">
+  <button class="next_previous_btn" (click)="onSubmit()" type="submit">
+    NEXT
+  </button>
+</div>
+
+<!-- <form [formGroup]="personalInformation" class="personal_information_form">
     <div class="input_single_container">
       <label for="firstName">First Name*</label>
       <input
@@ -328,10 +305,3 @@
       >
     </div>
   </form> -->
-</div>
-
-<div class="step_moving_btn">
-  <button class="next_previous_btn" (click)="onSubmit()" type="submit">
-    NEXT
-  </button>
-</div>
