@@ -1,6 +1,10 @@
 <div class="single_main_header_component">
   <div class="main_component_title">Personal Information</div>
-  <div class="main_edit_component" (click)="editPersonalInformationContainer()">
+  <button
+    class="main_edit_component"
+    #editPersonalInformationContainerHash
+    (click)="editPersonalInformationContainer()"
+  >
     @if(isEditPersonalInformationReadOnly){
     <img src="../../assets/icons/edit.png" alt="edit icon" />
     <span>Edit</span>
@@ -8,7 +12,7 @@
     <img src="../../assets/icons/correct.png" alt="correct icon" />
     <span>Save</span>
     }
-  </div>
+  </button>
 </div>
 
 <div class="single_main_component mb_24">
@@ -230,10 +234,19 @@
 
 <div class="single_main_header_component">
   <div class="main_component_title">Qualifications</div>
-  <div class="main_edit_component">
+  <button
+    #editQualificationsContainerHash
+    class="main_edit_component"
+    (click)="editQualificationsContainer()"
+  >
+    @if(isEditQualificationsReadOnly){
     <img src="../../assets/icons/edit.png" alt="edit icon" />
     <span>Edit</span>
-  </div>
+    } @else{
+    <img src="../../assets/icons/correct.png" alt="correct icon" />
+    <span>Save</span>
+    }
+  </button>
 </div>
 
 <div class="dropDown">
@@ -245,18 +258,38 @@
     <span class="single_container_title" for="yearsOfExperience"
       >Aggregate Percentage</span
     >
-    <span class="single_container_value">
-      {{ userEducationalQualifications.aggregatePercentage }}
-    </span>
+    <input
+      type="text"
+      class="w_small"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userEducationalQualifications.aggregatePercentage"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Year of Passing</span
     >
-    <span class="single_container_value">
-      {{ userEducationalQualifications.passingYear }}
-    </span>
+    @if(isEditQualificationsReadOnly){
+    <input
+      type="text"
+      class="w_small"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userEducationalQualifications.passingYear"
+    />
+    } @else {
+    <select
+      class="w_small"
+      name="passingYear"
+      id="passingYear"
+      [(ngModel)]="userEducationalQualifications.passingYear"
+    >
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+      <option value="2022">2022</option>
+      <option value="2023">2023</option>
+    </select>
+    }
   </div>
 
   <div class="double_container">
@@ -264,16 +297,38 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Qualification</span
       >
-      <span class="single_container_value">
+      @if(isEditQualificationsReadOnly){
+      <span class="single_input_container">
         {{ userEducationalQualifications.qualification }}
       </span>
+      } @else {
+      <select
+        name="qualification"
+        id="qualification"
+        [(ngModel)]="userEducationalQualifications.qualification"
+      >
+        <option value="Bachelor in Technology (B.Tech)">
+          Bachelor in Technology (B.Tech)
+        </option>
+      </select>
+      }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience">Stream</span>
-      <span class="single_container_value">
+      @if(isEditQualificationsReadOnly){
+      <span class="single_input_container">
         {{ userEducationalQualifications.stream }}
       </span>
+      } @else {
+      <select
+        name="stream"
+        id="stream"
+        [(ngModel)]="userEducationalQualifications.stream"
+      >
+        <option value="Information Technology">Information Technology</option>
+      </select>
+      }
     </div>
   </div>
 
@@ -282,21 +337,44 @@
       <span class="single_container_title" for="yearsOfExperience"
         >College</span
       >
-      <span class="single_container_value">
+      @if(isEditQualificationsReadOnly){
+      <span class="single_input_container">
         {{ userEducationalQualifications.collegeName }}
       </span>
+      } @else {
+      <select
+        name="collegeName"
+        id="collegeName"
+        [(ngModel)]="userEducationalQualifications.collegeName"
+      >
+        <option value="Pune Institute of Technology (PIT)">
+          Pune Institute of Technology (PIT)
+        </option>
+      </select>
+      }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If others, please enter your college name</span
       >
-      <span class="single_container_value">
+      @if(isEditQualificationsReadOnly){
+      <span class="single_input_container">
         @if(userEducationalQualifications.otherCollageName !== null &&
         userEducationalQualifications.otherCollageName.length !== 0){
         {{ userEducationalQualifications.otherCollageName }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        class="pb_4"
+        type="text"
+        name="otherCollageName"
+        id="otherCollageName"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userEducationalQualifications.otherCollageName"
+      />
+      }
     </div>
   </div>
 
@@ -304,9 +382,14 @@
     <span class="single_container_title" for="yearsOfExperience"
       >Where is your college located?</span
     >
-    <span class="single_container_value">
-      {{ userEducationalQualifications.collageLocation | titlecase }}
-    </span>
+    <input
+      class="w_small"
+      type="text"
+      name="collageLocation"
+      id="collageLocation"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userEducationalQualifications.collageLocation"
+    />
   </div>
 </div>
 
@@ -333,27 +416,36 @@
     <span class="single_container_title" for="yearsOfExperience"
       >Years of Experience</span
     >
-    <span class="single_container_value">
-      {{ userExperienced.yearsOfExperience }}
-    </span>
+    <input
+      type="text"
+      class="w_small"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userExperienced.yearsOfExperience"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Current CTC (In Rupees)</span
     >
-    <span class="single_container_value">
-      {{ userExperienced.currentCTC }}
-    </span>
+    <input
+      type="number"
+      class="w_small"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userExperienced.currentCTC"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Expected CTC (In Rupees)</span
     >
-    <span class="single_container_value">
-      {{ userExperienced.expectedCTC }}
-    </span>
+    <input
+      type="number"
+      class="w_small"
+      [readonly]="isEditQualificationsReadOnly"
+      [(ngModel)]="userExperienced.expectedCTC"
+    />
   </div>
 
   <div class="flex_16">
@@ -361,6 +453,7 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Select All The Technologies You Expertise In</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
         @for(expertiseTechnology of expertiseTechnologies; track
         expertiseTechnology.id){ @if(expertiseTechnology.value){
@@ -369,18 +462,40 @@
 
         } }
       </span>
+      } @else { @for(expertiseTechnology of expertiseTechnologies; track
+      expertiseTechnology.id){
+      <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="'e_' + expertiseTechnology.technologyName"
+          [(ngModel)]="expertiseTechnology.value"
+        />
+        <label [for]="'e_' + expertiseTechnology.technologyName">{{
+          expertiseTechnology.technologyName
+        }}</label>
+      </div>
+      } }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If others, please mention</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.e_otherTechnologies !== null &&
         userExperienced.e_otherTechnologies.length !== 0){
         {{ userExperienced.e_otherTechnologies | titlecase }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        type="text"
+        class="single_container_value"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userExperienced.e_otherTechnologies"
+      />
+      }
     </div>
   </div>
 
@@ -389,6 +504,7 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Select All The Technologies You are familiar In</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
         @for(familiarTechnology of familiarTechnologies; track
         familiarTechnology.id){ @if(familiarTechnology.value){
@@ -397,18 +513,40 @@
 
         } }
       </span>
+      } @else { @for(familiarTechnologie of familiarTechnologies; track
+      familiarTechnologie.id){
+      <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="'f_' + familiarTechnologie.technologyName"
+          [(ngModel)]="familiarTechnologie.value"
+        />
+        <label [for]="'f_' + familiarTechnologie.technologyName">{{
+          familiarTechnologie.technologyName
+        }}</label>
+      </div>
+      } }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If others, please mention</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.f_otherTechnologies !== null &&
         userExperienced.f_otherTechnologies.length !== 0){
         {{ userExperienced.f_otherTechnologies | titlecase }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        type="text"
+        class="single_container_value"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userExperienced.f_otherTechnologies"
+      />
+      }
     </div>
   </div>
 
@@ -417,9 +555,35 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Are you currently on notice period?</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.isInNoticePeriod){Yes} @else {No}
       </span>
+      } @else {
+      <div class="radio_container">
+        <div class="radio_container_options">
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isInNoticePeriod"
+              [value]="true"
+              [(ngModel)]="userExperienced.isInNoticePeriod"
+            />
+            <label for="isInNoticePeriod">Yes</label>
+          </div>
+
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isInNoticePeriod"
+              [value]="false"
+              [(ngModel)]="userExperienced.isInNoticePeriod"
+            />
+            <label for="isInNoticePeriod">No</label>
+          </div>
+        </div>
+      </div>
+      }
     </div>
 
     <div class="double_container">
@@ -427,18 +591,45 @@
         <span class="single_container_title" for="yearsOfExperience"
           >If Yes, when will your notice period end?</span
         >
+
+        @if(isEditQualificationsReadOnly){
+
         <span class="single_container_value">
           {{ userExperienced.noticePeriodEnd | date : "dd-MMM-yyyy" }}
         </span>
+
+        } @else {
+
+        <input
+          type="date"
+          id="noticePeriodEnd"
+          [readonly]="isEditQualificationsReadOnly"
+          [(ngModel)]="userExperienced.noticePeriodEnd"
+        />
+
+        }
       </div>
 
       <div class="single_input_container">
         <span class="single_container_title" for="yearsOfExperience"
           >How long is your notice period? (Mention in months)</span
         >
+        @if(isEditQualificationsReadOnly){
         <span class="single_container_value">
           {{ userExperienced.noticePeriodLength }} Months
         </span>
+        } @else {
+        <select
+          name="noticePeriodLength"
+          id="noticePeriodLength"
+          [(ngModel)]="userExperienced.noticePeriodLength"
+        >
+          <option value="0">0 months</option>
+          <option value="1">1 months</option>
+          <option value="2">2 months</option>
+          <option value="3">3 months</option>
+        </select>
+        }
       </div>
     </div>
   </div>
@@ -448,21 +639,60 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Have You Appeared For Any Test By Zeus in the past 12 months?</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.isAppearedInTestByZeus){Yes} @else {No}
       </span>
+      } @else {
+      <div class="radio_container">
+        <div class="radio_container_options">
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isAppearedInTestByZeus"
+              id="isAppearedInTestByZeus_yes"
+              [value]="true"
+              [(ngModel)]="userFresher.isAppearedInTestByZeus"
+            />
+            <label for="isAppearedInTestByZeus_yes">Yes</label>
+          </div>
+
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isAppearedInTestByZeus"
+              id="isAppearedInTestByZeus_no"
+              [value]="false"
+              [(ngModel)]="userExperienced.isAppearedInTestByZeus"
+            />
+            <label for="isAppearedInTestByZeus_no">No</label>
+          </div>
+        </div>
+      </div>
+      }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If Yes, which role did you apply for?</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.appearedRoleName !== null &&
         userExperienced.appearedRoleName.length !== 0){
         {{ userExperienced.appearedRoleName | titlecase }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        class="single_container_valuez"
+        type="text"
+        name="appearedRoleName"
+        id="appearedRoleName"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userExperienced.appearedRoleName"
+      />
+      }
     </div>
   </div>
 </div>
@@ -475,6 +705,7 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Select All The Technologies You are familiar In</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="checkbox_ticked_value_container">
         @for(familiarTechnology of familiarTechnologies; track
         familiarTechnology.id){ @if(familiarTechnology.value){
@@ -483,18 +714,40 @@
 
         } }
       </span>
+      } @else { @for(familiarTechnologie of familiarTechnologies; track
+      familiarTechnologie.id){
+      <div class="single_checkbox_container">
+        <input
+          type="checkbox"
+          [id]="familiarTechnologie.technologyName"
+          [(ngModel)]="familiarTechnologie.value"
+        />
+        <label [for]="familiarTechnologie.technologyName">{{
+          familiarTechnologie.technologyName
+        }}</label>
+      </div>
+      } }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If others, please mention</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userFresher.otherTechnologies !== null &&
         userFresher.otherTechnologies.length !== 0){
         {{ userFresher.otherTechnologies | titlecase }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        type="text"
+        class="single_container_value"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userFresher.otherTechnologies"
+      />
+      }
     </div>
   </div>
 
@@ -503,21 +756,60 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Have You Appeared For Any Test By Zeus in the past 12 months?</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userFresher.isAppearedInTestByZeus){Yes} @else {No}
       </span>
+      } @else {
+
+      <div class="radio_container">
+        <div class="radio_container_options">
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isAppearedInTestByZeus"
+              id="isAppearedInTestByZeus_yes"
+              [value]="true"
+              [(ngModel)]="userFresher.isAppearedInTestByZeus"
+            />
+            <label for="isAppearedInTestByZeus_yes">Yes</label>
+          </div>
+
+          <div class="single_radio_container">
+            <input
+              type="radio"
+              name="isAppearedInTestByZeus"
+              id="isAppearedInTestByZeus_no"
+              [value]="false"
+              [(ngModel)]="userFresher.isAppearedInTestByZeus"
+            />
+            <label for="isAppearedInTestByZeus_no">No</label>
+          </div>
+        </div>
+      </div>
+
+      }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience"
         >If Yes, which role did you apply for?</span
       >
+      @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
         @if(userExperienced.appearedRoleName !== null &&
         userExperienced.appearedRoleName.length !== 0){
         {{ userExperienced.appearedRoleName }}
         } @else {-}
       </span>
+      } @else {
+      <input
+        type="text"
+        class="single_container_value"
+        [readonly]="isEditQualificationsReadOnly"
+        [(ngModel)]="userExperienced.appearedRoleName"
+      />
+      }
     </div>
   </div>
 </div>

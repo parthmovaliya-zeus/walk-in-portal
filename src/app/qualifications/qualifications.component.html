@@ -162,6 +162,7 @@
   </div>
 
   @if(userProfessionalQualificationsVisible.isExperienced === true){
+
   <div class="step_inputs">
     <div class="single_input_container w_small">
       <label for="yearsOfExperience">Years of Experience*</label>
@@ -312,6 +313,7 @@
             id="noticePeriodLength"
             [(ngModel)]="userExperienced.noticePeriodLength"
           >
+            <option value="0">0 months</option>
             <option value="1">1 months</option>
             <option value="2">2 months</option>
             <option value="3">3 months</option>
@@ -367,6 +369,7 @@
   </div>
 
   } @else if(userProfessionalQualificationsVisible.isExperienced === false){
+
   <div class="step_inputs">
     <div class="technologies_container">
       <span class="technologies_container_label"

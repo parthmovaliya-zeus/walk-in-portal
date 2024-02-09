@@ -5,7 +5,11 @@
   @include displayFlex(space-between, center);
   margin: 0px 0px 24px 0px;
   .main_edit_component {
+    border: none;
     cursor: pointer;
+    font-family: quicksand;
+    font-weight: 600;
+    font-size: $base-font + px;
     @include displayFlex(normal, center);
     gap: 9px;
     color: $secondary-color;
@@ -14,6 +18,10 @@
       height: 18px;
       width: 18px;
     }
+  }
+  .highlighted {
+    border: 2px solid red;
+    border-radius: 2px;
   }
 }
 
@@ -36,11 +44,17 @@
   margin-bottom: 8px;
 }
 
+.pb_4 {
+  font-size: $base-font + px;
+  padding-bottom: 4px;
+}
+
 input {
   border: 0px;
   border-bottom: 1px solid $border-38-color;
   font-family: quicksand;
   font-weight: 600;
+  font-size: $base-font + px;
 }
 input:focus {
   outline: none;
@@ -128,6 +142,21 @@ input[type="checkbox"] {
   }
 }
 
+.w_small {
+  padding-bottom: 4px;
+  font-size: $base-font + px;
+  width: 180px;
+  color: $primary-color;
+}
+.w_small:read-only {
+  border: none;
+  font-size: $base-font + px;
+}
+
+.w_small:read-only:focus {
+  outline: none;
+}
+
 .single_main_component {
   background-color: $white-color;
   padding: 24px;
@@ -154,6 +183,10 @@ input[type="checkbox"] {
 
     .single_input_container {
       flex: 1;
+    }
+    input:focus,
+    select:focus {
+      outline: none;
     }
   }
 
@@ -250,13 +283,34 @@ input[type="checkbox"] {
     .single_checkbox_container {
       @include displayFlex(normal, center);
       gap: 8px;
+    }
 
-      //   input[type="checkbox"],
-      //   input[type="checkbox"]:disabled:checked {
-      //     width: 18px;
-      //     height: 24px;
-      //     accent-color: $primary-color;
-      //   }
+    select {
+      border: 0px;
+      border-bottom: 1px solid $border-38-color;
+      padding-bottom: 4px;
+      font-size: $base-font + px;
+      font-family: quicksand;
+      font-weight: 600;
+    }
+
+    .radio_container {
+      .radio_container_options {
+        @include displayFlex(normal, center);
+        gap: 24px;
+
+        .single_radio_container {
+          @include displayFlex(normal, center);
+          gap: 8px;
+
+          input[type="radio"] {
+            width: 20px;
+            height: 24px;
+            accent-color: $secondary-color;
+            margin: 0px;
+          }
+        }
+      }
     }
 
     // -------------single_input_container end here---------------

@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { IJobRoles, ITechnologies } from '../interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,67 +19,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './review-proceed.component.scss',
 })
 export class ReviewProceedComponent {
-  //   userPersonalInformation: IPersonalInformation = {
-  //     firstName: '',
-  //     lastName: '',
-  //     email: '',
-  //     countryCode: null,
-  //     phoneNumber: null,
-  //     portfolio: '',
-  //     // instructionalDesigner: null,
-  //     // softwareEngineer: null,
-  //     // softwareQualityEngineer: null,
-  //     referralName: '',
-  //     jobRelatedUpdates: null,
-  //   };
-
-  //   userEducationalQualifications: IUserEducationalQualifications = {
-  //     aggregatePercentage: '',
-  //     passingYear: null,
-  //     qualification: null,
-  //     stream: null,
-  //     collegeName: null,
-  //     otherCollageName: null,
-  //     collageLocation: '',
-  //   };
-
-  //   userProfessionalQualificationsVisible: any = {
-  //     isExperienced: true,
-  //   };
-
-  //   userFresher: IUserFresher = {
-  //     // javascript: false,
-  //     // angularJS: false,
-  //     // react: false,
-  //     // nodeJS: false,
-  //     // others: false,
-  //     otherTechnologies: null,
-  //     isAppearedInTestByZeus: null,
-  //     appearedRoleName: null,
-  //   };
-
-  //   userExperienced: IUserExperiences = {
-  //     yearsOfExperience: null,
-  //     currentCTC: null,
-  //     expectedCTC: null,
-  //     // e_javascript: false,
-  //     // e_angularJS: false,
-  //     // e_react: false,
-  //     // e_nodeJS: false,
-  //     // e_others: false,
-  //     e_otherTechnologies: null,
-  //     // f_javascript: false,
-  //     // f_angularJS: false,
-  //     // f_react: false,
-  //     // f_nodeJS: false,
-  //     // f_others: false,
-  //     f_otherTechnologies: null,
-  //     isInNoticePeriod: null,
-  //     noticePeriodEnd: null,
-  //     noticePeriodLength: null,
-  //     isAppearedInTestByZeus: null,
-  //     appearedRoleName: null,
-  //   };
+  constructor(private renderer: Renderer2) {}
 
   objectKeys = Object.keys;
 
@@ -88,6 +36,7 @@ export class ReviewProceedComponent {
   expertiseTechnologies: ITechnologies[] = [];
 
   isEditPersonalInformationReadOnly: boolean = true;
+  isEditQualificationsReadOnly: boolean = true;
 
   @Input() set prevUserInfo(val: any) {
     this.userInfo = val.userInfo;
@@ -103,7 +52,31 @@ export class ReviewProceedComponent {
 
   @Output() reviewPricessSubmited = new EventEmitter();
 
+  @ViewChild('editPersonalInformationContainerHash')
+  editPersonalInformationContainerHash!: ElementRef;
+
+  @ViewChild('editQualificationsContainerHash')
+  editQualificationsContainerHash!: ElementRef;
+
   onSubmit(direction: string) {
+    if (this.isEditPersonalInformationReadOnly === false) {
+      alert('Please save edited content');
+      this.renderer.addClass(
+        this.editPersonalInformationContainerHash.nativeElement,
+        'highlighted'
+      );
+      this.editPersonalInformationContainerHash.nativeElement.focus();
+      return;
+    }
+    if (this.isEditQualificationsReadOnly === false) {
+      alert('Please save edited content');
+      this.renderer.addClass(
+        this.editQualificationsContainerHash.nativeElement,
+        'highlighted'
+      );
+      this.editQualificationsContainerHash.nativeElement.focus();
+      return;
+    }
     this.reviewPricessSubmited.emit({
       userInfo: this.userInfo,
       preferredJobRoles: this.preferredJobRoles,
@@ -119,8 +92,20 @@ export class ReviewProceedComponent {
   }
 
   editPersonalInformationContainer() {
+    this.renderer.removeClass(
+      this.editPersonalInformationContainerHash.nativeElement,
+      'highlighted'
+    );
     this.isEditPersonalInformationReadOnly =
       !this.isEditPersonalInformationReadOnly;
+  }
+
+  editQualificationsContainer() {
+    this.renderer.removeClass(
+      this.editQualificationsContainerHash.nativeElement,
+      'highlighted'
+    );
+    this.isEditQualificationsReadOnly = !this.isEditQualificationsReadOnly;
   }
 
   showPreview(event: any) {
