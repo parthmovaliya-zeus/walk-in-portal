@@ -201,6 +201,15 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   reviewPricessSubmited(val: any) {
+    this.userPersonalInformation = val.userInfo;
+    this.preferredJobRoles = val.preferredJobRoles;
+    this.familiarTechnologies = val.familiarTechnologies;
+    this.expertiseTechnologies = val.expertiseTechnologies;
+    this.userEducationalQualifications = val.userEducationalQualifications;
+    this.userProfessionalQualificationsVisible =
+      val.userProfessionalQualificationsVisible;
+    this.userFresher = val.userFresher;
+    this.userExperienced = val.userExperienced;
     if (val.direction === 'PREVIOUS') {
       window.scrollTo(0, 0);
       this.movePreviousStep();

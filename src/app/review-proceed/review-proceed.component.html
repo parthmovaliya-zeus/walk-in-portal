@@ -1,28 +1,67 @@
 <div class="single_main_header_component">
   <div class="main_component_title">Personal Information</div>
-  <div class="main_edit_component">
+  <div class="main_edit_component" (click)="editPersonalInformationContainer()">
+    @if(isEditPersonalInformationReadOnly){
     <img src="../../assets/icons/edit.png" alt="edit icon" />
     <span>Edit</span>
+    } @else{
+    <img src="../../assets/icons/correct.png" alt="correct icon" />
+    <span>Save</span>
+    }
   </div>
 </div>
 
 <div class="single_main_component mb_24">
-  <!-- @for(key of objectKeys(userInfo); track $index) {
-  @if(userInfo.hasOwnProperty(key)) {
-      <div class="single_input_container">
-          <span class="single_container_title" for="yearsOfExperience">{{
-              key
-            }}</span>
-    <span class="single_container_value">Value: {{ userInfo[key] }}</span>
-</div>
-} } -->
-
   <div class="user_image_container">
-    @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0 &&
-    userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+    @if(isEditPersonalInformationReadOnly){ @if(userInfo.avatarBase64 !== null
+    && userInfo.avatarBase64.length !== 0 && userInfo.avatarName !== null &&
+    userInfo.avatarName.length !== 0){
     <img [src]="userInfo.avatarBase64" [alt]="userInfo.avatarName" />
     } @else {
     <img src="../../assets/icons/account_circle.svg" alt="user image" />
+    } } @else {
+    <div class="user_picture_component">
+      <input
+        id="input_user_image"
+        type="file"
+        accept="image/*"
+        (change)="showPreview($event)"
+      />
+
+      <label for="input_user_image" class="user_picture_component">
+        @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0
+        && userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+
+        <img
+          class="display_image"
+          [src]="userInfo.avatarBase64"
+          [alt]="userInfo.avatarName"
+        />
+
+        } @else {
+
+        <img
+          class="display_image"
+          src="../../assets/icons/account_circle.svg"
+          alt="user image icon"
+        />
+
+        }
+        <!-- --------------------------  -->
+        @if(userInfo.avatarBase64 !== null && userInfo.avatarBase64.length !== 0
+        && userInfo.avatarName !== null && userInfo.avatarName.length !== 0){
+
+        <div class="user_picture_title">CHANGE {{ userInfo.avatarName }}</div>
+        <div class="user_picture_info">Max. image size: 5 MB</div>
+
+        } @else {
+
+        <div class="user_picture_title">UPLOAD DISPLAY PICTURE</div>
+        <div class="user_picture_info">Max. image size: 5 MB</div>
+
+        }
+      </label>
+    </div>
     }
   </div>
 
@@ -30,45 +69,86 @@
     <span class="single_container_title" for="yearsOfExperience"
       >First Name</span
     >
-    <span class="single_container_value">{{
-      userInfo.firstName | titlecase
-    }}</span>
+    <input
+      type="text"
+      class="single_container_value"
+      [readonly]="isEditPersonalInformationReadOnly"
+      [(ngModel)]="userInfo.firstName"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Last Name</span
     >
-    <span class="single_container_value">{{
-      userInfo.lastName | titlecase
-    }}</span>
+    <input
+      type="text"
+      class="single_container_value"
+      [readonly]="isEditPersonalInformationReadOnly"
+      [(ngModel)]="userInfo.lastName"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience">Email</span>
-    <span class="single_container_value">{{ userInfo.email }}</span>
+    <input
+      type="text"
+      class="single_container_value"
+      [readonly]="isEditPersonalInformationReadOnly"
+      [(ngModel)]="userInfo.email"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Phone Number</span
     >
-    <span class="single_container_value">
-      + {{ userInfo.countryCode }} {{ userInfo.phoneNumber }}
-    </span>
+    <div class="phone_number_container">
+      <div class="add_text">+</div>
+      <input
+        class="country_code"
+        type="number"
+        [readonly]="isEditPersonalInformationReadOnly"
+        [(ngModel)]="userInfo.countryCode"
+        id="countryCode"
+      />
+      <input
+        class="phone_number"
+        type="number"
+        [readonly]="isEditPersonalInformationReadOnly"
+        [(ngModel)]="userInfo.phoneNumber"
+        id="phoneNumber"
+      />
+    </div>
   </div>
 
   <div class="single_input_container">
     <span class="resume_info_container">
+      @if(isEditPersonalInformationReadOnly){
       <img
         src="../../assets/icons/Upload_black_24dp.svg"
         alt="Upload Resume icon"
       />
-      <span>
-        @if(userInfo.resumeBase64 !== null && userInfo.resumeBase64.length !== 0
-        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0)
-        {{{userInfo.resumeName}}} @else{Upload Resume}
-      </span>
+      <span> Upload Resume </span>
+      <span>{{ userInfo.resumeName }}</span>
+      } @else {
+      <div class="upload_resume_container">
+        <label class="input_file_label" for="input_file">
+          <img
+            src="../../assets/icons/Upload_black_24dp.svg"
+            alt="Upload Resume icon"
+          />
+          <span> Upload Resume </span>
+          <span>{{ userInfo.resumeName }}</span>
+        </label>
+        <input
+          type="file"
+          accept=".pdf"
+          id="input_file"
+          (change)="showResume($event)"
+        />
+      </div>
+      }
     </span>
   </div>
 
@@ -76,13 +156,19 @@
     <span class="single_container_title" for="yearsOfExperience"
       >Enter Portfolio URL (if any)</span
     >
-    <span class="single_container_value">{{ userInfo.portfolio }}</span>
+    <input
+      type="text"
+      class="single_container_value"
+      [readonly]="isEditPersonalInformationReadOnly"
+      [(ngModel)]="userInfo.portfolio"
+    />
   </div>
 
   <div class="single_input_container">
     <span class="single_container_title" for="yearsOfExperience"
       >Preferred Job Roles</span
     >
+    @if(isEditPersonalInformationReadOnly){
     <span class="checkbox_ticked_value_container">
       @for(preferredJobRole of preferredJobRoles; track preferredJobRole.id){
       @if(preferredJobRole.value){
@@ -91,6 +177,19 @@
 
       } }
     </span>
+    } @else { @for(preferredJobRole of preferredJobRoles; track
+    preferredJobRole.id){
+    <div class="checkbox_single_container">
+      <input
+        [id]="preferredJobRole.JobRoleName"
+        type="checkbox"
+        [(ngModel)]="preferredJobRole.value"
+      />
+      <label [for]="preferredJobRole.JobRoleName" class="normal_label">{{
+        preferredJobRole.JobRoleName
+      }}</label>
+    </div>
+    } }
   </div>
 
   <div class="single_input_container">
@@ -98,20 +197,29 @@
       >If You Are Registering Via A Referral, Please Mention Full Name Of The
       Employee Who Referred You</span
     >
+    @if(isEditPersonalInformationReadOnly){
     <span class="single_container_value">
       @if(userInfo.referralName.length !== 0){
-      {{ userInfo.referralName | titlecase }}
+      {{ userInfo.referralName }}
       } @else { - }
     </span>
+    } @else {
+    <input
+      type="text"
+      class="single_container_value"
+      [readonly]="isEditPersonalInformationReadOnly"
+      [(ngModel)]="userInfo.referralName"
+    />
+    }
   </div>
 
   <div class="single_input_container">
     <div class="single_checkbox_container">
       <input
         type="checkbox"
-        [checked]="userInfo.jobRelatedUpdates"
-        class="single_container_value"
-        disabled
+        class=""
+        [disabled]="isEditPersonalInformationReadOnly"
+        [(ngModel)]="userInfo.jobRelatedUpdates"
       />
       <span class="single_container_title" for="yearsOfExperience"
         >Send me job related updates via mail</span

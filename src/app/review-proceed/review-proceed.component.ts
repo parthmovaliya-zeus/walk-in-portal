@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IJobRoles, ITechnologies } from '../interface';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-review-proceed',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './review-proceed.component.html',
   styleUrl: './review-proceed.component.scss',
 })
@@ -74,6 +75,9 @@ export class ReviewProceedComponent {
 
   objectKeys = Object.keys;
 
+  avatarFileInfo: any = [null];
+  resumeFileInfo: any = [null];
+
   userInfo: any = {};
   preferredJobRoles: IJobRoles[] = [];
   userEducationalQualifications: any = {};
@@ -82,6 +86,8 @@ export class ReviewProceedComponent {
   userExperienced: any = {};
   familiarTechnologies: ITechnologies[] = [];
   expertiseTechnologies: ITechnologies[] = [];
+
+  isEditPersonalInformationReadOnly: boolean = true;
 
   @Input() set prevUserInfo(val: any) {
     this.userInfo = val.userInfo;
@@ -99,7 +105,43 @@ export class ReviewProceedComponent {
 
   onSubmit(direction: string) {
     this.reviewPricessSubmited.emit({
+      userInfo: this.userInfo,
+      preferredJobRoles: this.preferredJobRoles,
+      userEducationalQualifications: this.userEducationalQualifications,
+      userProfessionalQualificationsVisible:
+        this.userProfessionalQualificationsVisible,
+      userFresher: this.userFresher,
+      userExperienced: this.userExperienced,
+      familiarTechnologies: this.familiarTechnologies,
+      expertiseTechnologies: this.expertiseTechnologies,
       direction,
     });
+  }
+
+  editPersonalInformationContainer() {
+    this.isEditPersonalInformationReadOnly =
+      !this.isEditPersonalInformationReadOnly;
+  }
+
+  showPreview(event: any) {
+    const file = (event?.target).files[0];
+    this.userInfo.avatarName = file?.name;
+    this.avatarFileInfo = file;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.userInfo.avatarBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(this.avatarFileInfo);
+  }
+
+  showResume(event: any) {
+    const file = (event?.target).files[0];
+    this.resumeFileInfo = file;
+    this.userInfo.resumeName = file?.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.userInfo.resumeBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(this.resumeFileInfo);
   }
 }
