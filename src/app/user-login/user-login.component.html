@@ -11,6 +11,9 @@
             name="email"
             id="email"
             placeholder="Email ID*"
+            [(ngModel)]="userLoginDetails.email"
+            required
+            #email
           />
         </div>
         <a href="#" class="inp_forgot">FORGOT EMAIL ID?</a>
@@ -24,6 +27,9 @@
             name="password"
             id="password"
             placeholder="Password*"
+            #password
+            [(ngModel)]="userLoginDetails.password"
+            required
           />
           <img
             src="../../assets/icons/preview.svg"

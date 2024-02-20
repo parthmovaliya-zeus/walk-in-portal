@@ -35,7 +35,7 @@
         />
         <span class="">{{ jr }}</span>
       </div>
-      @if($index !== jr.length){
+      @if($index !== job.job_roles.length){
       <div class="job_splitter screen_mobile"></div>
       <!-- [hidden]="screenWidth < 376" -->
       } }
@@ -58,7 +58,7 @@
       </div>
     </div> -->
 
-    @if(job.isExtraRoles){
+    @if(job.isExtraRolesTitle !== null){
     <div class="extra_roles_container">
       <span class="extra_roles">{{ job.isExtraRolesTitle }}</span>
     </div>

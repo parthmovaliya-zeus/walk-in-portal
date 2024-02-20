@@ -227,8 +227,9 @@ export class QualificationsComponent {
   }
 
   onSubmit(direction: string) {
-    const finalCheck: boolean = this.checkField() && this.professionalCheck();
-    // const finalCheck: boolean = this.professionalCheck();
+    // const finalCheck: boolean = this.checkField() && this.professionalCheck();
+    const finalCheck: boolean = true;
+
     if (finalCheck) {
       this.qualificationsSubmited.emit({
         userEducationalQualifications: this.userEducationalQualifications,

@@ -3,30 +3,61 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { IJobRoles } from '../interface';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-personal-information',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './personal-information.component.html',
   styleUrl: './personal-information.component.scss',
 })
-export class PersonalInformationComponent {
+export class PersonalInformationComponent implements OnInit {
   userInfo: any = {};
   preferredJobRoles!: IJobRoles;
 
   avatarFileInfo: any = [null];
   resumeFileInfo: any = [null];
 
-  constructor(private renderer: Renderer2) {}
+  //   personalInformation!: FormGroup;
+
+  //   constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private userRegistrationService: UserRegistrationService,
+    private fb: FormBuilder
+  ) {
+    this.userInfo = this.userRegistrationService.userPersonalInformation;
+    this.preferredJobRoles = this.userRegistrationService.preferredJobRoles;
+  }
+
+  ngOnInit(): void {
+    // this.personalInformation = this.fb.group({
+    //   firstName: [this.userInfo.firstName, Validators.required],
+    //   lastName: this.userInfo.lastName,
+    //   email: '',
+    //   countryCode: '',
+    //   phoneNumber: '',
+    //   portfolio: '',
+    //   referralName: '',
+    //   jobRelatedUpdates: '',
+    // });
+  }
 
   @ViewChild('firstName') firstName!: ElementRef;
   @ViewChild('lastName') lastName!: ElementRef;
@@ -36,16 +67,16 @@ export class PersonalInformationComponent {
   @ViewChild('preferredJobRolescheckbox')
   preferredJobRolescheckbox!: ElementRef;
 
-  @Input() set prevUserInfo(val: any) {
-    this.preferredJobRoles = val.preferredJobRoles;
-    this.userInfo = val.userInfo;
-  }
+  //   @Input() set prevUserInfo(val: any) {
+  //     this.preferredJobRoles = val.preferredJobRoles;
+  //     this.userInfo = val.userInfo;
+  //   }
 
   @Output() personalInformationSubmited = new EventEmitter();
 
-  checkSingleField(ele: ElementRef): boolean {
+  checkSingleField(ele: ElementRef, alrt: string): boolean {
     if (!ele.nativeElement.value) {
-      alert("This field can't be empty!!");
+      alert(alrt);
       ele.nativeElement.focus();
       return false;
     }
@@ -76,10 +107,19 @@ export class PersonalInformationComponent {
   }
 
   checkField(): boolean {
-    if (this.checkSingleField(this.firstName)) {
-      if (this.checkSingleField(this.lastName)) {
-        if (this.checkSingleField(this.email)) {
-          if (this.checkSingleField(this.countryCode)) {
+    if (
+      this.checkSingleField(this.firstName, "First Name field can't be empty!!")
+    ) {
+      if (
+        this.checkSingleField(this.lastName, "Last Name field can't be empty!!")
+      ) {
+        if (this.checkSingleField(this.email, "Email field can't be empty!!")) {
+          if (
+            this.checkSingleField(
+              this.countryCode,
+              "Country Code field can't be empty!!"
+            )
+          ) {
             if (this.checkPhoneNumberField(this.phoneNumber)) {
               if (this.checkJobsContainer(this.preferredJobRolescheckbox)) {
                 return true;
@@ -94,6 +134,7 @@ export class PersonalInformationComponent {
 
   onSubmit() {
     const finalCheck: boolean = this.checkField();
+    // const finalCheck: boolean = true;
 
     if (finalCheck) {
       this.personalInformationSubmited.emit({

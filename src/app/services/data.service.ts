@@ -10,22 +10,20 @@ import { IJobs } from '../interface';
 export class DataService {
   constructor(private _http: HttpClient) {}
 
-  baseURL: string = '../../assets/';
+  baseURL: string = 'https://localhost:7060/api/';
 
   getJobsData(): Observable<IJobs[]> {
-    return this._http
-      .get<IJobs[]>(this.baseURL + 'jobs.json')
+    var allJobs = this._http
+      .get<IJobs[]>(this.baseURL + 'JobListing')
       .pipe(catchError(this.handleError));
+
+    return allJobs;
   }
 
   getSingleJobData(id: number): Observable<IJobs | null> {
-    return this._http.get<IJobs[]>(this.baseURL + 'jobs.json').pipe(
-      map((jobs: IJobs[]) => {
-        let job = jobs.filter((job: IJobs) => job.id === id);
-        return job && job.length ? job[0] : null;
-      }),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<IJobs>(this.baseURL + 'SingleJob/' + id)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: any) {

@@ -47,7 +47,7 @@
           />
           <span class="">{{ jr }}</span>
         </div>
-        @if($index !== jr.length){
+        @if($index !== job.job_roles.length-1){
         <div class="job_splitter screen_mobile"></div>
         } }
       </div>
@@ -250,7 +250,6 @@
         <div class="job_header">Requirements :</div>
 
         <div class="job_value">
-          <!-- {{ job.requirements[$index] }} -->
           @for(reqi of job.requirements[$index].split("- "); track $index){
           @if(reqi.length !== 0){
 

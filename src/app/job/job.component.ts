@@ -63,8 +63,6 @@ export class JobComponent implements OnInit, AfterContentChecked {
   }
 
   clickClosePreRequisitesApplication() {
-    console.log(this.isPreRequisitesApplicationClose);
-
     this.isPreRequisitesApplicationClose =
       !this.isPreRequisitesApplicationClose;
   }
