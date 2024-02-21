@@ -7,8 +7,8 @@ import {
   of,
   throwError,
 } from 'rxjs';
-import { IUserLogin } from '../interface';
-import { HttpClient } from '@angular/common/http';
+import { IUserDetails, IUserLogin } from '../interface';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,17 @@ export class UserLoginService {
     //   (data) => console.log('success', data),
     //   (error) => console.log('error')
     // );
+  }
+
+  loginUserbyToken(): Observable<IUserDetails> {
+    const token = localStorage.getItem('token');
+    // var headerObject = new HttpHeaders().set(
+    //   'Authorization',
+    //   'Bearer ' + token
+    // );
+    return this._http.get<IUserDetails>(this.baseURL + 'Users/email', {
+      headers: { Authorization: `Bearer ` + token },
+    });
   }
 
   setUserLoginStatus(val: boolean) {

@@ -1,6 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
+import { Url } from 'url';
 
 export interface IPersonalInformation {
+  id: number;
   avatarBase64: string | null;
   avatarName: string | null;
   firstName: string;
@@ -15,23 +17,14 @@ export interface IPersonalInformation {
   jobRelatedUpdates: boolean | null;
 }
 
-// export interface IJobRoles {
-//   id: number;
-//   JobRoleName: string;
-//   value: boolean;
-// }
-
 export interface IJobRoles {
+  jobRolesIds: number[];
   JobRoleNames: string[];
   values: boolean[];
 }
 
-// export interface ITechnologies {
-//   id: number;
-//   technologyName: string;
-//   value: boolean;
-// }
 export interface ITechnologies {
+  technologyIds: number[];
   technologyNames: string[];
   values: boolean[];
 }
@@ -75,11 +68,13 @@ export interface IJobs {
   sDate: Date;
   eDate: Date;
   location: string;
+  job_rolesId: number[];
   job_roles: string[];
   isExpiring: boolean;
   isExpiringTitle: string;
   isExtraRoles: boolean;
   isExtraRolesTitle: string | null;
+  timeSlotsId: number[];
   timeSlots: string[];
   packages: number[];
   roleDescriptions: string[];
@@ -97,4 +92,50 @@ export interface IJobs {
     phone: string;
   };
   thingsToRemember: string;
+}
+
+export interface ISuccessPage {
+  startDate: Date | null | undefined;
+  timeSlot: string;
+  name: string;
+  addressLine1: string;
+  area: string;
+  city: string;
+  pincode: string;
+  countryCode: number;
+  number: number;
+  thingsToRemember: string;
+}
+
+export interface IApplyInJob {
+  timeSlotId: number | null;
+  preference: boolean[];
+}
+
+export interface IApplyInJobBodyData {
+  userId: number;
+  timeSlotId: number | null;
+  preference: boolean[];
+  job_rolesId: number[];
+}
+
+export interface IUserDetails {
+  aggregatePercentage: number;
+  countryCode: number;
+  currentCtc: number;
+  expectedCtc: number;
+  displayPicture: string;
+  email: string;
+  endDateOfNoticePeriod: Date;
+  firstName: string;
+  id: number;
+  isAppliendInTestByZeus: boolean;
+  isExperienced: boolean;
+  isInNoticePeriod: boolean;
+  lastName: string;
+  phoneNumber: string;
+  profileUrl: string;
+  resume: string;
+  roleAppliendInZeus: string;
+  yearsOfExperience: number;
 }

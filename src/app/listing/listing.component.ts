@@ -1,8 +1,10 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { IJobs } from '../interface';
+import { Router, RouterLink } from '@angular/router';
+import { IJobs, IPersonalInformation, IUserDetails } from '../interface';
 import { DataService } from '../services/data.service';
+import { UserLoginService } from '../services/user-login.service';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-listing',
@@ -10,10 +12,19 @@ import { DataService } from '../services/data.service';
   imports: [CommonModule, RouterLink],
   templateUrl: './listing.component.html',
   styleUrl: './listing.component.scss',
+  //   host: { ngSkipHydration: 'true' },
 })
 export class ListingComponent implements OnInit {
-  constructor(private dataService: DataService) {}
-
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private userLoginService: UserLoginService,
+    private userRegistrationService: UserRegistrationService
+  ) {
+    this.userPersonalInformation =
+      this.userRegistrationService.userPersonalInformation;
+  }
+  userPersonalInformation!: IPersonalInformation;
   jobs: IJobs[] = [];
 
   ngOnInit(): void {
@@ -22,46 +33,25 @@ export class ListingComponent implements OnInit {
     });
   }
 
-  //   jobs = [
-  //     {
-  //       id: 1,
-  //       title: 'Walk In for Designer Job Role',
-  //       sDate: '10-Jul-2021',
-  //       eDate: '11-Jul-2021',
-  //       location: 'Mumbai',
-  //       job_roles: ['Instructional Designer'],
-  //       isExpiring: true,
-  //       isExpiringTitle: 'Expires in 5 days',
-  //       isExtraRoles: false,
-  //       isExtraRolesTitle: '',
-  //     },
-  //     {
-  //       id: 2,
-  //       title: 'Walk In for Multiple Job Roles',
-  //       sDate: '03-Jul-2021',
-  //       eDate: '04-Jul-2021',
-  //       location: 'Mumbai',
-  //       job_roles: [
-  //         'Instructional Designer',
-  //         'Software Engineer',
-  //         'Software Quality Engineer',
-  //       ],
-  //       isExpiring: false,
-  //       isExpiringTitle: '',
-  //       isExtraRoles: true,
-  //       isExtraRolesTitle: 'Internship Opportunity for MCA Students',
-  //     },
-  //     {
-  //       id: 3,
-  //       title: 'Walk In for Design and Development Job Role',
-  //       sDate: '10-Jul-2021',
-  //       eDate: '11-Jul-2021',
-  //       location: 'Mumbai',
-  //       job_roles: ['Instructional Designer', 'Software Engineer'],
-  //       isExpiring: true,
-  //       isExpiringTitle: 'Expires in 5 days',
-  //       isExtraRoles: false,
-  //       isExtraRolesTitle: '',
-  //     },
-  //   ];
+  goSingleJob(id: number) {
+    let token = localStorage.getItem('token');
+
+    if (!token) {
+      sessionStorage.setItem('redirectID', id.toString());
+      this.router.navigate(['/login']);
+    } else {
+      // get user data here let token = localStorage.getItem('token');
+      this.userLoginService.loginUserbyToken().subscribe(
+        (resp: IUserDetails) => {
+          this.userLoginService.setUserLoginStatus(true);
+          this.userPersonalInformation.avatarBase64 = resp.displayPicture;
+          this.userPersonalInformation.id = resp.id;
+        },
+        (error) => {
+          console.log('Error at login with token: ', error);
+        }
+      );
+      this.router.navigate(['/job', id]);
+    }
+  }
 }

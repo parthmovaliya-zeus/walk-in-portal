@@ -15,6 +15,7 @@ export class UserRegistrationService {
   constructor() {}
 
   userPersonalInformation: IPersonalInformation = {
+    id: 0,
     avatarBase64: null,
     avatarName: null,
     firstName: '',
@@ -30,22 +31,21 @@ export class UserRegistrationService {
   };
 
   preferredJobRoles: IJobRoles = {
-    JobRoleNames: [
-      'instructional Designer',
-      'software Engineer',
-      'software Quality Engineer',
-    ],
-    values: [false, false, false],
+    jobRolesIds: [],
+    JobRoleNames: [],
+    values: [],
   };
 
   familiarTechnologies: ITechnologies = {
-    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
-    values: [false, false, false, false, false],
+    technologyIds: [],
+    technologyNames: [],
+    values: [],
   };
 
   expertiseTechnologies: ITechnologies = {
-    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
-    values: [false, false, false, false, false],
+    technologyIds: [],
+    technologyNames: [],
+    values: [],
   };
 
   userEducationalQualifications: IUserEducationalQualifications = {

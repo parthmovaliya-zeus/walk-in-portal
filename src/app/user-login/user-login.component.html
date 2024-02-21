@@ -41,7 +41,12 @@
       </div>
     </div>
     <div class="remember_me">
-      <input type="checkbox" name="rememberMe" id="rememberMe" />Remember Me
+      <input
+        type="checkbox"
+        name="rememberMe"
+        id="rememberMe"
+        (click)="toggleRememberMe()"
+      />Remember Me
     </div>
 
     <div class="login_button_container">

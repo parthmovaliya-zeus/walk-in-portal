@@ -12,12 +12,15 @@ import { IPersonalInformation } from '../interface';
   imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.scss',
+  //   host: { ngSkipHydration: 'true' },
 })
 export class UserLoginComponent implements OnInit {
   showPassword = false;
   passwordType = 'password';
   private _text = 'text';
   private _password = 'password';
+
+  remember_me: boolean = false;
 
   isUserLogedIn: any;
 
@@ -75,18 +78,31 @@ export class UserLoginComponent implements OnInit {
     return true;
   }
 
+  toggleRememberMe() {
+    this.remember_me = !this.remember_me;
+  }
+
   loginUserClicked() {
+    console.log(this.remember_me);
+
     if (this.checkEmail(this.email, 'Plese enter  Email!'))
       if (this.checkSingleField(this.password, 'Please Enter password!!'))
         this.userLoginService.loginUser(this.userLoginDetails).subscribe(
           (resp) => {
-            console.log(resp);
             var userData = resp.returnUserData;
-            var token = resp.token;
-            localStorage.setItem('toekn', token);
+            if (this.remember_me) {
+              var token = resp.token;
+              localStorage.setItem('token', token);
+            }
             this.userPersonalInformation.avatarBase64 = userData.DisplayPicture;
+            this.userPersonalInformation.id = userData.id;
             this.userLoginService.setUserLoginStatus(true);
-            this.router.navigate(['/jobs']);
+            let redirectID = sessionStorage.getItem('redirectID');
+            if (redirectID) {
+              this.router.navigate(['/job', redirectID]);
+            } else {
+              this.router.navigate(['']);
+            }
           },
           (error) => {
             alert("Email or Password dosen't match!!");

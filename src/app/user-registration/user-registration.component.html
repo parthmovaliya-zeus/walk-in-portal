@@ -56,15 +56,14 @@
 
   @if(stepCount === 1){
 
-  <app-personal-information
-    (personalInformationSubmited)="setPersonalInformation($event)"
-  ></app-personal-information>
+  <app-personal-information></app-personal-information>
+  <!-- (personalInformationSubmited)="setPersonalInformation($event)" -->
   <!-- [prevUserInfo]="{ userInfo: userPersonalInformation, preferredJobRoles }" -->
 
   } @else if(stepCount === 2){
 
-  <app-qualifications
-    (qualificationsSubmited)="setQualificationsInformation($event)"
+  <app-qualifications></app-qualifications>
+  <!-- (qualificationsSubmited)="setQualificationsInformation($event)"
     [prevUserInfo]="{
       userEducationalQualifications: userEducationalQualifications,
       preferredJobRoles,
@@ -74,13 +73,12 @@
       userExperienced: userExperienced,
       familiarTechnologies,
       expertiseTechnologies
-    }"
-  ></app-qualifications>
+    }" -->
 
   } @else if(stepCount === 3){
 
-  <app-review-proceed
-    (reviewPricessSubmited)="reviewPricessSubmited($event)"
+  <app-review-proceed></app-review-proceed>
+  <!-- (reviewPricessSubmited)="reviewPricessSubmited($event)"
     [prevUserInfo]="{
       userInfo: userPersonalInformation,
       preferredJobRoles,
@@ -91,8 +89,7 @@
       userExperienced: userExperienced,
       familiarTechnologies,
       expertiseTechnologies
-    }"
-  ></app-review-proceed>
+    }" -->
 
   }
 </div>

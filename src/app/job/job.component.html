@@ -1,4 +1,5 @@
-@if(!isAppliedInJob){ @if(job){
+<!-- @if(!isAppliedInJob){ -->
+@if(job){
 
 <div class="main_conatainer">
   <div class="go_up_component" (click)="goUpClicked()">
@@ -155,8 +156,8 @@
           <input
             type="radio"
             name="isInNoticePeriod"
-            [value]="timeSlot"
-            [(ngModel)]="applyInJob.timeSlot"
+            [value]="job.timeSlotsId[$index]"
+            [(ngModel)]="applyInJob.timeSlotId"
           />
           <label for="isInNoticePeriod">{{ timeSlot }}</label>
         </div>
@@ -174,7 +175,7 @@
         <input
           type="checkbox"
           [id]="'checkbox_' + job_role"
-          [value]="job_role"
+          [value]="job.job_rolesId[$index]"
           [(ngModel)]="applyInJob.preference[$index]"
         />
         <label [for]="'checkbox_' + job_role">
@@ -263,6 +264,7 @@
   }
 </div>
 
-} } @else {
-<app-job-applied-successful></app-job-applied-successful>
 }
+<!-- } @else {
+<app-job-applied-successful></app-job-applied-successful>
+} -->

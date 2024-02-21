@@ -12,6 +12,7 @@ import {
   IUserExperiences,
   IUserFresher,
 } from '../interface';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -29,8 +30,6 @@ import {
 export class UserRegistrationComponent implements OnInit {
   isDisable: boolean = true;
   stepCount: number = 1;
-
-  ngOnInit(): void {}
 
   movePreviousStep() {
     if (this.stepCount === 3) {
@@ -57,139 +56,32 @@ export class UserRegistrationComponent implements OnInit {
     this.isDisable = value;
   }
 
-  userPersonalInformation: IPersonalInformation = {
-    avatarBase64: null,
-    avatarName: null,
-    firstName: '',
-    lastName: '',
-    email: '',
-    countryCode: null,
-    phoneNumber: null,
-    resumeBase64: null,
-    resumeName: null,
-    portfolio: '',
-    referralName: '',
-    jobRelatedUpdates: false,
-  };
+  userPersonalInformation!: IPersonalInformation;
+  preferredJobRoles!: IJobRoles;
+  familiarTechnologies!: ITechnologies;
+  expertiseTechnologies!: ITechnologies;
+  userEducationalQualifications!: IUserEducationalQualifications;
+  userProfessionalQualificationsVisible: any;
+  userFresher!: IUserFresher;
+  userExperienced!: IUserExperiences;
 
-  preferredJobRoles: IJobRoles = {
-    JobRoleNames: [
-      'instructional Designer',
-      'software Engineer',
-      'software Quality Engineer',
-    ],
-    values: [false, false, false],
-  };
-  //     {
-  //       JobRoleName: 'instructional Designer',
-  //       value: false,
-  //     },
-  //     {
-  //       JobRoleName: 'software Engineer',
-  //       value: false,
-  //     },
-  //     {
-  //       JobRoleName: 'software Quality Engineer',
-  //       value: false,
-  //     },
-  //   ];
+  constructor(private _userRegistrationService: UserRegistrationService) {
+    this.userPersonalInformation =
+      this._userRegistrationService.userPersonalInformation;
+    this.preferredJobRoles = this._userRegistrationService.preferredJobRoles;
+    this.familiarTechnologies =
+      this._userRegistrationService.familiarTechnologies;
+    this.expertiseTechnologies =
+      this._userRegistrationService.expertiseTechnologies;
+    this.userEducationalQualifications =
+      this._userRegistrationService.userEducationalQualifications;
+    this.userProfessionalQualificationsVisible =
+      this._userRegistrationService.userProfessionalQualificationsVisible;
+    this.userFresher = this._userRegistrationService.userFresher;
+    this.userExperienced = this._userRegistrationService.userExperienced;
+  }
 
-  familiarTechnologies: ITechnologies = {
-    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
-    values: [false, false, false, false, false],
-  };
-  //   [
-  //     {
-
-  //       technologyName: 'Javascript',
-  //       value: false,
-  //     },
-  //     {
-
-  //       technologyName: 'Angular JS',
-  //       value: false,
-  //     },
-  //     {
-
-  //       technologyName: 'React',
-  //       value: false,
-  //     },
-  //     {
-
-  //       technologyName: 'Node JS',
-  //       value: false,
-  //     },
-  //     {
-
-  //       technologyName: 'Others',
-  //       value: false,
-  //     },
-  //   ];
-
-  expertiseTechnologies: ITechnologies = {
-    technologyNames: ['Javascript', 'Angular JS', 'React', 'Node JS', 'Others'],
-    values: [false, false, false, false, false],
-  };
-  //   [
-  //     {
-  //       id: 1,
-  //       technologyName: 'Javascript',
-  //       value: false,
-  //     },
-  //     {
-  //       id: 2,
-  //       technologyName: 'Angular JS',
-  //       value: false,
-  //     },
-  //     {
-  //       id: 3,
-  //       technologyName: 'React',
-  //       value: false,
-  //     },
-  //     {
-  //       id: 4,
-  //       technologyName: 'Node JS',
-  //       value: false,
-  //     },
-  //     {
-  //       id: 5,
-  //       technologyName: 'Others',
-  //       value: false,
-  //     },
-  //   ];
-
-  userEducationalQualifications: IUserEducationalQualifications = {
-    aggregatePercentage: null,
-    passingYear: null,
-    qualification: null,
-    stream: null,
-    collegeName: null,
-    otherCollageName: '',
-    collageLocation: '',
-  };
-
-  userProfessionalQualificationsVisible: any = {
-    isExperienced: false,
-  };
-
-  userFresher: IUserFresher = {
-    otherTechnologies: null,
-    isAppearedInTestByZeus: null,
-    appearedRoleName: null,
-  };
-
-  userExperienced: IUserExperiences = {
-    yearsOfExperience: null,
-    currentCTC: null,
-    expectedCTC: null,
-    e_otherTechnologies: null,
-    f_otherTechnologies: null,
-    isInNoticePeriod: null,
-    noticePeriodEnd: null,
-    noticePeriodLength: null,
-    isAppearedInTestByZeus: null,
-    appearedRoleName: null,
-  };
+  ngOnInit(): void {}
 
   setPersonalInformation(val: any) {
     this.preferredJobRoles = val.preferredJobRoles;

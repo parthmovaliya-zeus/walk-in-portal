@@ -64,7 +64,7 @@
     </div>
     }
 
-    <button [routerLink]="['/job', job.id]" class="more_details_btn">
+    <button (click)="goSingleJob(job.id)" class="more_details_btn">
       VIEW MORE DETAILS
     </button>
   </div>

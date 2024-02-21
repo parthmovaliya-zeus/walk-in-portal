@@ -3,12 +3,13 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { ListingComponent } from './listing/listing.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { JobComponent } from './job/job.component';
+import { JobAppliedSuccessfulComponent } from './job-applied-successful/job-applied-successful.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: UserLoginComponent,
+    component: ListingComponent,
   },
   {
     path: 'registration',
@@ -16,9 +17,9 @@ export const routes: Routes = [
     component: UserRegistrationComponent,
   },
   {
-    path: 'jobs',
+    path: 'login',
     pathMatch: 'full',
-    component: ListingComponent,
+    component: UserLoginComponent,
   },
   {
     path: 'job/:id',
@@ -26,8 +27,13 @@ export const routes: Routes = [
     component: JobComponent,
   },
   {
+    path: 'job/SuccessPage/:id',
+    pathMatch: 'full',
+    component: JobAppliedSuccessfulComponent,
+  },
+  {
     path: '**',
     pathMatch: 'full',
-    component: UserLoginComponent,
+    component: ListingComponent,
   },
 ];

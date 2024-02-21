@@ -1,3 +1,4 @@
+@if(job != null){
 <div class="main_component">
   <div class="hallTicket_component">
     <img src="../../assets/icons/correct_green.png" alt="correct icon" />
@@ -11,8 +12,8 @@
     <div class="sub_component">
       <div class="component_title">Date & Time of Walk-In :</div>
       <div class="component_value">
-        <div class="">03rd July 2021</div>
-        <div class="">9:00 AM to 11:00 AM</div>
+        <div class="">{{ job.startDate | date : "dd-MMM-yy" }}</div>
+        <div class="">{{ job.timeSlot }}</div>
       </div>
     </div>
 
@@ -21,13 +22,11 @@
     <div class="sub_component">
       <div class="component_title">Venue of Walk-In :</div>
       <div class="address_value">
-        <div class="">{{ job?.address?.name }}</div>
-        <div class="">{{ job?.address?.addressLine1 }}</div>
-        <div class="">{{ job?.address?.area }}</div>
-        <div class="">
-          {{ job?.address?.city }} - {{ job?.address?.pincode }}
-        </div>
-        <div class="">+{{ job?.address?.phone }}</div>
+        <div class="">{{ job.name }}</div>
+        <div class="">{{ job.addressLine1 }}</div>
+        <div class="">{{ job.area }}</div>
+        <div class="">{{ job.city }} - {{ job.pincode }}</div>
+        <div class="">+{{ job.number }}</div>
       </div>
     </div>
 
@@ -36,8 +35,7 @@
     <div class="sub_component">
       <div class="component_title">THINGS TO REMEMBER :</div>
       <div class="component_value">
-        <!-- {{ job?.thingsToRemember | json }} -->
-        @for(ttr of job?.thingsToRemember?.split("- "); track $index){
+        @for(ttr of job.thingsToRemember.split("- "); track $index){
         @if(ttr.length !== 0){
         <div class="">- {{ ttr }}</div>
         } }
@@ -49,3 +47,4 @@
     <button>DOWNLOAD HALL TICKET</button>
   </div>
 </div>
+}
