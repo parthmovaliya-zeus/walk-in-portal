@@ -85,12 +85,15 @@ export class PersonalInformationComponent implements OnInit {
 
   checkPhoneNumberField(ele: ElementRef): boolean {
     if (!ele.nativeElement.value) {
-      alert("This field can't be empty!!");
+      alert("This field can't be empty or Phone Number only contain Numbers");
       ele.nativeElement.focus();
       return false;
-    }
-    if (ele.nativeElement.value.length !== 10) {
+    } else if (ele.nativeElement.value.length !== 10) {
       alert('Phone Number Length must be 10 character long');
+      ele.nativeElement.focus();
+      return false;
+    } else if (ele.nativeElement.value.indexOf(0) === 0) {
+      alert('Phone Number not start with 0');
       ele.nativeElement.focus();
       return false;
     }
@@ -106,6 +109,20 @@ export class PersonalInformationComponent implements OnInit {
     return false;
   }
 
+  checkEmail(ele: ElementRef, alrt: string): boolean {
+    const emailRegex = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
+    if (!ele.nativeElement.value) {
+      alert(alrt);
+      ele.nativeElement.focus();
+      return false;
+    } else if (!emailRegex.test(ele.nativeElement.value)) {
+      alert('Plese enter valid Email!');
+      ele.nativeElement.focus();
+      return false;
+    }
+    return true;
+  }
+
   checkField(): boolean {
     if (
       this.checkSingleField(this.firstName, "First Name field can't be empty!!")
@@ -113,7 +130,7 @@ export class PersonalInformationComponent implements OnInit {
       if (
         this.checkSingleField(this.lastName, "Last Name field can't be empty!!")
       ) {
-        if (this.checkSingleField(this.email, "Email field can't be empty!!")) {
+        if (this.checkEmail(this.email, "Email field can't be empty!!")) {
           if (
             this.checkSingleField(
               this.countryCode,

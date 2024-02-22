@@ -1,5 +1,4 @@
 import { BehaviorSubject } from 'rxjs';
-import { Url } from 'url';
 
 export interface IPersonalInformation {
   id: number;
@@ -8,6 +7,7 @@ export interface IPersonalInformation {
   firstName: string;
   lastName: string;
   email: string;
+  password: string | null;
   countryCode: number | null;
   phoneNumber: number | null;
   resumeBase64: string | null;
@@ -23,6 +23,21 @@ export interface IJobRoles {
   values: boolean[];
 }
 
+export interface ICollages {
+  collageIds: number[];
+  collageNames: string[];
+}
+
+export interface IQualifications {
+  qualificationIds: number[];
+  qualificationNames: string[];
+}
+
+export interface IStreams {
+  streamIds: number[];
+  streamNames: string[];
+}
+
 export interface ITechnologies {
   technologyIds: number[];
   technologyNames: string[];
@@ -32,9 +47,9 @@ export interface ITechnologies {
 export interface IUserEducationalQualifications {
   aggregatePercentage: number | null;
   passingYear: number | null;
-  qualification: string | null;
-  stream: string | null;
-  collegeName: string | null;
+  qualificationId: number | null;
+  streamId: number | null;
+  collegeId: number | null;
   otherCollageName: string | null;
   collageLocation: string;
 }
@@ -138,4 +153,39 @@ export interface IUserDetails {
   resume: string;
   roleAppliendInZeus: string;
   yearsOfExperience: number;
+}
+
+export interface ISingleJobRole {
+  id: number;
+  jobName: string;
+  dtCreated: Date;
+  dtModified: Date;
+}
+
+export interface ISingleCollage {
+  id: number;
+  collageName: string;
+  dtCreated: Date;
+  dtModified: Date;
+}
+
+export interface ISingleQualification {
+  id: number;
+  qualificationTitle: string;
+  dtCreated: Date;
+  dtModified: Date;
+}
+
+export interface ISingleStream {
+  id: number;
+  streamName: string;
+  dtCreated: Date;
+  dtModified: Date;
+}
+
+export interface ISingleTechnology {
+  id: number;
+  technologyName: string;
+  dtCreated: Date;
+  dtModified: Date;
 }

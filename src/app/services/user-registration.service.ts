@@ -1,18 +1,33 @@
 import { Injectable } from '@angular/core';
 import {
+  ICollages,
   IJobRoles,
   IPersonalInformation,
+  IQualifications,
+  ISingleCollage,
+  ISingleJobRole,
+  ISingleQualification,
+  ISingleStream,
+  ISingleTechnology,
+  IStreams,
   ITechnologies,
   IUserEducationalQualifications,
   IUserExperiences,
   IUserFresher,
 } from '../interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserRegistrationService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
+  baseURL: string = 'https://localhost:7060/api/';
+
+  isReadOnly: boolean[] = [];
+  isEditPersonalInformationReadOnly!: boolean;
+  isEditQualificationsReadOnly!: boolean;
 
   userPersonalInformation: IPersonalInformation = {
     id: 0,
@@ -21,6 +36,7 @@ export class UserRegistrationService {
     firstName: '',
     lastName: '',
     email: '',
+    password: null,
     countryCode: null,
     phoneNumber: null,
     resumeBase64: null,
@@ -34,6 +50,21 @@ export class UserRegistrationService {
     jobRolesIds: [],
     JobRoleNames: [],
     values: [],
+  };
+
+  allStreams: IStreams = {
+    streamIds: [],
+    streamNames: [],
+  };
+
+  allQualifications: IQualifications = {
+    qualificationIds: [],
+    qualificationNames: [],
+  };
+
+  allCollages: ICollages = {
+    collageIds: [],
+    collageNames: [],
   };
 
   familiarTechnologies: ITechnologies = {
@@ -51,9 +82,9 @@ export class UserRegistrationService {
   userEducationalQualifications: IUserEducationalQualifications = {
     aggregatePercentage: null,
     passingYear: null,
-    qualification: null,
-    stream: null,
-    collegeName: null,
+    qualificationId: null,
+    streamId: null,
+    collegeId: null,
     otherCollageName: '',
     collageLocation: '',
   };
@@ -81,17 +112,58 @@ export class UserRegistrationService {
     appearedRoleName: null,
   };
 
+  years: number[] = [];
+
   getUserPersonalInformation(): any {
     return {
       userInfo: this.userPersonalInformation,
       preferredJobRoles: this.preferredJobRoles,
     };
   }
+
   setUserPersonalInformation(
     userPersonalInformation: any,
     preferredJobRoles: any
   ) {
     this.userPersonalInformation = userPersonalInformation;
     this.preferredJobRoles = preferredJobRoles;
+  }
+
+  getAllJobRoles(): Observable<ISingleJobRole[]> {
+    return this._http.get<ISingleJobRole[]>(this.baseURL + 'EnumJobRoles');
+  }
+
+  getAllTechnologies(): Observable<ISingleTechnology[]> {
+    return this._http.get<ISingleTechnology[]>(
+      this.baseURL + 'EnumTechnologies'
+    );
+  }
+
+  getAllCollages(): Observable<ISingleCollage[]> {
+    return this._http.get<ISingleCollage[]>(this.baseURL + 'EnumCollages');
+  }
+
+  getAllQualifications(): Observable<ISingleQualification[]> {
+    return this._http.get<ISingleQualification[]>(
+      this.baseURL + 'EnumQualifications'
+    );
+  }
+
+  getAllStreams(): Observable<ISingleStream[]> {
+    return this._http.get<ISingleStream[]>(this.baseURL + 'EnumStreams');
+  }
+
+  registerNewUser() {
+    console.log('registerNewUser: ', {
+      userPersonalInformation: this.userPersonalInformation,
+      preferredJobRoles: this.preferredJobRoles,
+      familiarTechnologies: this.familiarTechnologies,
+      expertiseTechnologies: this.expertiseTechnologies,
+      userEducationalQualifications: this.userEducationalQualifications,
+      userProfessionalQualificationsVisible:
+        this.userProfessionalQualificationsVisible,
+      userFresher: this.userFresher,
+      userExperienced: this.userExperienced,
+    });
   }
 }

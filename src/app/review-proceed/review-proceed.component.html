@@ -204,10 +204,10 @@
   </div>
 
   <div class="single_input_container">
-    <span class="single_container_title referral_title" for="yearsOfExperience"
-      >If You Are Registering Via A Referral, Please Mention Full Name Of The
-      Employee Who Referred You</span
-    >
+    <span class="single_container_title referral_title" for="yearsOfExperience">
+      If You Are Registering Via A Referral, Please Mention Full Name Of The
+      Employee Who Referred You
+    </span>
     @if(isEditPersonalInformationReadOnly){
     <span class="single_container_value">
       @if(userInfo.referralName.length !== 0){
@@ -293,10 +293,9 @@
       id="passingYear"
       [(ngModel)]="userEducationalQualifications.passingYear"
     >
-      <option value="2020">2020</option>
-      <option value="2021">2021</option>
-      <option value="2022">2022</option>
-      <option value="2023">2023</option>
+      @for(year of years; track $index){
+      <option [value]="year">{{ year }}</option>
+      }
     </select>
     }
   </div>
@@ -306,38 +305,49 @@
       <span class="single_container_title" for="yearsOfExperience"
         >Qualification</span
       >
-      @if(isEditQualificationsReadOnly){
+      @if(isEditQualificationsReadOnly){ @for(qid of
+      allQualifications.qualificationIds; track $index){
+      @if(userEducationalQualifications.qualificationId?.toString() ===
+      qid.toString() ){
       <span class="single_input_container">
-        {{ userEducationalQualifications.qualification }}
+        {{ allQualifications.qualificationNames[$index] }}
       </span>
-      } @else {
+      } } } @else {
       <select
         #qualification
         name="qualification"
         id="qualification"
-        [(ngModel)]="userEducationalQualifications.qualification"
+        [(ngModel)]="userEducationalQualifications.qualificationId"
       >
-        <option value="Bachelor in Technology (B.Tech)">
-          Bachelor in Technology (B.Tech)
+        @for(qid of allQualifications.qualificationIds; track $index){
+        <option [value]="qid">
+          {{ allQualifications.qualificationNames[$index] }}
         </option>
+        }
       </select>
       }
     </div>
 
     <div class="single_input_container">
       <span class="single_container_title" for="yearsOfExperience">Stream</span>
-      @if(isEditQualificationsReadOnly){
+      @if(isEditQualificationsReadOnly){ @for(sid of allStreams.streamIds; track
+      $index){ @if(userEducationalQualifications.streamId?.toString() ===
+      sid.toString()){
       <span class="single_input_container">
-        {{ userEducationalQualifications.stream }}
+        {{ allStreams.streamNames[$index] }}
       </span>
-      } @else {
+      } } } @else {
       <select
         #stream
         name="stream"
         id="stream"
-        [(ngModel)]="userEducationalQualifications.stream"
+        [(ngModel)]="userEducationalQualifications.streamId"
       >
-        <option value="Information Technology">Information Technology</option>
+        @for(sid of allStreams.streamIds; track $index){
+        <option [value]="sid">
+          {{ allStreams.streamNames[$index] }}
+        </option>
+        }
       </select>
       }
     </div>
@@ -348,20 +358,24 @@
       <span class="single_container_title" for="yearsOfExperience"
         >College</span
       >
-      @if(isEditQualificationsReadOnly){
+      @if(isEditQualificationsReadOnly){ @for(cid of allCollages.collageIds;
+      track $index){ @if(userEducationalQualifications.collegeId?.toString() ===
+      cid.toString()){
       <span class="single_input_container">
-        {{ userEducationalQualifications.collegeName }}
+        {{ allCollages.collageNames[$index] }}
       </span>
-      } @else {
+      } } } @else {
       <select
         #collegeName
         name="collegeName"
         id="collegeName"
-        [(ngModel)]="userEducationalQualifications.collegeName"
+        [(ngModel)]="userEducationalQualifications.collegeId"
       >
-        <option value="Pune Institute of Technology (PIT)">
-          Pune Institute of Technology (PIT)
+        @for(cid of allCollages.collageIds; track $index){
+        <option [value]="cid">
+          {{ allCollages.collageNames[$index] }}
         </option>
+        }
       </select>
       }
     </div>
@@ -814,9 +828,9 @@
       >
       @if(isEditQualificationsReadOnly){
       <span class="single_container_value">
-        @if(userExperienced.appearedRoleName !== null &&
-        userExperienced.appearedRoleName.length !== 0){
-        {{ userExperienced.appearedRoleName }}
+        @if(userFresher.appearedRoleName !== null &&
+        userFresher.appearedRoleName.length !== 0){
+        {{ userFresher.appearedRoleName }}
         } @else {-}
       </span>
       } @else {
@@ -825,7 +839,7 @@
         type="text"
         class="single_container_value"
         [readonly]="isEditQualificationsReadOnly"
-        [(ngModel)]="userExperienced.appearedRoleName"
+        [(ngModel)]="userFresher.appearedRoleName"
       />
       }
     </div>

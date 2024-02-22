@@ -65,7 +65,6 @@ export class UserLoginComponent implements OnInit {
 
   checkEmail(ele: ElementRef, alrt: string): boolean {
     const emailRegex = new RegExp('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
-
     if (!ele.nativeElement.value) {
       alert(alrt);
       ele.nativeElement.focus();

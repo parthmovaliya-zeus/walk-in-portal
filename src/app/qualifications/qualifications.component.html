@@ -38,10 +38,9 @@
           id="passingYear"
           [(ngModel)]="userEducationalQualifications.passingYear"
         >
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-          <option value="2022">2022</option>
-          <option value="2023">2023</option>
+          @for(year of years; track $index){
+          <option [value]="year">{{ year }}</option>
+          }
         </select>
       </div>
 
@@ -52,11 +51,13 @@
             #qualification
             name="qualification"
             id="qualification"
-            [(ngModel)]="userEducationalQualifications.qualification"
+            [(ngModel)]="userEducationalQualifications.qualificationId"
           >
-            <option value="Bachelor in Technology (B.Tech)">
-              Bachelor in Technology (B.Tech)
+            @for(qid of allQualifications.qualificationIds; track $index){
+            <option [value]="qid">
+              {{ allQualifications.qualificationNames[$index] }}
             </option>
+            }
           </select>
         </div>
 
@@ -66,11 +67,13 @@
             #stream
             name="stream"
             id="stream"
-            [(ngModel)]="userEducationalQualifications.stream"
+            [(ngModel)]="userEducationalQualifications.streamId"
           >
-            <option value="Information Technology">
-              Information Technology
+            @for(sid of allStreams.streamIds; track $index){
+            <option [value]="sid">
+              {{ allStreams.streamNames[$index] }}
             </option>
+            }
           </select>
         </div>
       </div>
@@ -82,11 +85,13 @@
             #collegeName
             name="collegeName"
             id="collegeName"
-            [(ngModel)]="userEducationalQualifications.collegeName"
+            [(ngModel)]="userEducationalQualifications.collegeId"
           >
-            <option value="Pune Institute of Technology (PIT)">
-              Pune Institute of Technology (PIT)
+            @for(cid of allCollages.collageIds; track $index){
+            <option [value]="cid">
+              {{ allCollages.collageNames[$index] }}
             </option>
+            }
           </select>
         </div>
 
@@ -236,20 +241,6 @@
         >Select All The Technologies You Are Familiar In</span
       >
 
-      <!-- @for(familiarTechnologie of familiarTechnologies; track
-      familiarTechnologie.id){
-      <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          [id]="'f_' + familiarTechnologie.technologyName"
-          [(ngModel)]="familiarTechnologie.value"
-        />
-        <label [for]="'f_' + familiarTechnologie.technologyName">{{
-          familiarTechnologie.technologyName
-        }}</label>
-      </div>
-      } -->
-
       @for(technology of familiarTechnologies.technologyNames; track $index){
       <div class="single_checkbox_container">
         <input
@@ -260,15 +251,6 @@
         <label [for]="'f_' + technology">{{ technology }}</label>
       </div>
       }
-
-      <!-- <div class="single_checkbox_container">
-        <input
-          type="checkbox"
-          id="f_javascript"
-          [(ngModel)]="userExperienced.f_javascript"
-        />
-        <label for="f_javascript">Javascript</label>
-      </div> -->
 
       <div class="single_input_container specific_width">
         <label for="f_otherTechnologies">If others, please mention</label>

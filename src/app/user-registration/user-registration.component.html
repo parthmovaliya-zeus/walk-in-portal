@@ -1,11 +1,14 @@
+@if(!isGoToPassword){
 <div class="register_header">
   <a href="#">
     <img src="../../assets/icons/back_light_clr.svg" alt="go back icon" />
   </a>
   <div class="">Create an account</div>
   <div class="btn_container">
-    <button class="btn">CANCEL</button>
-    <button class="btn" [disabled]="isDisable">CREATE</button>
+    <button class="btn" (click)="clickCancle()">CANCEL</button>
+    <button class="btn" (click)="registerNewUser()" [disabled]="isDisable">
+      CREATE
+    </button>
   </div>
 </div>
 
@@ -56,40 +59,24 @@
 
   @if(stepCount === 1){
 
-  <app-personal-information></app-personal-information>
-  <!-- (personalInformationSubmited)="setPersonalInformation($event)" -->
-  <!-- [prevUserInfo]="{ userInfo: userPersonalInformation, preferredJobRoles }" -->
+  <app-personal-information
+    (personalInformationSubmited)="setPersonalInformation($event)"
+  ></app-personal-information>
 
   } @else if(stepCount === 2){
 
-  <app-qualifications></app-qualifications>
-  <!-- (qualificationsSubmited)="setQualificationsInformation($event)"
-    [prevUserInfo]="{
-      userEducationalQualifications: userEducationalQualifications,
-      preferredJobRoles,
-      userProfessionalQualificationsVisible:
-        userProfessionalQualificationsVisible,
-      userFresher: userFresher,
-      userExperienced: userExperienced,
-      familiarTechnologies,
-      expertiseTechnologies
-    }" -->
+  <app-qualifications
+    (qualificationsSubmited)="setQualificationsInformation($event)"
+  ></app-qualifications>
 
   } @else if(stepCount === 3){
 
-  <app-review-proceed></app-review-proceed>
-  <!-- (reviewPricessSubmited)="reviewPricessSubmited($event)"
-    [prevUserInfo]="{
-      userInfo: userPersonalInformation,
-      preferredJobRoles,
-      userEducationalQualifications: userEducationalQualifications,
-      userProfessionalQualificationsVisible:
-        userProfessionalQualificationsVisible,
-      userFresher: userFresher,
-      userExperienced: userExperienced,
-      familiarTechnologies,
-      expertiseTechnologies
-    }" -->
+  <app-review-proceed
+    (reviewPricessSubmited)="reviewPricessSubmited($event)"
+  ></app-review-proceed>
 
   }
 </div>
+} @else {
+<app-create-password></app-create-password>
+}

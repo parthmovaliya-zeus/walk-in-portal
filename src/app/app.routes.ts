@@ -4,6 +4,7 @@ import { ListingComponent } from './listing/listing.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { JobComponent } from './job/job.component';
 import { JobAppliedSuccessfulComponent } from './job-applied-successful/job-applied-successful.component';
+import { CreatePasswordComponent } from './create-password/create-password.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,11 @@ export const routes: Routes = [
     pathMatch: 'full',
     component: JobAppliedSuccessfulComponent,
   },
+  //   {
+  //     path: 'password',
+  //     pathMatch: 'full',
+  //     component: CreatePasswordComponent,
+  //   },
   {
     path: '**',
     pathMatch: 'full',

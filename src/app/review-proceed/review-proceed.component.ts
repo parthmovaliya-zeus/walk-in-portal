@@ -3,13 +3,22 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { IJobRoles, ITechnologies } from '../interface';
+import {
+  ICollages,
+  IJobRoles,
+  IQualifications,
+  IStreams,
+  ITechnologies,
+  IUserEducationalQualifications,
+} from '../interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-review-proceed',
@@ -18,9 +27,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './review-proceed.component.html',
   styleUrl: './review-proceed.component.scss',
 })
-export class ReviewProceedComponent {
-  constructor(private renderer: Renderer2) {}
-
+export class ReviewProceedComponent implements OnInit {
   objectKeys = Object.keys;
 
   avatarFileInfo: any = [null];
@@ -28,27 +35,66 @@ export class ReviewProceedComponent {
 
   userInfo: any = {};
   preferredJobRoles!: IJobRoles;
-  userEducationalQualifications: any = {};
-  userProfessionalQualificationsVisible: any = {};
-  userFresher: any = {};
-  userExperienced: any = {};
+  userEducationalQualifications!: IUserEducationalQualifications;
+  userProfessionalQualificationsVisible: any;
+  userFresher: any;
+  userExperienced: any;
   familiarTechnologies!: ITechnologies;
   expertiseTechnologies!: ITechnologies;
+  allStreams!: IStreams;
+  allQualifications!: IQualifications;
+  allCollages!: ICollages;
+  years: number[] = [];
 
-  isEditPersonalInformationReadOnly: boolean = true;
-  isEditQualificationsReadOnly: boolean = true;
+  isEditPersonalInformationReadOnly: boolean;
+  isEditQualificationsReadOnly: boolean;
+  isReadOnly: boolean[] = [];
 
-  @Input() set prevUserInfo(val: any) {
-    this.userInfo = val.userInfo;
-    this.preferredJobRoles = val.preferredJobRoles;
-    this.userEducationalQualifications = val.userEducationalQualifications;
+  constructor(
+    private renderer: Renderer2,
+    private _userRegistrationService: UserRegistrationService
+  ) {
+    this.userInfo = this._userRegistrationService.userPersonalInformation;
+    this.preferredJobRoles = this._userRegistrationService.preferredJobRoles;
+    this.userEducationalQualifications =
+      this._userRegistrationService.userEducationalQualifications;
     this.userProfessionalQualificationsVisible =
-      val.userProfessionalQualificationsVisible;
-    this.userFresher = val.userFresher;
-    this.userExperienced = val.userExperienced;
-    this.familiarTechnologies = val.familiarTechnologies;
-    this.expertiseTechnologies = val.expertiseTechnologies;
+      this._userRegistrationService.userProfessionalQualificationsVisible;
+    this.userFresher = this._userRegistrationService.userFresher;
+    this.userExperienced = this._userRegistrationService.userExperienced;
+    this.familiarTechnologies =
+      this._userRegistrationService.familiarTechnologies;
+    this.expertiseTechnologies =
+      this._userRegistrationService.expertiseTechnologies;
+    this.allCollages = this._userRegistrationService.allCollages;
+    this.allQualifications = this._userRegistrationService.allQualifications;
+    this.allStreams = this._userRegistrationService.allStreams;
+    this.years = this._userRegistrationService.years;
+    this.isEditPersonalInformationReadOnly =
+      this._userRegistrationService.isEditPersonalInformationReadOnly;
+    this.isEditQualificationsReadOnly =
+      this._userRegistrationService.isEditQualificationsReadOnly;
+    this.isReadOnly = this._userRegistrationService.isReadOnly;
   }
+
+  ngOnInit(): void {
+    this.isEditPersonalInformationReadOnly = true;
+    this.isEditQualificationsReadOnly = true;
+    this.isReadOnly.push(true);
+    this.isReadOnly.push(true);
+  }
+
+  //   @Input() set prevUserInfo(val: any) {
+  //     this.userInfo = val.userInfo;
+  //     this.preferredJobRoles = val.preferredJobRoles;
+  //     this.userEducationalQualifications = val.userEducationalQualifications;
+  //     this.userProfessionalQualificationsVisible =
+  //       val.userProfessionalQualificationsVisible;
+  //     this.userFresher = val.userFresher;
+  //     this.userExperienced = val.userExperienced;
+  //     this.familiarTechnologies = val.familiarTechnologies;
+  //     this.expertiseTechnologies = val.expertiseTechnologies;
+  //   }
 
   @Output() reviewPricessSubmited = new EventEmitter();
 
@@ -288,9 +334,6 @@ export class ReviewProceedComponent {
 
   onSubmit(direction: string) {
     if (this.isEditPersonalInformationReadOnly === false) {
-      if (!this.checkField()) {
-        return;
-      }
       alert('Please save edited content');
       this.renderer.addClass(
         this.editPersonalInformationContainerHash.nativeElement,
@@ -299,6 +342,7 @@ export class ReviewProceedComponent {
       this.editPersonalInformationContainerHash.nativeElement.focus();
       return;
     }
+
     if (this.isEditQualificationsReadOnly === false) {
       alert('Please save edited content');
       this.renderer.addClass(
@@ -308,16 +352,17 @@ export class ReviewProceedComponent {
       this.editQualificationsContainerHash.nativeElement.focus();
       return;
     }
+
     this.reviewPricessSubmited.emit({
-      userInfo: this.userInfo,
-      preferredJobRoles: this.preferredJobRoles,
-      userEducationalQualifications: this.userEducationalQualifications,
-      userProfessionalQualificationsVisible:
-        this.userProfessionalQualificationsVisible,
-      userFresher: this.userFresher,
-      userExperienced: this.userExperienced,
-      familiarTechnologies: this.familiarTechnologies,
-      expertiseTechnologies: this.expertiseTechnologies,
+      //   userInfo: this.userInfo,
+      //   preferredJobRoles: this.preferredJobRoles,
+      //   userEducationalQualifications: this.userEducationalQualifications,
+      //   userProfessionalQualificationsVisible:
+      //     this.userProfessionalQualificationsVisible,
+      //   userFresher: this.userFresher,
+      //   userExperienced: this.userExperienced,
+      //   familiarTechnologies: this.familiarTechnologies,
+      //   expertiseTechnologies: this.expertiseTechnologies,
       direction,
     });
   }
@@ -329,14 +374,14 @@ export class ReviewProceedComponent {
     );
     if (this.isEditPersonalInformationReadOnly === false) {
       if (this.personalInfpCheckField() === true) {
-        this.isEditPersonalInformationReadOnly =
-          !this.isEditPersonalInformationReadOnly;
+        this.isReadOnly[0] = true;
+        this.isEditPersonalInformationReadOnly = true;
       } else {
         return;
       }
     } else {
-      this.isEditPersonalInformationReadOnly =
-        !this.isEditPersonalInformationReadOnly;
+      this.isEditPersonalInformationReadOnly = false;
+      this.isReadOnly[0] = false;
     }
   }
 
@@ -346,15 +391,16 @@ export class ReviewProceedComponent {
       'highlighted'
     );
     if (this.isEditQualificationsReadOnly === false) {
-      // const finalCheck: boolean = this.checkField() && this.professionalCheck();
-      const finalCheck: boolean = this.professionalCheck();
+      const finalCheck: boolean = this.checkField() && this.professionalCheck();
       if (finalCheck) {
-        this.isEditQualificationsReadOnly = !this.isEditQualificationsReadOnly;
+        this.isReadOnly[1] = true;
+        this.isEditQualificationsReadOnly = true;
       } else {
         return;
       }
     } else {
-      this.isEditQualificationsReadOnly = !this.isEditQualificationsReadOnly;
+      this.isReadOnly[1] = false;
+      this.isEditQualificationsReadOnly = false;
     }
   }
 

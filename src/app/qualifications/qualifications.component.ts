@@ -4,13 +4,21 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ITechnologies } from '../interface';
+import {
+  ICollages,
+  IQualifications,
+  IStreams,
+  ITechnologies,
+  IUserEducationalQualifications,
+} from '../interface';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-qualifications',
@@ -19,18 +27,42 @@ import { ITechnologies } from '../interface';
   templateUrl: './qualifications.component.html',
   styleUrl: './qualifications.component.scss',
 })
-export class QualificationsComponent {
+export class QualificationsComponent implements OnInit {
   isEducationalQualificationsVisible: boolean = false;
   isProfessionalQualificationsVisible: boolean = false;
 
-  userEducationalQualifications: any;
+  userEducationalQualifications: IUserEducationalQualifications;
   userProfessionalQualificationsVisible: any;
   userFresher: any;
   userExperienced: any;
   familiarTechnologies!: ITechnologies;
   expertiseTechnologies!: ITechnologies;
+  allStreams!: IStreams;
+  allQualifications!: IQualifications;
+  allCollages!: ICollages;
+  years: number[] = [];
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private _userRegistrationService: UserRegistrationService
+  ) {
+    this.userEducationalQualifications =
+      this._userRegistrationService.userEducationalQualifications;
+    this.userProfessionalQualificationsVisible =
+      this._userRegistrationService.userProfessionalQualificationsVisible;
+    this.userFresher = this._userRegistrationService.userFresher;
+    this.userExperienced = this._userRegistrationService.userExperienced;
+    this.familiarTechnologies =
+      this._userRegistrationService.familiarTechnologies;
+    this.expertiseTechnologies =
+      this._userRegistrationService.expertiseTechnologies;
+    this.allCollages = this._userRegistrationService.allCollages;
+    this.allQualifications = this._userRegistrationService.allQualifications;
+    this.allStreams = this._userRegistrationService.allStreams;
+    this.years = this._userRegistrationService.years;
+  }
+
+  ngOnInit(): void {}
 
   changeEducationalQualificationsVisible() {
     this.isEducationalQualificationsVisible =
@@ -41,15 +73,15 @@ export class QualificationsComponent {
       !this.isProfessionalQualificationsVisible;
   }
 
-  @Input() set prevUserInfo(val: any) {
-    this.userEducationalQualifications = val.userEducationalQualifications;
-    this.userProfessionalQualificationsVisible =
-      val.userProfessionalQualificationsVisible;
-    this.userFresher = val.userFresher;
-    this.userExperienced = val.userExperienced;
-    this.familiarTechnologies = val.familiarTechnologies;
-    this.expertiseTechnologies = val.expertiseTechnologies;
-  }
+  //   @Input() set prevUserInfo(val: any) {
+  //     this.userEducationalQualifications = val.userEducationalQualifications;
+  //     this.userProfessionalQualificationsVisible =
+  //       val.userProfessionalQualificationsVisible;
+  //     this.userFresher = val.userFresher;
+  //     this.userExperienced = val.userExperienced;
+  //     this.familiarTechnologies = val.familiarTechnologies;
+  //     this.expertiseTechnologies = val.expertiseTechnologies;
+  //   }
 
   @Output() qualificationsSubmited = new EventEmitter();
 
@@ -71,6 +103,15 @@ export class QualificationsComponent {
 
   @ViewChild('expertiseTechnologiesHash')
   expertiseTechnologiesHash!: ElementRef;
+
+  checkAggregatePercentage(ele: ElementRef): boolean {
+    if (ele.nativeElement.value > 35 && ele.nativeElement.value < 99) {
+      return true;
+    }
+    alert('Aggregate Percentage must between 35 and 99!!');
+    ele.nativeElement.focus();
+    return false;
+  }
 
   checkSingleElemet(ele: ElementRef): boolean {
     if (!ele.nativeElement.value) {
@@ -140,18 +181,16 @@ export class QualificationsComponent {
   }
 
   checkField(): boolean {
-    if (this.checkSingleElemet(this.aggregatePercentage)) {
-      if (this.checkSingleElemet(this.passingYear)) {
-        if (this.checkSingleElemet(this.qualification)) {
-          if (this.checkSingleElemet(this.stream)) {
-            if (this.checkSingleElemet(this.collegeName)) {
-              if (this.checkSingleElemet(this.collageLocation)) {
-                return true;
-              }
-            }
-          }
-        }
-      }
+    if (
+      this.checkSingleElemet(this.aggregatePercentage) &&
+      this.checkAggregatePercentage(this.aggregatePercentage) &&
+      this.checkSingleElemet(this.passingYear) &&
+      this.checkSingleElemet(this.qualification) &&
+      this.checkSingleElemet(this.stream) &&
+      this.checkSingleElemet(this.collegeName) &&
+      this.checkSingleElemet(this.collageLocation)
+    ) {
+      return true;
     }
     return false;
   }
@@ -227,18 +266,17 @@ export class QualificationsComponent {
   }
 
   onSubmit(direction: string) {
-    // const finalCheck: boolean = this.checkField() && this.professionalCheck();
-    const finalCheck: boolean = true;
-
+    const finalCheck: boolean = this.checkField() && this.professionalCheck();
+    // const finalCheck: boolean = true;
     if (finalCheck) {
       this.qualificationsSubmited.emit({
-        userEducationalQualifications: this.userEducationalQualifications,
-        userProfessionalQualificationsVisible:
-          this.userProfessionalQualificationsVisible,
-        userFresher: this.userFresher,
-        userExperienced: this.userExperienced,
-        familiarTechnologies: this.familiarTechnologies,
-        expertiseTechnologies: this.expertiseTechnologies,
+        //   userEducationalQualifications: this.userEducationalQualifications,
+        //   userProfessionalQualificationsVisible:
+        //     this.userProfessionalQualificationsVisible,
+        //   userFresher: this.userFresher,
+        //   userExperienced: this.userExperienced,
+        //   familiarTechnologies: this.familiarTechnologies,
+        //   expertiseTechnologies: this.expertiseTechnologies,
         direction,
       });
     }

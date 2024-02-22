@@ -23,6 +23,7 @@ export class DataService {
   };
 
   baseURL: string = 'https://localhost:7060/api/';
+
   getJobsData(): Observable<IJobs[]> {
     var allJobs = this._http
       .get<IJobs[]>(this.baseURL + 'JobListing')
