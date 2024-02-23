@@ -20,6 +20,8 @@ export class DataService {
   applyInJob: IApplyInJob = {
     timeSlotId: null,
     preference: [],
+    resumeBase64: null,
+    resumeName: null,
   };
 
   baseURL: string = 'https://localhost:7060/api/';

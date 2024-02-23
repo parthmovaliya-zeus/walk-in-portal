@@ -29,10 +29,7 @@
     <div class="job_role_container">
       @for(jr of job.job_roles; track $index){
       <div class="single_job">
-        <img
-          src="../../assets/icons/Instructional Designer.svg"
-          alt="Instructional Designer icon"
-        />
+        <img [src]="'../../assets/icons/' + jr + '.svg'" [alt]="jr + ' icon'" />
         <span class="">{{ jr }}</span>
       </div>
       @if($index !== job.job_roles.length){

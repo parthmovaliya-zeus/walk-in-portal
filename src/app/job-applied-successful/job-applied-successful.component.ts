@@ -46,19 +46,34 @@ export class JobAppliedSuccessfulComponent implements OnInit {
     //   this._rte.navigate(['job', jobId]);
     // }
 
+    let newResume = null;
+    if (this.applyInJob.resumeBase64)
+      newResume = this.applyInJob.resumeBase64?.split(',')[1];
+
+    // console.log(this.applyInJob.resumeBase64);
+    // console.log({
+    //   userId: this.userPersonalInformation.id,
+    //   timeSlotId: this.applyInJob.timeSlotId,
+    //   preference: this.applyInJob.preference,
+    //   job_rolesId: this.job_rolesId,
+    //   resume: newResume,
+    // });
+
     this.dataService
       .applyInJobByUser(jobId, {
         userId: this.userPersonalInformation.id,
         timeSlotId: this.applyInJob.timeSlotId,
         preference: this.applyInJob.preference,
         job_rolesId: this.job_rolesId,
+        resume: newResume,
       })
       .subscribe(
         (resp) => {},
         (error) => {
-          // alert(error.message);
-          // this._rte.navigate(['job', jobId]);
-          console.log('Error at apply in job', error);
+          alert(error.error.message);
+          //   console.log('Error at apply in job', error);
+          const jobId = sessionStorage.getItem('redirectID');
+          this._rte.navigate(['job', jobId]);
         }
       );
 

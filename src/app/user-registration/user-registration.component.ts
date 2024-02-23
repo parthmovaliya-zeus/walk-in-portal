@@ -223,4 +223,7 @@ export class UserRegistrationComponent implements OnInit {
   clickCancle() {
     this._router.navigate(['/']);
   }
+  goBackClicked() {
+    this._router.navigate(['/login']);
+  }
 }

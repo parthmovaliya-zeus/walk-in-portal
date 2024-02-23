@@ -157,10 +157,10 @@ export class UserRegistrationService {
 
   registerNewUser(): Observable<IUserRegisrationResponse> {
     var copyUserPersonalInformation = this.userPersonalInformation;
-    var mainAvatar = copyUserPersonalInformation.avatarBase64?.split(' ')[1];
+    var mainAvatar = copyUserPersonalInformation.avatarBase64?.split(',')[1];
     copyUserPersonalInformation.avatarBase64 =
       mainAvatar == null ? null : mainAvatar;
-    var mainResume = copyUserPersonalInformation.resumeBase64?.split(' ')[1];
+    var mainResume = copyUserPersonalInformation.resumeBase64?.split(',')[1];
     copyUserPersonalInformation.resumeBase64 =
       mainResume == null ? null : mainResume;
 

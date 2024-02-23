@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../services/data.service';
 import { IApplyInJob, IJobs } from '../interface';
 import { JobAppliedSuccessfulComponent } from '../job-applied-successful/job-applied-successful.component';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-job',
@@ -32,11 +33,14 @@ export class JobComponent implements OnInit, AfterContentChecked {
 
   jobId!: number | null;
 
+  resumeFileInfo: any = [null];
+
   constructor(
     private _rte: Router,
     private _route: ActivatedRoute,
     private _dataService: DataService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private userRegistrationService: UserRegistrationService
   ) {
     this.applyInJob = this._dataService.applyInJob;
     this.job_rolesId = this._dataService.job_rolesId;
@@ -64,6 +68,8 @@ export class JobComponent implements OnInit, AfterContentChecked {
       },
       (err) => {
         if (err.error.code === -1) {
+          if (this.jobId !== null)
+            sessionStorage.setItem('redirectID', this.jobId.toString());
           this._rte.navigate(['/login']);
         } else {
           console.log('error at get single job details: ', err);
@@ -106,9 +112,21 @@ export class JobComponent implements OnInit, AfterContentChecked {
       //     preference: this.applyInJob.preference,
       //     job_rolesId: this.job_rolesId,
       //   });
+      sessionStorage.setItem('redirectID', this.jobId.toString());
       this._rte.navigate(['job/SuccessPage', this.jobId]);
     } else {
       alert(`Job(` + this.jobId + `) Id Is null,`);
     }
+  }
+
+  showResume(event: any) {
+    const file = (event?.target).files[0];
+    this.resumeFileInfo = file;
+    this.applyInJob.resumeName = file?.name;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.applyInJob.resumeBase64 = reader.result as string;
+    };
+    reader.readAsDataURL(this.resumeFileInfo);
   }
 }

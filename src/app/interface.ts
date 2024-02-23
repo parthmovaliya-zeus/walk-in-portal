@@ -125,6 +125,8 @@ export interface ISuccessPage {
 export interface IApplyInJob {
   timeSlotId: number | null;
   preference: boolean[];
+  resumeBase64: string | null;
+  resumeName: string | null;
 }
 
 export interface IApplyInJobBodyData {
@@ -132,6 +134,7 @@ export interface IApplyInJobBodyData {
   timeSlotId: number | null;
   preference: boolean[];
   job_rolesId: number[];
+  resume: string | null;
 }
 
 export interface IUserDetails {

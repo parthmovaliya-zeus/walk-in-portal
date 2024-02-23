@@ -42,9 +42,10 @@
       <div class="job_role_container">
         @for(jr of job.job_roles; track $index){
         <div class="single_job">
+          <!-- src=`../../assets/icons/${jr}.svg` -->
           <img
-            src="../../assets/icons/Instructional Designer.svg"
-            alt="Instructional Designer icon"
+            [src]="'../../assets/icons/' + jr + '.svg'"
+            [alt]="jr + ' icon'"
           />
           <span class="">{{ jr }}</span>
         </div>
@@ -192,13 +193,17 @@
           src="../../assets/icons/Upload_green_24dp.svg"
           alt="Upload Resume icon"
         />
-        <!-- @if(userInfo.resumeBase64 !== null && userInfo.resumeBase64.length !== 0
-        && userInfo.resumeName !== null && userInfo.resumeName.length !== 0)
-        {{{userInfo.resumeName}}} @else{Upload Resume} -->
+        @if( applyInJob.resumeName !== null && applyInJob.resumeName.length !==
+        0)
+        {{{applyInJob.resumeName}}} @else{Upload Resume}
         <!-- Upload Resume -->
       </label>
-      <input type="file" accept=".pdf" id="input_file" />
-      <!-- (change)="showResume($event)" -->
+      <input
+        type="file"
+        accept=".pdf"
+        id="input_file"
+        (change)="showResume($event)"
+      />
     </div>
   </div>
 
