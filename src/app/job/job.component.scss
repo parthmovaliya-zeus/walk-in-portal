@@ -18,6 +18,7 @@
   }
 
   .go_up_component {
+    cursor: pointer;
     z-index: 10;
     @include displayFlex(center, center);
     height: 36px;
@@ -306,6 +307,7 @@
     padding-bottom: 76px;
     overflow-y: hidden;
     .go_up_component {
+      cursor: pointer;
       bottom: 48px;
       // right: 48px;
     }

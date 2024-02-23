@@ -59,6 +59,8 @@ export class JobComponent implements OnInit, AfterContentChecked {
 
         jobIds.forEach((x) => this.job_rolesId.push(x));
 
+        this.applyInJob.preference = [];
+
         if (this.job?.job_roles?.length) {
           for (let i = 0; i < this.job?.job_roles?.length; i++) {
             this.jobRolesDrop.push(true);

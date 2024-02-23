@@ -44,8 +44,14 @@ export class DataService {
     });
   }
 
-  applyInJobByUser(id: number, data: IApplyInJobBodyData) {
-    return this._http.post(this.baseURL + 'SingleJob/applyInJob/' + id, data);
+  applyInJobByUser(
+    id: number,
+    data: IApplyInJobBodyData
+  ): Observable<ISuccessPage> {
+    return this._http.post<ISuccessPage>(
+      this.baseURL + 'SingleJob/applyInJob/' + id,
+      data
+    );
   }
 
   getSuccessPageData(id: number): Observable<ISuccessPage> {

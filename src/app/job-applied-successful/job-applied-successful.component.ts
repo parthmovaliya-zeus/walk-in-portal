@@ -68,23 +68,25 @@ export class JobAppliedSuccessfulComponent implements OnInit {
         resume: newResume,
       })
       .subscribe(
-        (resp) => {},
+        (resp) => {
+          this.job = resp;
+        },
         (error) => {
           alert(error.error.message);
           //   console.log('Error at apply in job', error);
-          const jobId = sessionStorage.getItem('redirectID');
-          this._rte.navigate(['job', jobId]);
+          //   const jobId = sessionStorage.getItem('redirectID');
+          this._rte.navigate(['/']);
         }
       );
 
-    this.dataService.getSuccessPageData(jobId).subscribe(
-      (response) => {
-        this.job = response;
-      },
-      (err) => {
-        console.log('error at getting success page data: ', err);
-      }
-    );
+    // this.dataService.getSuccessPageData(jobId).subscribe(
+    //   (response) => {
+    //     this.job = response;
+    //   },
+    //   (err) => {
+    //     console.log('error at getting success page data: ', err);
+    //   }
+    // );
 
     // this.dataService.getSuccessPageData(jobId).subscribe((response) => {
     //   this.job = response;
