@@ -6,7 +6,14 @@
     alt="quantum dashboard logo"
   />
 
-  @if(isUserLogedIn){
+  @if(isUserLogedIn){ @if(userPersonalInformation.avatarBase64 !== null){
+  <img
+    class="user_login_container"
+    [src]="userPersonalInformation.avatarBase64"
+    [alt]="userPersonalInformation.avatarName"
+  />
+
+  } @else {
   <div class="user_login_container">U</div>
-  }
+  } }
 </div>

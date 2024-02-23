@@ -39,7 +39,7 @@ import { CreatePasswordComponent } from '../create-password/create-password.comp
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class UserRegistrationComponent implements OnInit {
-  isDisable: boolean = true;
+  isDisable: boolean = false;
   stepCount: number = 1;
   isGoToPassword: boolean = false;
 
@@ -209,7 +209,14 @@ export class UserRegistrationComponent implements OnInit {
       alert('Please save edited content');
       return;
     } else {
-      this.isGoToPassword = true;
+      this._userRegistrationService.isEmailExit().subscribe(
+        (reap) => {
+          this.isGoToPassword = true;
+        },
+        (error) => {
+          alert(error.error.error);
+        }
+      );
     }
   }
 

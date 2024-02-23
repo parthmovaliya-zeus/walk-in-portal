@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserLoginService } from '../services/user-login.service';
+import { IPersonalInformation } from '../interface';
+import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +15,15 @@ import { UserLoginService } from '../services/user-login.service';
 export class HeaderComponent implements OnInit {
   isUserLogedIn!: boolean;
 
-  constructor(private userLoginService: UserLoginService) {}
+  userPersonalInformation!: IPersonalInformation;
+
+  constructor(
+    private userLoginService: UserLoginService,
+    private userRegistrationService: UserRegistrationService
+  ) {
+    this.userPersonalInformation =
+      userRegistrationService.userPersonalInformation;
+  }
 
   ngOnInit(): void {
     this.userLoginService.getUserLoginStatus().subscribe((resp: boolean) => {

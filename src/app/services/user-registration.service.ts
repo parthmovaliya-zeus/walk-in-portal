@@ -11,9 +11,11 @@ import {
   ISingleTechnology,
   IStreams,
   ITechnologies,
+  IUserDetails,
   IUserEducationalQualifications,
   IUserExperiences,
   IUserFresher,
+  IUserRegisrationResponse,
 } from '../interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -153,9 +155,17 @@ export class UserRegistrationService {
     return this._http.get<ISingleStream[]>(this.baseURL + 'EnumStreams');
   }
 
-  registerNewUser() {
-    console.log('registerNewUser: ', {
-      userPersonalInformation: this.userPersonalInformation,
+  registerNewUser(): Observable<IUserRegisrationResponse> {
+    var copyUserPersonalInformation = this.userPersonalInformation;
+    var mainAvatar = copyUserPersonalInformation.avatarBase64?.split(' ')[1];
+    copyUserPersonalInformation.avatarBase64 =
+      mainAvatar == null ? null : mainAvatar;
+    var mainResume = copyUserPersonalInformation.resumeBase64?.split(' ')[1];
+    copyUserPersonalInformation.resumeBase64 =
+      mainResume == null ? null : mainResume;
+
+    const data = {
+      userPersonalInformation: copyUserPersonalInformation,
       preferredJobRoles: this.preferredJobRoles,
       familiarTechnologies: this.familiarTechnologies,
       expertiseTechnologies: this.expertiseTechnologies,
@@ -164,6 +174,16 @@ export class UserRegistrationService {
         this.userProfessionalQualificationsVisible,
       userFresher: this.userFresher,
       userExperienced: this.userExperienced,
-    });
+    };
+    return this._http.post<IUserRegisrationResponse>(
+      this.baseURL + 'Users/addUser',
+      data
+    );
+  }
+
+  isEmailExit() {
+    return this._http.get(
+      this.baseURL + 'Users/available/' + this.userPersonalInformation.email
+    );
   }
 }

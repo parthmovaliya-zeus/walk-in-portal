@@ -82,8 +82,6 @@ export class UserLoginComponent implements OnInit {
   }
 
   loginUserClicked() {
-    console.log(this.remember_me);
-
     if (this.checkEmail(this.email, 'Plese enter  Email!'))
       if (this.checkSingleField(this.password, 'Please Enter password!!'))
         this.userLoginService.loginUser(this.userLoginDetails).subscribe(
@@ -93,10 +91,22 @@ export class UserLoginComponent implements OnInit {
               var token = resp.token;
               localStorage.setItem('token', token);
             }
-            this.userPersonalInformation.avatarBase64 = userData.DisplayPicture;
+            if (userData.displayPicture !== null)
+              this.userPersonalInformation.avatarBase64 =
+                'data:image/jpeg;base64, ' + userData.displayPicture;
+
+            if (userData.resume !== null)
+              this.userPersonalInformation.resumeBase64 =
+                'data:application/pdf;base64, ' + userData.resume;
             this.userPersonalInformation.id = userData.id;
+            this.userPersonalInformation.firstName = userData.firstName;
+            this.userPersonalInformation.lastName = userData.lastName;
+            this.userPersonalInformation.email = userData.email;
+            this.userPersonalInformation.countryCode = userData.countryCode;
+            this.userPersonalInformation.phoneNumber = userData.phoneNumber;
             this.userLoginService.setUserLoginStatus(true);
             let redirectID = sessionStorage.getItem('redirectID');
+
             if (redirectID) {
               this.router.navigate(['/job', redirectID]);
             } else {

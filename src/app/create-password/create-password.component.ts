@@ -4,7 +4,11 @@ import { UserLoginService } from '../services/user-login.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserRegistrationService } from '../services/user-registration.service';
-import { IPersonalInformation, IUserDetails } from '../interface';
+import {
+  IPersonalInformation,
+  IUserDetails,
+  IUserRegisrationResponse,
+} from '../interface';
 
 @Component({
   selector: 'app-create-password',
@@ -79,7 +83,16 @@ export class CreatePasswordComponent implements OnInit {
     const goNext = this.checkPassword('Password and Re-Password not matching');
     if (goNext) {
       this.userPersonalInformation.password = this.password.nativeElement.value;
-      this.userRegistrationService.registerNewUser();
+      this.userRegistrationService.registerNewUser().subscribe(
+        (resp: IUserRegisrationResponse) => {
+          console.log('User Registered! ', resp);
+          const token = resp.token;
+          localStorage.setItem('token', token);
+        },
+        (error) => {
+          console.log('Error at User Registration: ', error);
+        }
+      );
     }
   }
 }

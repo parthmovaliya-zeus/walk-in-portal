@@ -189,3 +189,7 @@ export interface ISingleTechnology {
   dtCreated: Date;
   dtModified: Date;
 }
+
+export interface IUserRegisrationResponse {
+  token: string;
+}
