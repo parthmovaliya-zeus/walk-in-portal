@@ -24,6 +24,7 @@ export class ListingComponent implements OnInit {
     this.userPersonalInformation =
       this.userRegistrationService.userPersonalInformation;
   }
+
   userPersonalInformation!: IPersonalInformation;
   jobs: IJobs[] = [];
 
@@ -34,7 +35,10 @@ export class ListingComponent implements OnInit {
   }
 
   goSingleJob(id: number) {
-    let token = localStorage.getItem('token');
+    let token =
+      localStorage.getItem('token') === null
+        ? sessionStorage.getItem('token')
+        : localStorage.getItem('token');
 
     if (!token) {
       sessionStorage.setItem('redirectID', id.toString());
@@ -44,7 +48,9 @@ export class ListingComponent implements OnInit {
       this.userLoginService.loginUserbyToken().subscribe(
         (resp: IUserDetails) => {
           this.userLoginService.setUserLoginStatus(true);
-          this.userPersonalInformation.avatarBase64 = resp.displayPicture;
+          if (resp.displayPicture !== null)
+            this.userPersonalInformation.avatarBase64 =
+              'data:image/jpeg;base64, ' + resp.displayPicture;
           this.userPersonalInformation.id = resp.id;
         },
         (error) => {

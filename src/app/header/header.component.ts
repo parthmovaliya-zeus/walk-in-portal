@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserLoginService } from '../services/user-login.service';
-import { IPersonalInformation } from '../interface';
+import { IPersonalInformation, IUserDetails } from '../interface';
 import { UserRegistrationService } from '../services/user-registration.service';
 
 @Component({
@@ -29,6 +29,24 @@ export class HeaderComponent implements OnInit {
     this.userLoginService.getUserLoginStatus().subscribe((resp: boolean) => {
       this.isUserLogedIn = resp;
     });
+
+    let token = localStorage.getItem('token');
+
+    if (!token) {
+      // get user data here let token = localStorage.getItem('token');
+      this.userLoginService.loginUserbyToken().subscribe(
+        (resp: IUserDetails) => {
+          this.userLoginService.setUserLoginStatus(true);
+          if (resp.displayPicture !== null)
+            this.userPersonalInformation.avatarBase64 =
+              'data:image/jpeg;base64, ' + resp.displayPicture;
+          this.userPersonalInformation.id = resp.id;
+        },
+        (error) => {
+          console.log('Error at login with token: ', error);
+        }
+      );
+    }
     // this.userLoginService.getUserLoginStatus().subscribe();
   }
 }

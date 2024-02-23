@@ -85,7 +85,6 @@ export class CreatePasswordComponent implements OnInit {
       this.userPersonalInformation.password = this.password.nativeElement.value;
       this.userRegistrationService.registerNewUser().subscribe(
         (resp: IUserRegisrationResponse) => {
-          console.log('User Registered! ', resp);
           const token = resp.token;
           localStorage.setItem('token', token);
         },

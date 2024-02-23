@@ -63,8 +63,11 @@ export class JobComponent implements OnInit, AfterContentChecked {
         }
       },
       (err) => {
-        console.log('Error');
-        console.log(err);
+        if (err.error.code === -1) {
+          this._rte.navigate(['/login']);
+        } else {
+          console.log('error at get single job details: ', err);
+        }
       }
     );
   }

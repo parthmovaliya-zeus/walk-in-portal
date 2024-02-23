@@ -33,7 +33,13 @@ export class DataService {
   }
 
   getSingleJobData(id: number): Observable<IJobs> {
-    return this._http.get<IJobs>(this.baseURL + 'SingleJob/' + id);
+    var token =
+      localStorage.getItem('token') === null
+        ? sessionStorage.getItem('token')
+        : localStorage.getItem('token');
+    return this._http.get<IJobs>(this.baseURL + 'SingleJob/' + id, {
+      headers: { Authorization: `Bearer ` + token },
+    });
   }
 
   applyInJobByUser(id: number, data: IApplyInJobBodyData) {

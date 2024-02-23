@@ -91,6 +91,7 @@ export class UserLoginComponent implements OnInit {
               var token = resp.token;
               localStorage.setItem('token', token);
             }
+            sessionStorage.setItem('token', resp.token);
             if (userData.displayPicture !== null)
               this.userPersonalInformation.avatarBase64 =
                 'data:image/jpeg;base64, ' + userData.displayPicture;
